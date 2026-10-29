@@ -1,0 +1,87 @@
+---
+title: "Meta Ads"
+description: "Connect your Meta (Facebook and Instagram) ad account to import cost and campaigns, send conversions through the Conversions API, collect Lead Ads leads and let PatternPilot manage your ads."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks for campaigns, ad sets and ads |
+| Campaign import | Campaigns, ad sets and ads, with budget mode, bid strategy and objective |
+| CAPI | Server-side conversions to your Meta pixel |
+| Leads | Leads from Meta Lead Ads |
+| PatternPilot actions | **Pause**, **Resume**, **Adjust bid**, **Adjust budget** |
+
+### Connect Meta
+
+1. Go to **Data Hub → Integrations**.
+2. Click the **Meta Ads (Facebook & Instagram)** card.
+3. Sign in to Facebook and approve access.
+4. In **Configure Meta Integration**, choose the **Ad Account** (required).
+5. Optional: choose a **Meta Pixel (Optional)** to link for conversion tracking.
+6. Click **Save Configuration**.
+
+You land on the integration's page and campaigns appear shortly.
+
+The ad account can't be changed after setup. To use a different account, delete this integration and connect again.
+
+### Pass the ad set ID in your URLs
+
+ClickPattern maps Meta ad sets to your campaigns automatically when visits carry the ad set ID. Add Meta's `{{adset.id}}` macro to your ad's URL parameters, for example through the Meta traffic source template. Meta also offers `{{campaign.id}}`, `{{ad.id}}`, `{{placement}}` and `{{site_source_name}}`.
+
+### The Meta integration page
+
+The header shows the ad account, the **Pixel** and **Last Sync**. Tabs:
+
+| Tab | What it shows |
+| --- | --- |
+| **Performance** | Meta metrics over time |
+| **Campaigns** | Campaigns with **Bid Strategy**, **Objective**, budget mode and **CP Visits**, plus counts of **Total Campaigns**, **Active**, **CBO** and **ABO** |
+| **Campaign Mapping** | Ad set to ClickPattern campaign mapping |
+| **Leads** | Captured Lead Ads leads |
+| **CAPI** | Conversions API setup |
+| **Sync Logs** | Sync history |
+| **Health** | Connection and sync status |
+
+Meta counts each day in the ad account's time zone. ClickPattern counts visits per UTC day. Compare totals over a range, not a single day.
+
+### Set up CAPI
+
+1. Open the **CAPI** tab and click **Set Up CAPI**.
+2. Check the **Pixel ID**. It's filled in if you linked a pixel during setup.
+3. Optional but recommended: paste a **Conversions API Access Token**. Generate it in Facebook Events Manager > Your Pixel > Settings > Conversions API.
+4. Choose **Events to Send** and click **Save & Enable**.
+
+Without a dedicated token, ClickPattern uses the OAuth token from your Meta integration. A dedicated token is more reliable. The CAPI tab shows **CAPI token set** or **Using OAuth token**. To replace a saved token, enter a new one. Leave the field blank to keep it.
+
+For the other CAPI options, see "[Server-side conversions (CAPI) setup](/integrations/server-side-conversions-capi-setup)".
+
+### Leads
+
+The **Leads** tab lists leads from your Meta Lead Ads with **Total Leads**, **Today** and **This Week** counts. Click **Export CSV** to download them with Lead ID, email, full name, phone, capture time and form ID.
+
+### PatternPilot actions
+
+Rules can pause and resume Meta campaigns and adjust bids and budgets. Bids apply to the ad set, so map the ad set to your ClickPattern campaign. You can also pause, resume and edit budgets and bids from the **Campaigns** tab.
+
+### Token renewal
+
+Meta access lasts 60 days. ClickPattern renews it automatically during syncs when fewer than 7 days remain. If renewal doesn't happen, the card shows **Token expires in Nd**. If access expires, the status becomes **Token Expired** and the page shows "Your Meta access token has expired. Reconnect to resume syncing." Click **Reconnect** (or **Refresh Token** at any time) and sign in again.
+
+### FAQ
+
+**Can I switch the integration to another ad account?** No. Delete the integration and connect again with the other account.
+
+**Do I need a pixel to connect?** No. The pixel is optional. You need one only for CAPI.
+
+**Why does a campaign row show a dash in the reconciliation columns?** Some of its ad sets aren't mapped to a ClickPattern campaign, so the Meta and ClickPattern figures aren't comparable.
+
+**Why aren't my ad sets mapped automatically?** Your URLs don't pass the ad set ID. Add `{{adset.id}}` to the ad's URL parameters.
+
+### Related articles
+
+- [Campaign mapping and unmapped objects](/integrations/campaign-mapping-and-unmapped-objects)
+- [Server-side conversions (CAPI) setup](/integrations/server-side-conversions-capi-setup)
+- [Which platforms support which actions](/automation/which-platforms-support-which-actions)
+- [Integrations overview](/integrations/integrations-overview)

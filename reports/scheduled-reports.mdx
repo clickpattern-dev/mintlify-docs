@@ -1,0 +1,134 @@
+---
+title: "Scheduled reports"
+description: "Have ClickPattern build a report on a schedule and email it to your team, post a webhook, or feed a BI tool. Scheduled reports are available on higher plans; see [pricing](https://www.clickpattern.com/pricing)."
+---
+
+### Open the scheduler
+
+Use any of these:
+
+- In Performance, click **Export/import → Advanced Report** to start a new report.
+- Click **Export/import → Manage scheduled reports** to see your list.
+- Click **Advanced**, then **Preview** under **Scheduled Reports for Data Visualisation**.
+
+On **Scheduled Reports**, click **Create Report**. The page lists your scheduled reports across all workspaces.
+
+<Frame>
+  <img src="/images/reports/scheduled-reports.jpg" alt="Scheduled Reports list with the Create Report button" />
+</Frame>
+
+### Step 1: Report Details
+
+| Field | What to enter | Limits |
+| --- | --- | --- |
+| **Report Name** | A name, for example "Daily Campaign Performance" | Required, 2–100 characters |
+| **Description** | What the report covers | Optional, up to 500 characters |
+
+### Step 2: Schedule
+
+| Field | What to enter |
+| --- | --- |
+| **Frequency** | **Hourly**, **Daily**, **Weekly**, **Monthly** or **Custom (cron)** |
+| **Time of Day** | When it runs, in the selected time zone. Default `08:00`. Daily, Weekly and Monthly only. |
+| **Timezone** | The zone the schedule runs in. Defaults to your browser's zone. |
+| **Day of Week** | Weekly only |
+| **Day of Month** | Monthly only, 1–28 |
+| **Cron Expression** | Custom only. Standard 5-field cron, evaluated in the selected time zone. |
+
+Hourly reports run at minute 0 of every hour.
+
+Cron examples from the wizard:
+
+| Expression | Runs |
+| --- | --- |
+| `0 9 * * 1-5` | 9am every weekday |
+| `0 */2 * * *` | Every 2 hours on the hour |
+| `30 14 1,15 * *` | 2:30pm on the 1st and 15th of each month |
+| `0 0 * * 0` | Midnight every Sunday |
+
+A cron schedule can't run more often than every 15 minutes.
+
+### Step 3: Content
+
+| Field | What to enter | Limits |
+| --- | --- | --- |
+| **Date Range** | **Today**, **Yesterday**, **Last 7 Days**, **Last 14 Days**, **Last 30 Days**, **Last 90 Days**, **This Week**, **Last Week**, **This Month** or **Last Month** | Default **Yesterday** |
+| **Workspaces** | The workspaces to include. Their data is combined into one report. | 1–25 |
+| **Groupings** | Entities (Campaign, Offer, Lander, Traffic Source, Affiliate Network, Flow, Rule), Geo/Device (Country, Region / State, City, Device, OS, Browser and more) or Time (Day, Month, Day of Week, Hour of Day) | 1–4 |
+| **Columns** | Tick columns by group: Traffic, Financial, Rates, Cost Metrics, Revenue Metrics, Platform Data, Events, Quality, Refunds | At least 1 |
+| **Sort By** | A column, then **ASC** or **DESC** | Optional |
+| **Filters** | A dimension (such as Campaign, Offer, Country or Device) and an operator: **Equals**, **Does not equal**, **Contains**, **Is one of**, **Is not one of** | Optional |
+| **Maximum Rows** | How many rows to include | 1–100,000, default 50,000 |
+
+Optional switches:
+
+- **Include empty rows (rows with all zero values)**
+- **Compare to previous period (embed Δ% in the email body)**
+
+### Step 4: Delivery
+
+**Report Format:**
+
+| Format | Notes |
+| --- | --- |
+| **CSV** | Works with Excel and Google Sheets |
+| **Excel (XLSX)** | Native workbook with a frozen header |
+| **PDF** | Print-ready. Capped at 5,000 rows |
+| **JSON** | For programmatic use |
+| **XML** | For older systems |
+
+**Delivery channels:**
+
+- **Email Recipients**: type an address and press Enter. Up to 10 recipients. At least one is required.
+- **BI / Data Visualization**: automatic. Every report gets a permanent link. See below.
+- **Webhook URL (optional)**: ClickPattern sends a POST with report details after each run. Works with Zapier, Make.com, n8n or any webhook endpoint.
+
+### Step 5: Review
+
+Check the summary, then click **Create Report**.
+
+### Manage your reports
+
+The list shows **Name**, **Status**, **Schedule**, **Groupings**, **Format**, **Last Run** and **Runs**. Click the menu on a row for:
+
+| Action | What it does |
+| --- | --- |
+| **View details** | Shows the setup, run history and the BI link |
+| **Edit** | Opens the wizard with your settings |
+| **Run now** | Runs the report immediately |
+| **Download last report** | Downloads the latest file |
+| **Pause** / **Resume** | Stops or restarts the schedule |
+| **Delete** | Removes the report and its run history. This can't be undone. |
+
+### Connect a BI tool
+
+1. Choose **CSV** as the format and create the report.
+2. Run it once with **Run now**, and make sure the date range has data.
+3. Open **View details** and find **Persistent URL (for BI Tools)**.
+4. Copy the link, or click **Copy Google Sheets formula** to get `=IMPORTDATA("…")`.
+
+The URL never changes, and it always returns the latest run. In Power BI, use Get Data → Web, paste the URL and choose Anonymous. In Looker Studio or Tableau, add it as a CSV or web data source.
+
+### One-time Big Data report
+
+For a single large export:
+
+1. Click **Advanced** in Performance.
+2. Under **Big Data Report**, click **Select**.
+3. Complete **Report Details**, **Content**, **Delivery** and **Review**. There's no Schedule step.
+
+It runs once right away, and the download link is emailed when it's ready. It's available on the same plans as scheduled reports.
+
+### FAQ
+
+**My cron expression was rejected. Why?** It must be a valid 5-field expression, at least 15 minutes apart. For example, `*/15 * * * *` or `0 * * * *`.
+
+**Why is my PDF missing rows?** PDF stops at 5,000 rows. Use CSV or XLSX for larger reports.
+
+**Who sees my scheduled reports?** The list shows the reports you created.
+
+### Related articles
+
+- [Shared reports](/reports/shared-reports)
+- [Performance reports](/reports/performance-reports)
+- [Date ranges, comparison and time zone](/reports/date-ranges-comparison-and-time-zone)

@@ -1,0 +1,92 @@
+---
+title: "Rule-based paths and conditions"
+description: "Rules send specific visitors, such as one country, device or time of day, down their own paths. Visitors who match no rule use the default paths."
+---
+
+### Steps
+
+1. In a flow (or the Advanced campaign's Path mode), click **Add rule** under **Rule-based paths**.
+2. Click the rule and enter a **Rule name**.
+3. Click **Add Condition**. Pick a type, an operator and values, then click **Apply**.
+4. Add more conditions if needed.
+5. Set up the rule's paths. Click **Add path** for more than one.
+6. Order your rules with the up and down arrows.
+7. Click **Save**.
+
+<Frame>
+  <img src="/images/shared/new-flow-rule.jpg" alt="Rule with conditions and paths" />
+</Frame>
+
+<Frame>
+  <img src="/images/shared/flow-condition.jpg" alt="Condition editor popover with Include empty and Timezone" />
+</Frame>
+
+### How rules are evaluated
+
+- Rules are checked from top to bottom. The top rule has the highest priority.
+- The first rule whose conditions all match wins. Later rules are skipped.
+- Within a rule, all conditions must match (AND). The editor shows `&` between them.
+- Within one condition, any selected value can match (OR). For example, Country Is Germany, Austria matches either.
+- Matching ignores upper and lower case.
+- A rule with its switch off is skipped.
+- If a rule matches but none of its paths is enabled, the visitor isn't routed. Keep at least one path on.
+- No match: the visitor uses the default paths.
+
+A rule needs at least one condition and one path, or you'll see "Rule must have at least one condition" or "Rule must have at least one path".
+
+Rule controls: up and down arrows set priority, the copy icon duplicates the rule, the delete icon removes it.
+
+### Condition types
+
+| Condition | Operators | Value input |
+| --- | --- | --- |
+| Country | Is, Is Not | Pick from list |
+| Region/State | Is, Is Not | Search |
+| City | Is, Is Not | Search |
+| Device Type | Is, Is Not | Pick from list |
+| Device Brand | Is, Is Not | Search |
+| Device Model | Is, Is Not | Search |
+| Operating System | Is, Is Not | Pick from list |
+| OS Version | Is, Is Not | Pick from list |
+| Browser | Is, Is Not | Pick from list |
+| Browser Version | Is, Is Not | Search |
+| Connection Type | Is, Is Not | Pick from list |
+| ISP | Is, Is Not | Search |
+| Mobile Carrier | Is, Is Not | Search |
+| Proxy | Is, Is Not | Yes or no |
+| IP Address | All six | Text |
+| Weekday | Is, Is Not | Pick from list, with time zone |
+| Time of Day | Is, Is Not | Pick from list, with time zone |
+| Language | Is, Is Not | Pick from list |
+| Referrer URL | All six | Text |
+| Referrer Domain | All six | Text |
+| Unique Visit | Is, Is Not | Yes or no |
+| Custom Variable 1 to 10 | All six | Text |
+
+"All six" means **Is**, **Is Not**, **Contains**, **Not Contains**, **Starts With** and **Ends With**.
+
+Each condition type can be used once per rule. Custom Variable N reads the traffic source's Variable N (`{varN}`).
+
+### Include empty
+
+Text conditions (IP Address, Referrer URL, Referrer Domain, Custom Variable) have an **Include empty** checkbox, for example **Include empty custom variable**. Tick it to also match visits where the value is missing. The value shows as **(Empty)**.
+
+Without it, a missing value never matches **Is** and always matches **Is Not**.
+
+### Time zone for time conditions
+
+**Weekday** and **Time of Day** have a **Timezone** field. The day or hour is checked in that time zone. The default is UTC.
+
+### FAQ
+
+**My rule never matches. What should I check?** Check the rule's switch, its position (a higher rule may catch the visitors first), and that every condition can be true at once.
+
+**How do I target visitors without a referrer?** Add **Referrer Domain**, tick **Include empty referrer domain**, and leave other values empty.
+
+**Can I use OR between two different condition types?** Not in one rule. Create two rules with the same paths.
+
+### Related articles
+
+- [Create a flow](/tracking/create-a-flow)
+- [Traffic Distribution AI and smart rotation](/tracking/traffic-distribution-ai-and-smart-rotation)
+- [Add a custom traffic source](/tracking/add-a-custom-traffic-source)

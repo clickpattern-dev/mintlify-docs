@@ -1,0 +1,60 @@
+---
+title: "Clickadu"
+description: "Connect Clickadu with an API token. ClickPattern syncs your cost, imports campaigns that had recent traffic and lets PatternPilot pause, resume and change bids and budgets on mapped campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks per campaign |
+| Campaign import | Campaigns that had traffic in the last 30 days |
+| PatternPilot actions | **Pause campaign**, **Resume campaign**, **Adjust bid**, **Adjust budget** |
+
+PatternPilot acts on whole campaigns. Zone-level actions aren't available in rules.
+
+### What you need
+
+- Your Clickadu API token.
+
+### Connect Clickadu
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **Clickadu** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **API Token** | Your Clickadu API token. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+<Frame>
+  <img src="/images/integrations/12-clickadu.jpg" alt="Integrate with Clickadu dialog" />
+</Frame>
+
+### How actions work on Clickadu
+
+- **Pause campaign** sets the campaign to Stopped in Clickadu. **Resume campaign** sets it back to Working.
+- **Adjust bid** applies the new amount to every country rate on the campaign.
+- **Adjust budget** changes the campaign's daily or total amount.
+- If Clickadu's campaign data lacks the rate or budget field, the change fails and nothing is written.
+
+### Manage the connection
+
+Click the Clickadu card under **Connected Integrations**. The detail page has **Performance**, **Campaigns**, **Campaign Mapping** and **Sync Logs** tabs, plus **Sync Now** and **Delete**.
+
+### FAQ
+
+**Why is one of my Clickadu campaigns missing?** ClickPattern finds Clickadu campaigns through their recent statistics. A campaign with no traffic in the last 30 days doesn't appear.
+
+**Why are all imported campaigns shown as active?** Clickadu's statistics don't include campaign status, so imported campaigns show as active. Check the real status in Clickadu.
+
+**Why did a paused campaign show as Stopped in Clickadu?** ClickPattern pauses Clickadu campaigns by setting them to Stopped. Resume sets them back to Working.
+
+### Related articles
+
+- [PropellerAds](/integrations/propellerads)
+- [Adsterra](/integrations/adsterra)
+- [ClickAdilla](/integrations/clickadilla)

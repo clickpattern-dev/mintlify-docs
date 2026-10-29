@@ -1,0 +1,66 @@
+---
+title: "Visits or clicks not recorded"
+description: "If visits are missing, the traffic either isn't using your campaign URL, or ClickPattern answered it with an error, a fallback or a filter page. Open the campaign URL yourself first; the response tells you which."
+---
+
+### Check 1: Is the ad using the campaign URL?
+
+1. Go to **Performance → Campaigns**, select the campaign and click **Edit**.
+2. Open the **Tracking & PatternPilot** tab and copy **Campaign URL**.
+3. Compare it with the URL in your ad. The ID after `/c/` must match exactly.
+
+Redirect campaign URLs look like `https://{domain}/c/7d2f4a10-3b1e-4c8a-9f21-5a6b7c8d9e0f`. Campaign IDs are UUIDs.
+
+### Check 2: Open the URL and read the response
+
+Paste the campaign URL into a private browser window.
+
+| HTTP status | Message | Cause | Fix |
+| --- | --- | --- | --- |
+| 400 | Invalid campaign slug | The ID after `/c/` isn't a valid campaign ID. | Copy the URL again from the campaign. |
+| 404 | Campaign not found: "The requested campaign does not exist" | The campaign was deleted or the ID is wrong. | Use the URL of an existing campaign. |
+| 403 | Campaign inactive: "This campaign is currently inactive" | The campaign isn't active. | Resume the campaign. |
+| 410 | Gone | The campaign is paused or archived, or its flow has no enabled default path, and no fallback URL is set. | Resume or unarchive the campaign, or enable a default path in the flow. |
+| 404 | Page not found | The offer reached its cap and no redirect offer is set. | Set a redirect offer in the offer's cap settings, or raise the cap. |
+| 500 | No valid lander configured | All landers in the path are inactive or have zero weight. | Give at least one lander a weight. |
+| 500 | No valid offer configured | All offers in the path are inactive or have zero weight. | Give at least one offer a weight. |
+| 500 | No destination configured | The campaign has no landers or offers. | Add a destination. |
+| 500 | Flow evaluation failed | A path in the flow has no lander or offer to send the visitor to. | Check each path in the flow has an active lander or offer. |
+
+Paused or archived campaigns don't record new visits. Conversions on earlier visits are still accepted.
+
+### Check 3: Was the visitor filtered?
+
+Blocked visitors are sent to a ClickPattern notice page instead of your destination, for example "Content Not Available in Your Region" or "Device Not Supported".
+
+1. Go to **Logs → Traffic Filtering** to see filtered events with the IP, user agent, matching rule and reason.
+2. If legitimate traffic is blocked, edit or turn off the rule in **Data Hub → Traffic filtering**.
+
+### Check 4: Direct tracking pages
+
+Direct tracking (no redirect) needs the `cpid` parameter on the lander or offer URL in your ad, for example `https://lander.example/page?cpid=7d2f4a10-…`, and the tracking script on the page.
+
+| Script response | Cause |
+| --- | --- |
+| `// Error: Missing cpid parameter` | The page URL has no `cpid`. |
+| `// Error: Campaign not found` | The `cpid` value doesn't match a campaign. |
+| `// Campaign not active` | The campaign is paused or archived. |
+
+Open your browser's developer tools on the page and check the response of the request to `/cp/events`.
+
+### Check 5: Is your report showing the right data?
+
+- Check the date range, time zone and workspace selector.
+- Check the status filter isn't hiding paused or archived campaigns.
+
+### FAQ
+
+**Visits show in my ad platform but not in ClickPattern.** Platforms count clicks on the ad. ClickPattern counts requests that reach the campaign URL. Bots, prefetches and users who leave before the redirect make the numbers differ.
+
+**Why is Unique Visits lower than Visits?** Repeat visits by the same visitor within the uniqueness window count as visits but not as unique visits.
+
+### Related articles
+
+- [Lander CTA not working](/troubleshooting/lander-cta-not-working)
+- [Tokens arriving empty](/troubleshooting/tokens-arriving-empty)
+- [Error codes and messages](/reference/error-codes-and-messages)

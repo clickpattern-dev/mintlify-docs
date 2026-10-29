@@ -1,0 +1,29 @@
+---
+title: "Connect ChatGPT"
+description: "Add ClickPattern to ChatGPT as a custom MCP connector, using the same server URL and sign-in flow as Claude."
+---
+
+### Steps
+
+1. In ChatGPT, open the settings where you add custom connectors or apps.
+2. Add a new connector and enter the server URL: `https://mcp.clickpattern.com/api/mcp`
+3. Choose OAuth as the authentication method if ChatGPT asks. Leave the OAuth client ID and client secret blank.
+4. Save the connector and start the connection.
+5. Sign in to ClickPattern when the sign-in page opens.
+6. On the **Authorize** screen, choose a **Workspace** and an **Access level** (**Read only** or **Read and write**), then click **Approve**.
+
+ChatGPT registers itself with ClickPattern automatically, so you don't need to create anything in the ClickPattern app first.
+
+### FAQ
+
+**Where exactly is the connector setting in ChatGPT?** ChatGPT's menus change over time and differ by plan. Look for custom connectors or MCP servers in ChatGPT's settings, or check OpenAI's help pages.
+
+**Does ChatGPT get the same tools as Claude?** Yes. Every AI client with an OAuth connection gets the same set of tools. Write tools work only on a **Read and write** connection.
+
+**Can I connect ChatGPT and Claude to the same workspace?** Yes. Each client gets its own connection. Revoking one doesn't affect the other.
+
+### Related articles
+
+- [Connect Claude to ClickPattern](/ai/connect-claude-to-clickpattern)
+- [What your AI assistant can do](/ai/what-your-ai-assistant-can-do)
+- [Manage and revoke AI connections](/ai/manage-and-revoke-ai-connections)

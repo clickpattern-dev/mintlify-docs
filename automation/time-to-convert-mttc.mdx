@@ -1,0 +1,53 @@
+---
+title: "Time-to-convert (MTTC)"
+description: "Time-to-convert (TTC) is how long a visitor takes to convert after clicking your ad. Set Low and High thresholds to spot bot-like instant conversions and slow converters."
+---
+
+### Set the thresholds
+
+1. Go to **Data Hub → MTTC**.
+2. Enter **Low TTC (below)** and **High TTC (above)** in `HH:MM:SS` format.
+3. Click **Save**.
+
+| Field | Default | Allowed range |
+| --- | --- | --- |
+| **Low TTC (below)** | `00:00:10` | `00:00:01` to `24:00:00` |
+| **High TTC (above)** | `01:00:00` | `00:01:00` to `168:00:00` (7 days) |
+
+**High TTC** must be greater than **Low TTC**. Click **Reset to default** to restore the defaults, or **Cancel** to undo unsaved edits.
+
+Validation messages:
+
+- **Use HH:MM:SS format (e.g. 00:00:10)**
+- **Low TTC must be between 00:00:01 and 24:00:00**
+- **High TTC must be between 00:01:00 and 168:00:00**
+- **High TTC must be strictly greater than Low TTC**
+
+<Frame>
+  <img src="/images/automation/mttc.jpg" alt="MTTC page with both fields and the colored bar" />
+</Frame>
+
+### What the thresholds flag
+
+The colored bar shows three zones:
+
+| Column | Counts conversions | Often means |
+| --- | --- | --- |
+| **Low TTC** | Faster than the Low threshold. | Bot traffic. |
+| **Optimal TTC** | Between the two thresholds. | Normal behavior. |
+| **High TTC** | Slower than the High threshold. | Slow or delayed converters. |
+| **MTTC** | Average time-to-convert across conversions. | Your typical conversion delay. |
+
+Add these columns to your Performance reports with **Columns**.
+
+### FAQ
+
+**Do new thresholds change past reports?** Yes. The TTC columns are calculated with your current thresholds each time a report loads, including past date ranges.
+
+**Who can change the thresholds?** Owners and Admins can save. Other roles can view the page.
+
+### Related articles
+
+- [Anti-Fraud Kit](/automation/anti-fraud-kit)
+- [Traffic filtering](/automation/traffic-filtering)
+- [Rule metrics](/automation/rule-metrics)

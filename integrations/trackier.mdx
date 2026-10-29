@@ -1,0 +1,59 @@
+---
+title: "Trackier"
+description: "Connect Trackier with your API key to browse your Trackier offers in ClickPattern and copy their tracking links. Use Trackier's postback to send conversions to ClickPattern."
+---
+
+### What you need
+
+- Your Trackier publisher API key.
+
+### Connect Trackier
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, find **Trackier**. Set **Category** to **Affiliate network** to narrow the list.
+3. Click the Trackier card. **Integrate with Trackier** opens.
+4. Enter your API key.
+5. Optional: enter a **Custom account name**.
+6. Leave **Enable integration** on, then click **Integrate**.
+
+The integration is added to the workspace you have selected. ClickPattern checks the key before it connects. If the key is wrong, you see "The provided credentials for Trackier are invalid. Please check and try again."
+
+<Frame>
+  <img src="/images/integrations/18-trackier.jpg" alt="Integrate with Trackier window" />
+</Frame>
+
+### Manage the connection
+
+Click the connected Trackier card. Depending on how the connection was created, it opens one of two views:
+
+- **Manage Trackier**: an **Integration enabled** switch to pause or resume syncing, the capabilities list and **Disconnect integration**.
+- **The Trackier page**: **Sync Now**, **Delete**, the integration details (**Status**, **Last Sync**, **Total Offers**), your **Publisher Account** and two tabs, **Performance** and **Campaigns**.
+
+### Browse offers and copy tracking links
+
+On the Trackier page, open **Campaigns**. It lists your Trackier offers with **Offer Name**, **Status**, **Payout**, **Advertiser**, **Category**, **Countries** and **Campaign ID**.
+
+1. Search by name, advertiser, category or country.
+2. Click the copy icon (**Copy tracking link**) on a row.
+3. Paste the link into a ClickPattern offer as its **Offer URL**, and add `{clickid}` in the sub ID parameter.
+
+Offers appear after the first sync. The **Performance** tab shows **Daily Performance** from Trackier.
+
+### Conversions
+
+Connections that open the Trackier page also pull conversions from Trackier's API every 4 hours. For real-time conversions on every connection, set up Trackier's postback with your ClickPattern postback URL.
+
+### FAQ
+
+**Does connecting Trackier send conversions automatically?** Set up the postback to be sure. The 4-hour pull applies only to connections that open the Trackier page.
+
+**Where do I put the tracking link?** In a ClickPattern offer's **Offer URL**. Add `{clickid}` to Trackier's sub ID parameter so conversions match visits.
+
+**Can I turn the connection off without deleting it?** Yes, if it opens **Manage Trackier**. Switch **Integration enabled** off.
+
+### Related articles
+
+- [Affiliate network templates](/integrations/affiliate-network-templates)
+- [S2S postback](/tracking/s2s-postback)
+- [Add your postback to an affiliate network](/tracking/add-your-postback-to-an-affiliate-network)
+- [Add an offer](/tracking/add-an-offer)

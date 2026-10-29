@@ -1,0 +1,52 @@
+---
+title: "Redirect or direct tracking?"
+description: "Redirect tracking sends visitors through a ClickPattern link before your page. Direct tracking skips the redirect: your ad links straight to your page, and a script on the page reports the visit. Start with redirect unless you have a reason not to."
+---
+
+### How each works
+
+**Redirect:** your ad points to `https://{domain}/c/{campaignId}?…`. ClickPattern records the visit, picks the lander or offer, and forwards the visitor in a fraction of a second.
+
+**Direct:** your ad points to your own page with the campaign ID added, `https://yourpage.com/?cpid={campaignId}&…`. The ClickPattern script on that page records the visit:
+
+```
+<script async src="https://{domain}/d/script.js"></script>
+```
+
+### Which to choose
+
+|  | Redirect | Direct |
+| --- | --- | --- |
+| Setup | Paste one URL into your ad | Add the script to every landing page, and add `cpid` to every ad link |
+| Page load | One extra hop | No extra hop |
+| Ad platforms that reject redirect links | Not suitable | Works |
+| Organic, social and email links | Works if you control the link | Works for any link that carries `cpid` |
+| Rule-based routing to different landers and offers | Yes | Visitors land on the page you linked |
+| Lander protection and honeypot traffic checks | Yes | No |
+
+### Choose redirect if
+
+- You want ClickPattern to choose between landers or offers, or route by country, device or time.
+- You run affiliate offers through a lander and want the simplest setup.
+
+### Choose direct if
+
+- Your ad platform doesn't allow redirecting tracking links, or flags them.
+- You track your own site or store and want the URL in the ad to be your own domain.
+- Page speed matters more than routing.
+
+### Important for direct tracking
+
+Traffic that never carried `cpid` isn't counted. Use the URL from the campaign's tracking tab in every ad, post and link you want tracked, and put the script on every page visitors can land on.
+
+### FAQ
+
+**Can I switch later?** Yes. Change the tracking method on the campaign and update the URL in your ads.
+
+**Does direct tracking still give me a click ID for my network?** Yes. The script assigns a click ID to each visit and passes it on when the visitor clicks through to the offer.
+
+### Related articles
+
+- [Redirect tracking](/tracking/redirect-tracking)
+- [Direct (redirectless) tracking](/tracking/direct-redirectless-tracking)
+- [Transition modes](/tracking/transition-modes)

@@ -1,0 +1,65 @@
+---
+title: "Snapchat Ads"
+description: "Connect your Snapchat Ads account to import cost and campaigns, send conversions through the Snapchat Conversions API and let PatternPilot manage your ads."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks per campaign, every 15 minutes |
+| Campaign import | Campaigns and ad squads |
+| CAPI | Server-side web events to your Snapchat pixel |
+| PatternPilot actions | **Pause**, **Resume**, **Adjust bid**, **Adjust budget** |
+
+### Connect Snapchat
+
+1. Go to **Data Hub → Integrations**.
+2. Click the **Snapchat Ads** card.
+3. Sign in to Snapchat and approve access.
+4. In **Configure Snapchat Integration**, choose the **Ad Account**. Each option shows its ID and organization.
+5. Optional: choose a **Snapchat Pixel (Optional)**. You need it only for the Conversions API.
+6. Click **Save Configuration**.
+
+If no pixel is listed, you see "No pixels found — create one in Snapchat Ads Manager". Create the pixel in Snapchat, then add it later with **Configure**.
+
+The ad account can't be changed after setup. You can change the pixel with **Configure**.
+
+### The Snapchat integration page
+
+The header has **Configure**, **Sync Now**, **Refresh Token** (or **Reconnect**) and **Delete**. Tabs: **Performance**, **Campaigns**, **Campaign Mapping**, **Overview**, **CAPI** and **Health**.
+
+<Frame>
+  <img src="/images/integrations/35-snapchat-header.jpg" alt="Snapchat Ads integration page with Configure, Sync Now and Refresh Token" />
+</Frame>
+
+### Set up CAPI
+
+1. Open the **CAPI** tab and click **Set Up CAPI**.
+2. Check the **Pixel ID**. It's filled in if you chose a pixel during setup. Find it in Snapchat Ads Manager > Events Manager > Pixel details.
+3. Choose **Events to Send** and click **Save & Enable**.
+
+Snapchat events are sent as web events only. Snapchat matches conversions on email, phone, or the visitor's IP address and user agent. Snapchat has no test event code, so use **Validate** to check an event without recording it.
+
+### PatternPilot actions
+
+Rules can pause and resume Snapchat campaigns and adjust bids and budgets. Bids apply to the ad squad, so map the ad squad to your ClickPattern campaign.
+
+### Token renewal
+
+Snapchat access refreshes automatically. If it expires or the integration keeps failing, the page shows a warning with **Reconnect Now**.
+
+### FAQ
+
+**Do I have to choose a pixel when I connect?** No. Cost and campaign sync work without one. Add a pixel when you want to send conversions.
+
+**Why can't I send a test event to Snapchat?** Snapchat has no test mode. Use **Validate**, which checks the event and records nothing.
+
+**Can I use a different pixel later?** Yes. Click **Configure** and choose another pixel. Update the **Pixel ID** on the CAPI tab too.
+
+### Related articles
+
+- [Server-side conversions (CAPI) setup](/integrations/server-side-conversions-capi-setup)
+- [Campaign mapping and unmapped objects](/integrations/campaign-mapping-and-unmapped-objects)
+- [Which platforms support which actions](/automation/which-platforms-support-which-actions)
+- [Integrations overview](/integrations/integrations-overview)

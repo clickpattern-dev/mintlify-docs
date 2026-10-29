@@ -1,0 +1,69 @@
+---
+title: "Postback and pixel parameters"
+description: "Parameters you can send on the S2S postback (/postback) and the conversion pixel (/conversion.gif), with their aliases and the responses you get back."
+---
+
+### S2S postback
+
+`https://{domain}/postback?cid={network_click_macro}&payout={network_payout_macro}&txid={network_txid_macro}`
+
+Both GET and POST are accepted. POST can send the parameters in the query string or a JSON body.
+
+| Parameter | Aliases | Values | Notes |
+| --- | --- | --- | --- |
+| `cid` | `c`, `clickid`, `click_id` | ClickPattern click ID | Required. If several are sent, `cid` wins, then `c`, `clickid`, `click_id`. |
+| `payout` | `revenue` | Number, 0 or more | Used when the offer's payout type is **Auto**. Values above 10,000,000 are dropped. |
+| `currency` | `payout_currency` | 3-letter code | Default `USD`. |
+| `txid` | `transaction_id` | Text | Identifies each sale. A new `txid` on the same click is a new conversion. |
+| `status` | — | `approved`, `pending`, `rejected`, `refund` | Default `approved`. `refunded` and `chargeback` mean `refund`. Not case-sensitive. Any other word is refused. |
+| `et` | `event`, `event_type`, `type` | Event type, for example `lead`, `purchase` | First one found wins, in this order. No value means the default conversion. |
+| `cost` | — | Number | Added to cost only for custom conversion events set to include cost. |
+| `param1` … `param5` | — | Text | Reported as Postback Param 1–5. |
+| `ptoken` | — | Your security token | Checked only when the affiliate network requires one. |
+| `email` | `em` | Email | Hashed before storage. Used for server-side conversion matching. |
+| `phone` | `ph` | Phone | Hashed. |
+| `first_name` | `firstname`, `fn` | Text | Hashed. |
+| `last_name` | `lastname`, `ln` | Text | Hashed. |
+| `city` | `ct` | Text | Hashed. |
+| `state` | `st` | Text | Hashed. |
+| `zip` | `zp`, `postal_code` | Text | Hashed. |
+| `country` | — | Text | Hashed. |
+| `external_id` | `lead_id` | Text | Stored as sent, not hashed. |
+
+Placeholder values (`REPLACE`, `OPTIONAL`, `{macro}`, `[macro]`, `__MACRO__`, `%%macro%%`, `${macro}` and similar) are ignored as if not sent.
+
+### Postback responses
+
+| HTTP status | Body | Meaning |
+| --- | --- | --- |
+| 200 | `"message": "Postback received successfully"` with `postback_id`, `click_id`, `status`, `timestamp` | Accepted and queued. |
+| 200 | `"message": "Postback received", "status": "ok"` | Received but refused. The reason is in **Logs → Received Postbacks** or **Errors Log**. |
+| 400 | `"error": "Invalid postback request"`, `"message": "Missing required parameter: cid (Click ID)"` | No click ID. |
+| 400 | `"error": "Invalid postback request"`, `"message": "Invalid payout value: must be a positive number"` | Payout isn't a number or is negative. |
+| 400 | `"message": "Refused: a ClickPattern outgoing postback reached a ClickPattern tracking host. …"` | A traffic source postback URL points back to ClickPattern. |
+| 503 | `"message": "Postback not accepted, retry", "status": "retry"`, header `Retry-After: 60` | Temporary problem. Resend after 60 seconds. |
+
+### Conversion pixel
+
+`<img src="https://{domain}/conversion.gif?et=lead" width="1" height="1" />`
+
+| Parameter | Aliases | Notes |
+| --- | --- | --- |
+| `cid` | — | Optional. If missing, the `_cp_cid` cookie is used (same registrable domain only). |
+| `payout` | `revenue`, `sum` | Number. |
+| `currency` | `payout_currency` | Default `USD`. |
+| `txid` | `transaction_id` | Text. |
+| `status` | — | `approved` (default), `pending`, `rejected`. Refunds aren't accepted on the pixel. |
+| `et` | `event`, `event_type`, `type` | Event type. |
+| `eid` | `event_id` | Event ID for deduplication with the ad platform's browser pixel. |
+| `param1` … `param5` | — | Reported as Postback Param 1–5. |
+| `email`, `phone` and the other customer fields | Same aliases as the postback | Hashed before storage. |
+| `_dryrun` | — | `1` returns a JSON diagnostic instead of recording a conversion. |
+
+The pixel always returns a 1×1 transparent GIF, even when the conversion is refused. Use `_dryrun=1` or the logs to troubleshoot.
+
+### Related articles
+
+- [Conversions not showing](/troubleshooting/conversions-not-showing)
+- [Payout or revenue wrong](/troubleshooting/payout-or-revenue-wrong)
+- [Error codes and messages](/reference/error-codes-and-messages)

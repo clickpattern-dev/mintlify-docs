@@ -1,0 +1,66 @@
+---
+title: "Traffic sources"
+description: "A traffic source is the ad network or platform that sends you visitors. It tells ClickPattern which URL parameters to add to your campaign URL, so each visit arrives with the ad, placement and cost details the source fills in."
+---
+
+### Templates vs custom
+
+When you click **Create** on **Performance → Traffic Sources**, you see a grid of templates. You can search it with **Search by traffic source name**.
+
+- **A template** pre-fills the parameter names and tokens that network uses.
+- **Custom** starts with empty parameters for a source that isn't listed.
+
+You can edit the parameters either way.
+
+### Parameters
+
+Each parameter row maps the source's own placeholder (**TS Token**) to a URL parameter name (**TS Parameter**). The **CP Token** column shows the ClickPattern token where the value lands.
+
+| Group | Rows | CP Token | Use it for |
+| --- | --- | --- | --- |
+| **External IDs** | Up to 3 (**Add external ID**) | `{externalid}`, `{externalid2}`, `{externalid3}` | The source's own click ID, so you can send conversions back to it |
+| **Other Parameters → Cost** | 1, always present | `{cost}` | The price the source paid for the visit |
+| **Other Parameters → Variable 1–10** | Up to 10 (**Add parameter**) | `{var1}` … `{var10}` | Campaign ID, ad ID, zone, placement, keyword and similar details |
+
+Variable rows have an **Enable** checkbox. Only enabled rows are added to the campaign URL. The values appear as report dimensions and can be passed to your offer and lander URLs with the same tokens.
+
+<Frame>
+  <img src="/images/shared/traffic-source-custom.jpg" alt="Traffic source Parameters section with External IDs and Other Parameters" />
+</Frame>
+
+### Cost currency
+
+The **Cost Currency** section has one **Currency** field. Set it to the currency the source bills you in. It defaults to USD.
+
+### Postback back to the source
+
+Under **Passing conversion info to traffic source**, tick **Traffic source postback URL** and paste the source's conversion URL into **Postback URL**. ClickPattern calls it each time a conversion is recorded for a visit from that source.
+
+Insert values with **Available Tokens**. These tokens are filled in:
+
+| Token | Value |
+| --- | --- |
+| `{click_id}` | ClickPattern click ID |
+| `{campaign_id}` | ClickPattern campaign ID |
+| `{payout}`, `{revenue}` | Conversion payout, in the conversion's currency |
+| `{currency}` | Conversion currency |
+| `{transaction_id}`, `{txid}` | Transaction ID from the network, if sent |
+| `{event_type}` | Conversion event type |
+
+You can also use the source's own tokens from your Parameters table. The usual one is the source's click ID, captured in **External ID 1**.
+
+For custom conversion events, the postback fires only when that event's **Send postback to traffic source** setting is on. Sent postbacks are listed in **Logs → Sent Postbacks**.
+
+### FAQ
+
+**Which template should I pick if my network appears twice?** Pick the one that matches the product you buy from, then check the parameter names against the network's macro docs.
+
+**Why is my Cost column empty?** The Cost parameter only fills in if the source replaces its cost placeholder and the campaign's cost source isn't **Not Tracked**. See Cost models.
+
+**Do I need External IDs?** Only if you want to send conversions back to the source. Without the source's click ID, its postback can't match the conversion to its click.
+
+### Related articles
+
+- [Campaigns](/core-concepts/campaigns)
+- [Cost models](/core-concepts/cost-models)
+- [Visits, clicks and conversions](/core-concepts/visits-clicks-and-conversions)

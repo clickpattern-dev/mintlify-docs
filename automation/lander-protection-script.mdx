@@ -1,0 +1,57 @@
+---
+title: "Lander protection script"
+description: "The lander protection script blocks direct-URL visits and scrapers. Visitors who didn't arrive through a ClickPattern tracking link in the last 30 minutes see a blank page."
+---
+
+### When to use it
+
+- Stop competitors and spy tools from copying your lander.
+- Stop people from opening your lander URL directly.
+
+It works only on redirect-tracking campaigns with a Landers & Offers funnel.
+
+### How it works
+
+When a campaign sends a visitor to a lander, ClickPattern adds an `lptoken` parameter to the lander URL. The script on your lander checks the token. A token is valid for 30 minutes and only for the visitor's browser. Without a valid token, the page stays blank.
+
+### Install the script
+
+1. Go to **Data Hub → Lander protection**.
+2. Under **1. Choose the Lander Protection Script version**, pick **JavaScript** or **PHP**.
+3. Click **Copy script**.
+4. Paste it into your lander: in the `<head>` for JavaScript, or in the `<body>` for PHP.
+5. Send a test visit through your campaign link to check the lander loads.
+
+| Version | Protection | Requirement |
+| --- | --- | --- |
+| **JavaScript** | Blocks direct visits and casual scrapers. Advanced headless tools can read the key from the HTML. | Any lander. |
+| **PHP** | Strongest. The key stays on your server and the token is checked before any lander HTML is sent. | Lander hosted on a server that supports PHP. |
+
+One key covers your whole account, so the same script works on every lander in every workspace.
+
+<Frame>
+  <img src="/images/automation/lander-protection.jpg" alt="Lander protection page with JavaScript selected and the script box" />
+</Frame>
+
+### Reset the secret
+
+**Reset secret** creates a new key. Only the account Owner can do this.
+
+1. Click **Reset secret**.
+2. Read **Rotate lander protection secret?** and click **Yes, rotate**.
+3. Copy the new script and replace it on every lander right away.
+
+Every lander still running the old script starts blocking all visitors within seconds. Only reset if you can redeploy immediately, for example if your key leaked.
+
+### FAQ
+
+**My lander is blank when I open it. Is it broken?** No. Opening the lander URL directly has no valid token, so the page stays blank. Test through your campaign tracking link instead.
+
+**Does it work with direct tracking?** No. It works only with redirect-tracking campaigns that send visitors to a lander.
+
+**What happens after I reset the secret?** All landers with the old script block every visitor until you paste the new script.
+
+### Related articles
+
+- [Traffic filtering](/automation/traffic-filtering)
+- [Anti-Fraud Kit](/automation/anti-fraud-kit)

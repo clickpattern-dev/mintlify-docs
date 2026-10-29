@@ -1,0 +1,80 @@
+---
+title: "Plans, usage and limits"
+description: "Your plan sets how many events you can track each month and how many campaigns, offers and other items your account can have. The Usage page shows where you stand, and this article explains what happens when you reach a limit."
+---
+
+### Where to see your usage
+
+Go to **Settings → Usage**. The page covers your whole account, across all of your workspaces.
+
+At the top, a box shows your plan name and the current period's dates. Below it, usage is split into sections:
+
+| Section | What it shows |
+| --- | --- |
+| **Monthly Usage** | **Events** and **Ad Spend** for the current month. These rows show **Resets** with the date the count starts again. |
+| **Resources** | Items your account has right now: **Campaigns**, **Offers**, **Landing Pages**, **Flows**, **Traffic Sources**, **Custom Domains**, **Integrations**, **Team Members**, **Read-only Seats**, **Workspaces**, **Automation Rules**, **Custom Events**, **Scheduled Reports**, **Shared Reports**. |
+
+Each row shows your current count and your plan's limit (`{current} / {limit}`), a progress bar and a chip. Under each label is a short description of what is counted.
+
+{/* Screenshot to add: Usage page with Monthly Usage and Resources sections. To be captured when the billing pages are switched on. */}
+
+### What the chips mean
+
+| Chip | Meaning |
+| --- | --- |
+| Green percentage | Under 25% of the limit used. |
+| Blue percentage | 25–49% used. |
+| Orange percentage | 50–74% used. |
+| Red percentage | 75% or more used. |
+| **Unlimited** | Your plan has no cap for this item. |
+| **No plan limit set** | Your plan doesn't state a limit for this item. |
+| **Over limit** | Your plan doesn't include this item, but you have some. |
+
+The figures are calculated live from your tracked events and your current setup.
+
+### What counts toward each limit
+
+- **Events** = visits + lander clicks + conversions. The row's description shows the split, for example `120000 visits + 30000 clicks + 900 conversions`.
+- **Ad Spend** is the tracked ad spend across mapped campaigns this month, in USD.
+- **Campaigns** counts active campaigns across all workspaces.
+- **Offers**, **Landing Pages** and **Traffic Sources** count only the ones used by active campaigns.
+- **Team Members** counts full-seat members, and **Read-only Seats** counts read-only seats. The account owner isn't counted in either.
+
+Monthly counts start again on the first day of each month.
+
+### When you reach a resource limit
+
+If you try to create an item and your account is already at its limit, it isn't created. A **Plan limit reached** message appears, for example: "This account has reached its campaigns limit (\{current\}/\{limit\})."
+
+Click **Upgrade** in the message to open **Settings → Billing & Subscription**. To make room without upgrading, archive or delete items you no longer use.
+
+### When a feature isn't in your plan
+
+Some features are only included on certain plans. If yours doesn't include one, its button is greyed out. Hover over it to see a note that the feature isn't available on your account, with a **View plan details** link.
+
+If you reach the feature another way, you see an **Upgrade Required** message.
+
+### When you go over your monthly events
+
+On plans that include overage, tracking doesn't stop at the monthly event limit. Visits, clicks and conversions keep being recorded. Events above your plan's amount are billed as overage on your next invoice.
+
+When you reach the limit, this banner appears at the top of the app: **Monthly event limit reached**, "You've reached your monthly event limit. Upgrade for more events." Click **Upgrade** to compare plans.
+
+Some plans stop recording at the limit instead. In that case the red banner **Event tracking paused** appears. Your links keep redirecting visitors and conversions are still recorded, but new visits and lander clicks aren't recorded until you upgrade or the month resets.
+
+For the events, overage rates and limits on each plan, see [pricing](https://www.clickpattern.com/pricing).
+
+### FAQ
+
+**Does going over my monthly events break my campaigns?** No. Visitors are always redirected. On plans with overage, everything keeps being tracked and the extra events are billed.
+
+**Why does my Offers count look lower than the number of offers I have?** Offers, landing pages and traffic sources only count when an active campaign uses them.
+
+**Can my team see the Usage page?** Yes. Every member can open **Settings → Usage**. It shows their own plan's limits, with usage counted across all the workspaces they belong to.
+
+**Where do I change my plan?** Go to **Settings → Billing & Subscription**. See "[Upgrade, downgrade and billing](/billing/upgrade-downgrade-and-billing)".
+
+### Related articles
+
+- [Upgrade, downgrade and billing](/billing/upgrade-downgrade-and-billing)
+- [Trial, past due and cancellation](/billing/trial-past-due-and-cancellation)

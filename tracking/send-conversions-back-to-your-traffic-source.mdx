@@ -1,0 +1,68 @@
+---
+title: "Send conversions back to your traffic source"
+description: "Tell your traffic source about each conversion, so it can optimize your bids. Add the traffic source's postback URL to the traffic source in ClickPattern."
+---
+
+### Step 1: Add the traffic source postback URL
+
+1. Go to **Performance → Traffic Sources** and open the traffic source with **Edit**.
+2. Under **Passing conversion info to traffic source**, tick **Traffic source postback URL**.
+3. Paste the URL your traffic source gave you into **Postback URL**, for example: `https://your-traffic-source.com/postback?clickid={clickid}&payout={payout}`
+4. Click **Save**.
+
+Templates often fill this in for you. Unticking the box clears the URL.
+
+<Frame>
+  <img src="/images/shared/ts-postback-tokens.jpg" alt="Passing conversion info to traffic source section with Postback URL filled" />
+</Frame>
+
+### Step 2: Use the right tokens
+
+These tokens are filled in when ClickPattern sends the postback. Write them exactly as shown, in lowercase.
+
+| Token | Value |
+| --- | --- |
+| `{payout}`, `{revenue}` | Conversion amount, in the conversion's own currency |
+| `{currency}` | Conversion currency code |
+| `{txid}`, `{transaction_id}` | Transaction ID; empty if there is none |
+| `{click_id}` | ClickPattern click ID |
+| `{campaign_id}` | ClickPattern campaign ID |
+| `{event_type}` | Event type; `sale` when there is none |
+| Your traffic source tokens | The value each enabled parameter carried on the click, by its **TS Token** or **CP Token**, such as `{externalid}` |
+
+Most traffic sources need their own click ID back. Map it as an external ID in the traffic source's **Parameters**, then use that token in the postback URL.
+
+Example: your traffic source sends its click ID as `clickid={click_id}`, mapped to `{externalid}`. Your postback URL is:
+
+`https://your-traffic-source.com/postback?clickid={externalid}&payout={payout}`
+
+### What triggers a postback
+
+- Conversions from postbacks, pixels, scripts and the Shopify connection.
+- Not micro-conversions, such as `add_to_cart`.
+- Not refunds.
+- For custom conversions, only when **Send postback to traffic source** is ticked on the event in **Data Hub → Custom conversions**. It's off by default.
+
+A campaign can replace the traffic source's postback URL with its own. See **Create a campaign: Advanced form**.
+
+### Check what was sent
+
+Go to **Logs → Sent Postbacks**. Each row shows the URL sent and a status: **Delivered** or **Failed**. Failures show a reason, such as `Unexpected HTTP response code: 400`.
+
+<Frame>
+  <img src="/images/shared/logs-sent-postbacks.jpg" alt="Sent Postbacks log with Delivered and Failed rows" />
+</Frame>
+
+### FAQ
+
+**Why is my postback URL sent with `{clickid}` still in it?** `{clickid}` isn't an outgoing token. Use `{click_id}` for the ClickPattern ID, or your traffic source's mapped token for its own ID.
+
+**Why are some conversions missing from Sent Postbacks?** Micro-conversions, refunds and custom conversions without **Send postback to traffic source** are not sent.
+
+**Can I see why a postback failed?** Yes. Open the row in **Logs → Sent Postbacks** to see the response code or error.
+
+### Related articles
+
+- [Custom variables and external IDs](/tracking/custom-variables-and-external-ids)
+- [Event types and custom conversion events](/tracking/event-types-and-custom-conversion-events)
+- [S2S postback](/tracking/s2s-postback)

@@ -1,0 +1,125 @@
+---
+title: "Passing data with URL tokens"
+description: "Tokens are placeholders in curly braces, such as {clickid} or {country}. ClickPattern replaces them with real values when it sends a visitor to your offer or lander."
+---
+
+### Where tokens work
+
+Add tokens to **Offer URL** and **Lander URL**. They are filled in at redirect time, on the campaign URL and on lander click URLs.
+
+Tokens are not filled in on direct (redirectless) tracking pages, because nothing redirects. Use `window.clickpattern.getTokens()` there.
+
+### Syntax
+
+| Form | Example | Result |
+| --- | --- | --- |
+| `{token}` | `{country}` | `US` |
+| `{token:default}` | `{country:XX}` | `XX` when the country is unknown |
+| `{var:param}` | `{var:zone}` | The value of the `zone` parameter on the incoming URL |
+| `{var:param:default}` | `{var:zone:none}` | `none` when `zone` is missing |
+| `{param}` (passthrough) | `{gclid}` | The value of the `gclid` parameter on the incoming URL |
+
+Standard token names are case-insensitive: `{ClickID}` and `{clickid}` are the same. Passthrough parameter names must match the incoming URL exactly, including case.
+
+A token with no value and no default is removed, so it never shows up as literal text.
+
+### Example
+
+Offer URL:
+
+`https://network.example/offer?aff_sub={clickid}&sub2={campaign.id}&geo={country:XX}&src={trafficsource.name}`
+
+What the visitor gets:
+
+`https://network.example/offer?aff_sub=c1a8f0e2-5b7d-4f3a-8e9c-2d4b6a1f0e37&sub2=7d2f4a10-3c1e-4b8a-9f2d-5e6a7b8c9d01&geo=DE&src=PropellerAds`
+
+### Token reference
+
+**Click tracking**
+
+| Token | Value |
+| --- | --- |
+| `{clickid}` | ClickPattern click ID. Required for conversion tracking. |
+| `{externalid}` | External click ID from the traffic source |
+| `{externalidparameter}` | Name of the URL parameter that carried the external ID |
+
+**Campaign, workspace, offer, lander**
+
+| Token | Value |
+| --- | --- |
+| `{campaign.id}` | Campaign ID |
+| `{campaign.name}` | Campaign name |
+| `{workspace.id}` | Workspace ID |
+| `{offer.id}` | Offer ID |
+| `{offer.name}` | Offer name |
+| `{lander.id}` | Lander ID |
+| `{lander.name}` | Lander name |
+
+**Traffic source**
+
+| Token | Value |
+| --- | --- |
+| `{trafficsource.id}` | Traffic source ID |
+| `{trafficsource.name}` | Traffic source name |
+| `{referrerdomain}` | Domain of the page the visitor came from |
+
+**Geo and locale**
+
+| Token | Value |
+| --- | --- |
+| `{country}` | Two-letter country code, such as `US` |
+| `{countryname}` | Country name |
+| `{region}` | Region or state |
+| `{city}` | City |
+| `{language}` | Browser language |
+
+**Device**
+
+| Token | Value |
+| --- | --- |
+| `{device}` | Device type (mobile, tablet or desktop) |
+| `{brand}` | Device brand |
+| `{model}` | Device model |
+| `{os}` | Operating system |
+| `{osversion}` | Operating system version |
+| `{browser}` | Browser |
+| `{browserversion}` | Browser version |
+
+**Connection**
+
+| Token | Value |
+| --- | --- |
+| `{isp}` | Internet service provider |
+| `{carrier}` | Mobile carrier (same value as `{isp}`) |
+| `{ip}` | Visitor IP address |
+| `{useragent}` | Visitor user agent, URL-encoded |
+
+**Cost and utility**
+
+| Token | Value |
+| --- | --- |
+| `{cost}` | Cost of the visit |
+| `{trackingdomain}` | The campaign's tracking domain |
+| `{cachebuster}` | A random number, new on every visit |
+
+**Custom variables**
+
+| Token | Value |
+| --- | --- |
+| `{var1}` … `{var10}` | The `var1`…`var10` parameter on the incoming URL, or `sub1`…`sub10` if `varN` is missing |
+
+To pass a traffic source parameter under its own name, use `{var:zone}` or the passthrough form `{zone}`.
+
+### FAQ
+
+**What happens if a value is missing?** The token is removed. Add a default, such as `{city:unknown}`, if the network needs a value.
+
+**Can I pass any parameter from my ad link?** Yes. Write the parameter name in braces, such as `{adset}`. It must match the incoming parameter name exactly.
+
+**Which token do I need for conversions?** `{clickid}`, placed in the network's sub ID parameter. Without it, ClickPattern can't match conversions to visits.
+
+### Related articles
+
+- [Custom variables and external IDs](/tracking/custom-variables-and-external-ids)
+- [Direct (redirectless) tracking](/tracking/direct-redirectless-tracking)
+- [Add your postback to an affiliate network](/tracking/add-your-postback-to-an-affiliate-network)

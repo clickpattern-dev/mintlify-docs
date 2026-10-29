@@ -1,0 +1,107 @@
+---
+title: "Create an automation rule"
+description: "The rule wizard has two steps: Actions (what to target and what to do) and Conditions (when to do it). This article covers step 1."
+---
+
+### Step 1: Name the rule
+
+1. Go to **PatternPilot** and click **Create Rule**.
+2. Enter a **Rule Name**, for example "Pause unprofitable campaigns".
+3. Optionally enter a **Description (optional)** so teammates know what the rule is for.
+
+| Field | What to enter | Limits |
+| --- | --- | --- |
+| **Rule Name** | A name you'll recognize in the rules list. | Required. Under 200 characters. |
+| **Description (optional)** | What the rule does and why. | Under 1,000 characters. |
+
+### Step 2: Choose the target level
+
+Under **Create rule for**, pick the level the rule acts on:
+
+| Option | The rule acts on |
+| --- | --- |
+| **Campaign** | Campaigns mapped at campaign level. |
+| **Ad Set** | Campaigns mapped at ad set level. The action runs on the mapped ad set. |
+| **Ad Group** | Campaigns mapped at ad group level. The action runs on the mapped ad group. |
+
+The campaign list only shows campaigns mapped at the level you pick. Changing the level clears your campaign selection.
+
+### Step 3: Choose which campaigns
+
+Pick one targeting option:
+
+| Option | What it does |
+| --- | --- |
+| **Specific campaigns** | Select specific campaigns to target. Search and tick each one (up to 20). |
+| **All from traffic source** | Apply to all campaigns from a traffic source. Choose the **Traffic Source**. |
+| **All from integration** | Apply to all campaigns from a specific integration. Choose the **Integration**. |
+
+In **Specific campaigns**, each entry shows the campaign name, the platform entity it maps to, and whether it's **Active** or **Inactive**. If nothing is mapped at the chosen level, you'll see a message asking you to map a campaign at that level or pick another target level.
+
+<Frame>
+  <img src="/images/automation/rule-step1.jpg" alt="Rule wizard step 1 with target level chips and campaign picker" />
+</Frame>
+
+### Step 4: Choose actions
+
+Under **Choose action**, pick an **Action**. Click **Add action** to add more.
+
+| Action | What it does |
+| --- | --- |
+| **Pause campaign** / **Pause ad set** / **Pause ad group** | Pauses the target on the ad platform. |
+| **Resume campaign** / **Resume ad set** / **Resume ad group** | Resumes the target on the ad platform. |
+| **Adjust bid** | Changes the bid on the ad platform. |
+| **Adjust budget** | Changes the budget on the ad platform. |
+| **Send alert** | Alerts you. Nothing changes on the ad platform. |
+| **Send notification** | Notifies you. Nothing changes on the ad platform. |
+| **Mark** | Marks the target in ClickPattern. Nothing changes on the ad platform. |
+
+A rule can have up to 5 actions. Each action can be used once per rule. A new rule starts with the pause action.
+
+Not every ad platform supports every action. See "[Which platforms support which actions](/automation/which-platforms-support-which-actions)".
+
+### Adjust bid and Adjust budget
+
+These actions add a **Type** field and a **Value** field.
+
+| Type | What **Value** means | Extra field |
+| --- | --- | --- |
+| **Percentage** (default) | The change, in %. Use a negative number to lower, for example `-20`. | **Max bid** or **Max budget** (required) |
+| **Fixed** | The new amount, in $. The bid or budget is set to this value. | None |
+
+**Max bid** and **Max budget** are caps. A rule that stays true keeps applying its percentage on every check, so the cap stops the value from growing without limit.
+
+Validation messages:
+
+| Message | Cause |
+| --- | --- |
+| **Required** (under **Value**) | The value is empty or 0. |
+| **Must be above -100%** | A percentage of -100 or lower would set the bid or budget to zero or less. |
+| **Must be above $0** | A fixed amount must be greater than 0. |
+| **Required cap** | A percentage change needs a **Max bid** or **Max budget** above 0. |
+
+**Next** stays disabled until the name, at least one campaign (or a traffic source or integration) and valid action values are set.
+
+<Frame>
+  <img src="/images/automation/rule-adjust-budget.jpg" alt="Adjust budget action with Percentage type, Value and Max budget fields" />
+</Frame>
+
+### Step 5: Continue to conditions
+
+Click **Next** to set conditions. See "[Rule conditions, time frames and cooldown](/automation/rule-conditions-time-frames-and-cooldown)". When you're done, click **Create Rule**.
+
+### FAQ
+
+**Why is Next greyed out?** Check the name, the campaign selection and any red fields under **Value** or the max cap. Each must be valid before you can continue.
+
+**Why don't I see some campaigns in the list?** Only mapped campaigns at the selected level appear. Switch between **Campaign**, **Ad Set** and **Ad Group**, or map the campaign first.
+
+**Does a percentage change compound?** Yes, each time the rule acts it applies the percentage to the current value. The required max cap is the upper limit.
+
+**Can I copy an existing rule?** Yes. In the rules list, open the row menu and click **Duplicate**. The wizard opens prefilled as "Copy of …".
+
+### Related articles
+
+- [Rule conditions, time frames and cooldown](/automation/rule-conditions-time-frames-and-cooldown)
+- [Rule metrics](/automation/rule-metrics)
+- [Which platforms support which actions](/automation/which-platforms-support-which-actions)

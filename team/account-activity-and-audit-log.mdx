@@ -1,0 +1,57 @@
+---
+title: "Account activity and audit log"
+description: "Account Activity shows sign-ins and security events. Audit Logs shows who created, changed or deleted what in your workspaces. You can filter both and download them as CSV."
+---
+
+### What each log shows
+
+| Log | Events |
+| --- | --- |
+| **Account Activity** | Login, logout, password change, 2FA enable, 2FA disable, session revoke, role change |
+| **Audit Logs** | Create, change, archive, restore, delete, connect, disconnect, configure, sync, verify, invite, accept, decline, export |
+
+Owners and Admins can view both logs.
+
+### Open a log
+
+1. Go to **Logs**.
+2. Click **Audit Logs** or **Account Activity**.
+3. Filter by **Workspaces**, **Users**, **Entity types** and **Actions**.
+4. Pick a date range. Use the arrows to move to the previous or next period. The default is the last 7 days.
+
+| Column | What it shows |
+| --- | --- |
+| Workspace | Where the event happened |
+| User e-mail | Who did it |
+| Entity type | For example Campaign, Lander, Integration, Member |
+| Action type | What happened |
+| Entity name / IP address | The element's name |
+| Entity ID | The element's ID |
+| IP address | Where the request came from |
+| Occurred At | Date and time |
+
+Click the view icon on a row to open **Event Details**. For changes, it shows each **Field** with its **Old Value** and **New Value**.
+
+<Frame>
+  <img src="/images/team/audit-logs.jpg" alt="Audit Logs table with filters, with IP addresses blurred" />
+</Frame>
+
+### Export to CSV
+
+Click the **Download CSV** icon below the table. The file includes the rows that match your filters.
+
+### How long logs are kept
+
+Retention depends on your plan. See [pricing](https://www.clickpattern.com/pricing). The retention period is set when each event is recorded, so a plan change only affects new events.
+
+### FAQ
+
+**Can I choose which columns to show?** Yes. Click the **Columns** icon below the table.
+
+**Why is an action I took missing?** Check the date range and filters. Sign-in events are in **Account Activity**, not **Audit Logs**.
+
+### Related articles
+
+- [Active sessions](/team/active-sessions)
+- [Roles and permissions](/team/roles-and-permissions)
+- [Move elements between workspaces](/team/move-elements-between-workspaces)

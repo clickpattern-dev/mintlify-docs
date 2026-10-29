@@ -1,0 +1,104 @@
+---
+title: "Rule conditions, time frames and cooldown"
+description: "Step 2 of the rule wizard sets when the rule acts: the metrics to check, the time window, how often to check, and how long to wait after acting."
+---
+
+### Time settings
+
+| Setting | What it controls | Options |
+| --- | --- | --- |
+| **Time frame** | How far back to look at data when checking conditions. | **Last 1 hour**, **Last 3 hours**, **Last 6 hours**, **Last 12 hours**, **Last 24 hours** (default), **Last 2 days**, **Last 3 days**, **Last 7 days**, **Last 14 days**, **Last 30 days**, **Last 90 days** |
+| **Check every** | How often the rule is evaluated. | **Every 15 minutes**, **Every 30 minutes**, **Every hour** (default), **Every 2 hours**, **Every 4 hours**, **Every 6 hours**, **Every 8 hours**, **Every 16 hours**, **Every 24 hours**, **Every 48 hours** |
+| **Cooldown (minutes)** | After the rule acts, how long before it can act again, even if conditions are still met. | 0 to 1,440. Default 60. 0 means no cooldown. |
+
+**Check every** and **Cooldown (minutes)** are under **Advanced settings**. An info box below always summarizes the setup, for example "Evaluates last 24 hours of data, checks every hour, waits 1 hour after triggering".
+
+### Automatic defaults
+
+When you change **Time frame** with **Advanced settings** closed, ClickPattern sets **Check every** and **Cooldown** for you:
+
+| Time frame | Check every | Cooldown |
+| --- | --- | --- |
+| Last 1 hour | Every 15 minutes | 15 minutes |
+| Last 3 hours | Every 15 minutes | 30 minutes |
+| Last 6 hours | Every 15 minutes | 30 minutes |
+| Last 12 hours | Every hour | 1 hour |
+| Last 24 hours | Every hour | 1 hour |
+| Last 2 days | Every hour | 1 hour |
+| Last 3 days | Every hour | 1 hour |
+| Last 7 days | Every 6 hours | 6 hours |
+| Last 14 days | Every 6 hours | 6 hours |
+| Last 30 days | Every 24 hours | 1 day |
+| Last 90 days | Every 24 hours | 1 day |
+
+Open **Advanced settings** to choose your own values. While it's open, changing the time frame no longer resets them.
+
+### Check interval vs time frame
+
+**Check every** can't be longer than the longest condition time frame. For example, checking every 48 hours over the last 24 hours would skip data. You'll see:
+
+> Schedule interval (every 48 hours) exceeds the longest condition time frame (24 hours). Pick a more frequent schedule or a longer time frame.
+
+**Create Rule** stays disabled until you fix it.
+
+<Frame>
+  <img src="/images/automation/rule-conditions-advanced.jpg" alt="Conditions step with Time frame, Advanced settings open and the summary box" />
+</Frame>
+
+### Add conditions
+
+1. Under **Conditions**, set **Match** to **All (AND)** or **Any (OR)**.
+2. For each condition, pick a **Metric**, an **Operator**, a **Value** and a **Time frame**.
+3. Click **Add condition** for more. A rule can have up to 10 conditions.
+
+| Match | The rule acts when |
+| --- | --- |
+| **All (AND)** | Every condition is met. |
+| **Any (OR)** | At least one condition is met. |
+
+A new rule starts with one condition: Cost > 100 over 24 hours. Each condition has its own **Time frame**. New conditions take the time frame set at the top.
+
+### Operators
+
+| Operator | Meaning |
+| --- | --- |
+| **> is greater than** | Above the value. |
+| **&lt; is less than** | Below the value. |
+| **= equals** | Exactly the value. |
+| **≥ is at least** | The value or above. |
+| **≤ is at most** | The value or below. |
+| **≠ does not equal** | Anything except the value. |
+
+**equals** and **does not equal** rarely match on money, percentage or ratio metrics, because those are almost never an exact number. The wizard warns you when you pick them for such a metric. Use **is greater than** or **is less than** instead.
+
+### Comparison conditions
+
+A comparison condition checks one metric as a percentage of another. For example: "Cost is greater than 50% of Revenue".
+
+1. Click **Add comparison condition**, or click **+ Add comparison (% of another metric)** under an existing condition.
+2. Set the **Metric**, **Operator** and **Value** (the percentage).
+3. Under **Compare as percentage of:**, pick the **Compare to** metric and its **Time frame**.
+
+Click **Remove comparison** to turn it back into a plain condition.
+
+### Check the summary
+
+The **Rule Summary** box below the conditions restates the rule in plain words: what it applies to, the conditions, the time frame and the actions. Read it before you click **Create Rule**.
+
+<Frame>
+  <img src="/images/automation/rule-comparison-summary.jpg" alt="Two conditions joined by AND, one comparison condition, and the Rule Summary" />
+</Frame>
+
+### FAQ
+
+**Why didn't my cost rule fire on a 1-hour time frame?** Ad-platform cost arrives by day. Conditions on Cost, Profit, ROI, ROAS, CPC, CPA, CPV or eCPM over a window shorter than 24 hours aren't evaluated. Use **Last 24 hours** or longer for these metrics.
+
+**What happens if a rate metric has no data?** A rate like ROI with zero cost, or CTR with zero visits, can't be calculated. That condition counts as not met.
+
+**What does the cooldown prevent?** Action loops. Without it, a rule whose conditions stay true would act again on every check.
+
+### Related articles
+
+- [Create an automation rule](/automation/create-an-automation-rule)
+- [Rule metrics](/automation/rule-metrics)
+- [Rule logs and Run Rule Now](/automation/rule-logs-and-run-rule-now)

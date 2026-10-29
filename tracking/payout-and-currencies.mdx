@@ -1,0 +1,55 @@
+---
+title: "Payout and currencies"
+description: "Payout is what you earn per conversion. Set it per offer, and let ClickPattern convert every currency so your reports add up."
+---
+
+### Auto vs Manual payout
+
+Set **Payout type** in the offer's **Payout** section.
+
+| Payout type | Where the payout comes from | If nothing is sent |
+| --- | --- | --- |
+| **Auto** (default) | The `payout` value in the postback or pixel | 0 |
+| **Manual** | Your offer settings. A payout sent by the network is ignored. | The default value |
+
+With **Manual**, ClickPattern uses the first match:
+
+1. A **Geo-specific payout** for the visitor's country, if you added one.
+2. The offer's **Default value**.
+3. 0, if neither is set.
+
+To add geo payouts, turn on **Geo-specific payout** (Manual only), then pick a country and enter its payout.
+
+<Frame>
+  <img src="/images/shared/offer-manual-geo-payout.jpg" alt="Offer Payout section with Manual type and Geo-specific payout rows" />
+</Frame>
+
+### Currencies
+
+- Send the conversion currency as a three-letter ISO code, such as `EUR`, in `currency` (or `payout_currency`).
+- With Auto payout and no currency sent, `USD` is used.
+- An invalid code is ignored. The offer's currency is used, then `USD`.
+- An invalid code is ignored and the same fallback applies.
+- Set the offer's **Currency** next to the payout, and the affiliate network's **Payout currency**.
+
+### How amounts are converted
+
+ClickPattern stores each conversion in its original currency and converts it to USD at the rate on the day it arrived. Totals always add up, even across currencies. The postback to your traffic source sends the original amount and currency.
+
+### Display currency
+
+Your reports show amounts in **Default currency**, set in **Settings → General settings**. To view another currency for the session, change the currency selector on the Performance toolbar.
+
+### FAQ
+
+**I use Auto, but my revenue is 0. Why?** The network isn't sending `payout`, or its macro is empty. Add `payout={network_payout_macro}` to the postback, or switch the offer to Manual.
+
+**Does a geo payout apply with Auto?** No. Geo-specific payouts apply only with Manual.
+
+**Will reports change if exchange rates move later?** No. Each conversion keeps the rate from the day it was recorded.
+
+### Related articles
+
+- [S2S postback](/tracking/s2s-postback)
+- [Track and update cost](/tracking/track-and-update-cost)
+- [Add your postback to an affiliate network](/tracking/add-your-postback-to-an-affiliate-network)

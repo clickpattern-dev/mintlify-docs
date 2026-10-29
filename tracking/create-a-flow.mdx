@@ -1,0 +1,62 @@
+---
+title: "Create a flow"
+description: "A flow is a reusable routing plan. It holds default paths, optional rule-based paths, and weights. Many campaigns can share one flow."
+---
+
+### Steps
+
+1. Go to **Performance → Flows** and click **Create**.
+2. With the flow selected in the left panel, set **Country label**, **Name** and **Workspace**. A **Preview** shows the final name.
+3. Pick a **Default transition**.
+4. Under **Default paths**, click **Path 1** and set it up. Click **Add default path** for more.
+5. Optional: add rule-based paths with **Add rule**. See **Rule-based paths and conditions**.
+6. Click **Save**.
+
+<Frame>
+  <img src="/images/shared/new-flow.jpg" alt="New flow editor with flow settings and Default paths" />
+</Frame>
+
+### Flow settings
+
+| Field | What to enter | Default |
+| --- | --- | --- |
+| **Country label** | A country, or Global | Global |
+| **Name** | The flow name | Required. Up to 100 characters. |
+| **Workspace** | Owning workspace | Required. |
+| **Default transition** | **302**, **Meta refresh**, **Double meta refresh** or **Direct** | 302 |
+
+### Default paths
+
+Default paths serve every visitor who doesn't match a rule. A flow needs at least one.
+
+For each path:
+
+| Field | What to enter | Default |
+| --- | --- | --- |
+| **Path name** | A label | Path 1, Path 2… |
+| **Path Destination** | **Landers & Offers** or **Offers only** | Offers only |
+| **Transition to offer** | **302**, **Meta refresh** or **Double meta refresh** | The flow's default transition |
+| Landers | **Select landers** to add. Landers & Offers paths need at least one. |  |
+| Offers | **Select offers** to add. At least one is required. |  |
+| Weights | Per lander and offer. | Spread evenly as you add them |
+
+### Weights
+
+- Each default path has a weight. Use the **−** and **+** buttons (steps of 10) or type a number. The minimum is 1.
+- The percentage next to each weight shows its share of traffic.
+- Landers and offers inside a path have their own weights the same way.
+- A path switch lets you turn a path off without deleting it. Disabled paths get no traffic.
+
+### FAQ
+
+**What does "At least one default path is required" mean?** Every flow needs a default path for visitors who match no rule. Add one with **Add default path**.
+
+**Why does my save fail with "at least one offer is required"?** One of your paths has no offer. The error names the path. Add an offer to it.
+
+**If I edit a flow, do campaigns update?** Yes. Every campaign that uses the flow follows the change.
+
+### Related articles
+
+- [Rule-based paths and conditions](/tracking/rule-based-paths-and-conditions)
+- [Traffic Distribution AI and smart rotation](/tracking/traffic-distribution-ai-and-smart-rotation)
+- [Transition modes](/tracking/transition-modes)

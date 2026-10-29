@@ -1,0 +1,55 @@
+---
+title: "Adsterra"
+description: "Connect Adsterra with an API token. ClickPattern syncs your cost, imports your campaigns and lets PatternPilot pause, resume and change budgets and CPM bids on mapped campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks per campaign |
+| Campaign import | Your Adsterra campaigns |
+| PatternPilot actions | **Pause campaign**, **Resume campaign**, **Adjust budget**, **Adjust bid** (CPM campaigns only) |
+
+### What you need
+
+- Your Adsterra API token.
+
+### Connect Adsterra
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **Adsterra** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **API Token** | Your Adsterra API token. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+<Frame>
+  <img src="/images/integrations/10-adsterra.jpg" alt="Integrate with Adsterra dialog" />
+</Frame>
+
+### How bid and budget changes work
+
+- Adsterra sets bids per country. **Adjust bid** applies the new price to every country on the campaign.
+- **Adjust bid** works only on CPM campaigns. On CPC campaigns it fails and nothing changes.
+- **Adjust budget** changes the campaign's daily or total budget limit.
+
+### Manage the connection
+
+Click the Adsterra card under **Connected Integrations**. The detail page has **Performance**, **Campaigns**, **Campaign Mapping** and **Sync Logs** tabs, plus **Sync Now** and **Delete**.
+
+### FAQ
+
+**Can rules change Adsterra budgets and bids?** Yes. Budget changes work on all campaigns, and bid changes work on CPM campaigns.
+
+**My token stopped working. How do I update it?** Delete the integration on its detail page, then connect Adsterra again with the new token.
+
+### Related articles
+
+- [PropellerAds](/integrations/propellerads)
+- [Clickadu](/integrations/clickadu)
+- [Traffic source templates](/integrations/traffic-source-templates)

@@ -1,0 +1,52 @@
+---
+title: "Mondiad"
+description: "Connect Mondiad with a Client ID and Client Secret. ClickPattern syncs your cost and imports your campaigns. PatternPilot can't change Mondiad campaigns yet."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks per campaign |
+| Campaign import | Your Mondiad campaigns |
+| PatternPilot actions | None |
+
+Mondiad only accepts campaign updates that resend every campaign setting, including all targeting. A partial change could overwrite your targeting, so ClickPattern doesn't pause, resume or change bids or budgets on Mondiad. Make those changes in Mondiad.
+
+### What you need
+
+- Your Mondiad Client ID and Client Secret.
+
+### Connect Mondiad
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **Mondiad** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **Client ID** | Your Mondiad Client ID. Required. |
+| **Client Secret** | Your Mondiad Client Secret. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+<Frame>
+  <img src="/images/integrations/15-mondiad.jpg" alt="Integrate with Mondiad dialog with Client ID and Client Secret" />
+</Frame>
+
+### Manage the connection
+
+Click the Mondiad card under **Connected Integrations**. The detail page has **Performance**, **Campaigns**, **Campaign Mapping** and **Sync Logs** tabs, plus **Sync Now** and **Delete**.
+
+### FAQ
+
+**Can I build PatternPilot rules on Mondiad campaigns?** You can use rules that send alerts or notifications. Rules that pause, resume or change bids or budgets do nothing on Mondiad.
+
+**Which currency is Mondiad cost in?** Mondiad reports spend in USD.
+
+### Related articles
+
+- [PropellerAds](/integrations/propellerads)
+- [MediaGo](/integrations/mediago)
+- [Traffic source templates](/integrations/traffic-source-templates)

@@ -1,0 +1,179 @@
+---
+title: "Integrations overview"
+description: "Integrations connect ClickPattern to your ad platforms, your Shopify store and Trackier. Once connected, ClickPattern imports cost and campaign data, lets PatternPilot act on your ads and can send conversions back to the platform."
+---
+
+### Where to find them
+
+Go to **Data Hub → Integrations**. The page has two sections:
+
+| Section | What it shows |
+| --- | --- |
+| **Connected Integrations** | Platforms you've already connected. Click a card to open its detail page. |
+| **Available Integrations** | Platforms you can connect. Click a card to start. |
+
+Use **Search by name** or the **Category** filter (**All**, **Traffic source**, **Affiliate network**, **Other**) to find a platform.
+
+You need permission to manage integrations to see **Available Integrations**. Without it you can still view connected integrations.
+
+<Frame>
+  <img src="/images/integrations/01-integrations-page.jpg" alt="Integrations page with Connected and Available sections" />
+</Frame>
+
+<Frame>
+  <img src="/images/integrations/02-available.jpg" alt="Available Integrations section" />
+</Frame>
+
+### Which workspace gets the integration
+
+An integration belongs to one workspace. If you have more than one workspace selected, connected integrations are grouped by workspace and a notice tells you which workspace new connections go to: the first one selected. Switch to a single workspace to choose a different target.
+
+### Two ways to connect
+
+| Type | Platforms | What happens |
+| --- | --- | --- |
+| OAuth | Meta, Google Ads, TikTok, Snapchat | You sign in on the platform and approve access. Back in ClickPattern, a **Configure … Integration** window asks you to pick the ad account. |
+| Credentials | Taboola, Outbrain, MGID, PropellerAds, Adsterra, Clickadu, ClickAdilla, MediaGo, Mondiad, ExoClick, Trackier | An **Integrate with \{platform\}** window asks for your API token or client credentials. |
+| Connection code | Shopify | You connect from inside your Shopify admin with a one-time code. See "[Shopify: connect your store](/integrations/shopify-connect-your-store)". |
+
+The credentials window has these common fields:
+
+| Field | What to enter |
+| --- | --- |
+| **Assign to workspace** | The workspace that receives the integration. Shown for traffic sources. |
+| **Custom account name** | Optional. A name for this connection, for example the account's region or client. |
+| **Auto-matching for all campaigns** | Traffic sources only. On by default. Leave it on. |
+
+ClickPattern encrypts and stores the credentials you enter.
+
+### Finish setup for OAuth platforms
+
+After you approve access, choose the ad account and click **Save Configuration** (Meta, TikTok, Snapchat) or **Save and Start Sync** (Google Ads). Syncing starts right away. On Meta and Google Ads you land on the integration's detail page.
+
+On Meta and Google Ads, if you close the window without choosing an account, **Cancel Integration Setup?** offers three options:
+
+- **Continue Configuring**: go back and pick an account.
+- **Skip for Now**: keep the connection and finish later. The card shows **Finish setup**.
+- **Delete Integration**: remove the connection.
+
+The ad account can't be changed later. To sync a different account, delete the integration and connect again.
+
+### Connection errors
+
+If the platform sign-in fails, you return to the Integrations page with one of these messages:
+
+| Message | What to do |
+| --- | --- |
+| **Connection Cancelled** | You cancelled on the platform. Click the card again when you're ready. |
+| **Authorization Failed** | The platform refused the authorization. Try again. |
+| **Invalid Request** / **Invalid State** | The sign-in session didn't match. Start again from the card. |
+| **Connection Failed** | ClickPattern couldn't finish the connection. Try again. |
+
+If you pick an ad account that's already connected in the same workspace, you see **Account already connected**. Open the existing integration instead.
+
+### Statuses and token warnings
+
+Connected cards stay quiet when everything is healthy. They show a chip only when something needs attention:
+
+| Chip | Meaning |
+| --- | --- |
+| **Finish setup** | You authorized the connection but didn't pick an ad account. Nothing syncs until you do. |
+| **Syncing…** | The first sync is running. |
+| **Sync error** | The last sync failed. Hover for the error, or open **Sync Logs**. |
+| **Reconnect needed** | The platform access has expired or was revoked. Reconnect from the detail page. |
+| **Inactive** | The integration is turned off. |
+| **Token expires in Nd** | Meta access is close to expiry and wasn't renewed automatically. |
+| **Inactive Nd** | Platform access hasn't been refreshed for N days. Check that syncs are running. |
+
+When any integration needs reconnecting or is expiring soon, a **Token health** banner at the top of the page sums them up. On detail pages, the same statuses read **Active**, **Syncing**, **Finish setup**, **Error**, **Token Expired** and **Inactive**.
+
+### The detail page
+
+Click a connected card to open its detail page. The header shows the status, the ad account and these buttons:
+
+| Button | What it does |
+| --- | --- |
+| **Configure** | Opens the ad account picker, on platforms that have one. |
+| **Sync Now** | Queues a sync right away. If the integration is in error, it re-runs the first sync. |
+| **Refresh Token** / **Reconnect** | Signs you in to the platform again. Shows **Reconnect** when access has expired. OAuth platforms only. |
+| **Delete** | Removes the integration. |
+
+Detail pages have some of these tabs, depending on the platform (some platforms add their own). **Health** is on Meta, Google Ads, TikTok, Snapchat and MGID only.
+
+| Tab | What it shows |
+| --- | --- |
+| **Performance** | Spend, clicks, impressions and other platform metrics. |
+| **Campaigns** | Imported platform campaigns with status and budget. You can pause, resume, edit budget or edit bid from here where the platform allows it. |
+| **Campaign Mapping** | Which ClickPattern campaign each platform campaign, ad set or ad group feeds. |
+| **CAPI** | Server-side conversion setup, for platforms that support it. |
+| **Sync Logs** | Every sync run and its result. |
+| **Health** | **Connection Status**, **Integration Details** and **Sync Status** for each sync type. |
+
+<Frame>
+  <img src="/images/integrations/20-google-header.jpg" alt="Integration detail page header with Sync Now, Refresh Token and Delete" />
+</Frame>
+
+### How often data syncs
+
+| Data | When |
+| --- | --- |
+| Cost and performance (insights) | Every 15 minutes. Each run re-reads recent days, so late corrections from the platform are picked up. |
+| Campaigns, ad sets, ad groups and ads (objects) | Once a day, at 01:30 UTC |
+| Cost attribution to your ClickPattern campaigns | Every 6 hours, for the last 3 days |
+| Trackier conversions (see "[Trackier](/integrations/trackier)") | Every 4 hours |
+
+Each integration's **Health** tab shows its schedule and when each sync last ran. Use **Sync Now** if you don't want to wait.
+
+### First sync and backfill
+
+When you connect, ClickPattern runs a first sync that imports recent history:
+
+| History imported | Platforms |
+| --- | --- |
+| Last 30 days | Meta, Google Ads, TikTok, Snapchat |
+| Last 14 days | Taboola, Outbrain, MGID |
+| Last 7 days | PropellerAds, Adsterra, Clickadu, ClickAdilla, MediaGo, Mondiad, ExoClick |
+
+### Include estimated cost
+
+The **Include estimated cost** switch at the top of the Integrations page sets the workspace default for reports:
+
+- **On**: reports include estimated cost for today and yesterday, based on recent cost per visit, until the platform's synced spend arrives.
+- **Off**: reports use platform-synced cost only. Use this when you reconcile against invoices.
+
+The switch applies to one workspace. It's disabled when several workspaces are selected. Only workspace owners and admins see it.
+
+### Sync Logs
+
+The **Sync Logs** tab shows **Last Sync**, **Last Status**, **24h Success**, **24h Partial** and **24h Errors**. Below that is a table with **Time**, **Type**, **Status**, **Records**, **Duration** and **Triggered By**.
+
+- Filter by **Sync Type**: **Insights**, **Objects**, **Conversions**, **First Sync** or **Cost Attribution**.
+- Turn on **Auto-refresh (30s)** while you wait for a sync.
+- Statuses: **Success**, **Partial**, **Error**, **Running**, **Skipped**. Expand a row for details.
+
+<Frame>
+  <img src="/images/integrations/23-google-synclogs.jpg" alt="Sync Logs tab with filters and run table" />
+</Frame>
+
+### Disconnect or delete
+
+- **Ad platforms**: open the detail page, click **Delete**, then confirm. This removes the connected data and can't be undone.
+- **Affiliate networks connected with credentials**: click the card to open **Manage \{network\}**. Use the switch to turn the integration off (**Integration disabled**) or click **Disconnect integration**, then **Confirm**.
+- **Shopify**: see "[Shopify: connect your store](/integrations/shopify-connect-your-store)".
+
+### FAQ
+
+**Why don't I see the Available Integrations section?** Your role doesn't allow managing integrations. Ask a workspace owner or admin.
+
+**Can I connect the same ad account twice?** No. In one workspace, each ad account can be connected once. You see **Account already connected** if you try.
+
+**Sync Now says the integration is pending or expired. What now?** Sync Now only runs on active or errored integrations. Finish setup by picking an ad account, or click **Reconnect**.
+
+**I mapped my campaigns but cost still looks wrong for today.** Today's platform cost can lag. With **Include estimated cost** on, reports fill the gap with an estimate until synced spend arrives.
+
+### Related articles
+
+- [Campaign mapping and unmapped objects](/integrations/campaign-mapping-and-unmapped-objects)
+- [Server-side conversions (CAPI) setup](/integrations/server-side-conversions-capi-setup)
+- [Track and update cost](/tracking/track-and-update-cost)
+- [Roles and permissions](/team/roles-and-permissions)

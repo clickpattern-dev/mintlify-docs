@@ -1,0 +1,50 @@
+---
+title: "ExoClick"
+description: "Connect ExoClick with an API token to bring your ExoClick spend into ClickPattern. This integration syncs cost only."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks per campaign |
+| Campaign import | Not available |
+| PatternPilot actions | Not available |
+| Detail page | Not available yet |
+
+Because ExoClick campaigns aren't imported, you can't map them by hand. Make sure your campaign URL passes ExoClick's campaign ID so ClickPattern can match cost from your click data. See **Traffic source templates**.
+
+### What you need
+
+- Your ExoClick API token.
+
+### Connect ExoClick
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **ExoClick** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **API Token** | Your ExoClick API token. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+<Frame>
+  <img src="/images/integrations/13-exoclick.jpg" alt="Integrate with ExoClick dialog" />
+</Frame>
+
+### FAQ
+
+**I click the connected ExoClick card and see "Detail view coming soon".** That's expected. The ExoClick detail page isn't built yet. Your connection stays active and keeps syncing.
+
+**Can rules change ExoClick bids or pause zones?** Not yet. The ExoClick integration currently syncs cost only.
+
+**How do I disconnect ExoClick?** There's no detail page with a **Delete** button yet. Contact support through **Help**.
+
+### Related articles
+
+- [Adsterra](/integrations/adsterra)
+- [PropellerAds](/integrations/propellerads)
+- [Traffic source templates](/integrations/traffic-source-templates)

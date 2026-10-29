@@ -1,0 +1,78 @@
+---
+title: "Add a custom tracking domain"
+description: "Use your own subdomain, such as track.yourbrand.com, for campaign URLs, click URLs and pixels. Add it in Settings → Domains and point one CNAME record to ClickPattern; SSL is set up for you."
+---
+
+### Why use one
+
+- Links show your brand instead of a shared domain.
+- The conversion cookie works when the tracking domain and your site share a main domain.
+- Your tracking isn't affected by other accounts' traffic.
+
+### Step 1: Add the domain
+
+1. Go to **Settings → Domains**.
+2. Under **Custom Domains**, enter your subdomain in **Add Custom Domain**, for example `track.yourbrand.com`. Root domains are not recommended.
+3. Click **Add Domain**.
+
+New domains are Public: available to all workspaces. See **Domains across workspaces** to restrict one.
+
+<Frame>
+  <img src="/images/shared/domains.jpg" alt="Domain Settings page with Platform Domains and Custom Domains sections" />
+</Frame>
+
+### Step 2: Create the CNAME record
+
+After you add the domain, a table of DNS records appears under it. It has **Type**, **Name**, **Value** and **Status** columns.
+
+1. Copy the record with the copy icon.
+2. Sign in to your DNS provider and create a CNAME record with that **Name** and **Value**.
+3. Save the record.
+
+There is one routing CNAME per domain.
+
+If your DNS is on Cloudflare, set the record's proxy status to **DNS only** (grey cloud). A proxied (orange cloud) record hides the CNAME, and the domain can't be validated.
+
+### Step 3: Wait for verification
+
+Verification is automatic; you don't need to click **Verify**. Pending domains are checked every hour. DNS changes can take up to 48 hours to spread.
+
+When the record is in place, an SSL certificate is issued automatically. The domain then shows **Verified — Cloudflare is serving this domain with a valid SSL certificate. No DNS records needed anymore.**
+
+### Statuses
+
+| Status | Meaning |
+| --- | --- |
+| **Pending** | Waiting for the DNS record or the certificate |
+| **Partial** | Some checks passed, others haven't yet |
+| **Verified** | Ready to use |
+| **Failed** | A check failed. The error shows under the domain. |
+| **Expired** | The SSL certificate has expired |
+
+Each DNS record also shows **Passed**, **Pending** or **Error**.
+
+### Error messages when adding a domain
+
+| Message | What to do |
+| --- | --- |
+| `Invalid domain format` | Enter a hostname only, such as `track.yourbrand.com`, without `https://` or a path |
+| `Domain already exists in this workspace` | It's already added; find it in the list |
+| `This domain is already in use in workspace "…"` | Remove it from that workspace first, or use another subdomain |
+| `This domain is a platform domain and cannot be registered as custom` | Choose a domain you own |
+| `ClickPattern-owned domains cannot be registered as custom domains` | Choose a domain you own |
+
+If you reach your plan's limit, the page shows **You've reached your plan's custom-domain limit.** See [pricing](https://www.clickpattern.com/pricing) for plan details.
+
+### FAQ
+
+**Can I use my root domain, such as `yourbrand.com`?** It isn't recommended. Use a subdomain so your website isn't affected.
+
+**How long does verification take?** Usually minutes after the record is live. DNS changes can take up to 48 hours.
+
+**Do I need to buy an SSL certificate?** No. SSL is issued and renewed automatically.
+
+### Related articles
+
+- [Domains across workspaces](/tracking/domains-across-workspaces)
+- [Tracking URLs page](/tracking/tracking-urls-page)
+- [Conversion pixel and script](/tracking/conversion-pixel-and-script)

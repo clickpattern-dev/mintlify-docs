@@ -1,0 +1,49 @@
+---
+title: "Transition modes"
+description: "The transition mode decides how ClickPattern sends the visitor from the tracking link to the next page. The options are 302 Redirect, Meta Refresh, Double Meta Refresh and Direct."
+---
+
+### Modes
+
+| Mode | How it works | Use it when |
+| --- | --- | --- |
+| **302 Redirect** | A standard server redirect. Fastest. | Most campaigns. Default. |
+| **Meta Refresh** | ClickPattern serves a short "Redirecting..." page that forwards the browser. | A network or page needs a browser-side redirect. |
+| **Double Meta Refresh** | Two meta refresh hops through your tracking domain before the final page. | You want to hide the original referrer from the offer. |
+| **Direct** | No redirect. The visitor lands on your page and a script tracks the visit. | Platforms that don't allow redirect links in ads. |
+
+### Where you set it
+
+| Place | Field | Options |
+| --- | --- | --- |
+| Simple campaign, Path mode | **Transition to offer** | All four |
+| Advanced campaign | **Transition between ad and campaign funnel** | Redirect (302) or Direct |
+| Flow | **Default transition** | 302, Meta refresh, Double meta refresh, Direct |
+| Flow path | **Transition to offer** | 302, Meta refresh, Double meta refresh |
+
+### Which setting wins
+
+1. The path's **Transition to offer** override.
+2. The flow's **Default transition**.
+3. The campaign's transition.
+4. 302 if none is set.
+
+A path override has no **Direct** option. Direct is set for the whole campaign or flow.
+
+<Frame>
+  <img src="/images/shared/flow-path-transition.jpg" alt="Flow path Transition to offer options" />
+</Frame>
+
+### FAQ
+
+**Does Double Meta Refresh slow pages down?** A little. It adds two short hops. Use it only when you need to strip the referrer.
+
+**I chose Direct. Why isn't there a /c/ link?** Direct campaigns use your page URL with `cpid` added, plus the tracking script. See **Direct tracking**.
+
+**Does the transition mode affect tracking accuracy?** No. Visits and clicks are recorded the same way. The mode only changes how the browser is forwarded.
+
+### Related articles
+
+- [Redirect tracking](/tracking/redirect-tracking)
+- [Direct (redirectless) tracking](/tracking/direct-redirectless-tracking)
+- [Create a flow](/tracking/create-a-flow)

@@ -1,0 +1,48 @@
+---
+title: "Rule didn't trigger"
+description: "A rule acts only when it's active, its check runs, its conditions are met on mapped campaigns, and its cooldown and rate limits allow it. The rule's logs show which one stopped it."
+---
+
+### Check 1: Open the logs
+
+Go to **PatternPilot**, open the rule's row menu and click **View Logs**. Read the **Status** of recent runs and expand a row to see the metric values the rule saw.
+
+### Check 2: The rule is active
+
+Paused or archived rules don't run. **Run Rule Now** on an inactive rule fails with "Activate the rule before manually firing it" (`RULE_NOT_ACTIVE`).
+
+### Check 3: Check interval and time frame
+
+- **Check every** sets how often the rule runs. With **Every 24 hours**, a change can take up to a day to act.
+- **Time frame** is the data window. A 1-hour window on a quiet campaign may never reach your threshold.
+- The check interval can't be longer than the longest condition time frame. The wizard won't save it.
+
+### Check 4: Cooldown
+
+After acting, a rule waits **Cooldown (minutes)** before it can act again, even if conditions are still met. Runs in that window show **Skipped**.
+
+### Check 5: Cost-based conditions
+
+- Conditions on Cost, Profit, ROI, ROAS, CPC, CPA, CPV or eCPM aren't evaluated on time frames under 24 hours. Use **Last 24 hours** or longer.
+- When cost for an API-cost campaign hasn't synced yet, rules using those metrics are skipped for that run.
+
+### Check 6: Mapping
+
+Pause, resume and bid or budget actions work only on campaigns mapped to an ad integration. Saving a rule that targets unmapped campaigns fails with `CAMPAIGN_NOT_MAPPED`: "This rule has a platform action (pause / adjust) targeting N campaign(s) that are not mapped to an ad integration. Map them on the integration page first, or the action would have no effect."
+
+### Check 7: Rate limits and failed actions
+
+- Each integration accepts up to 100 rule actions per hour and 1,000 per day. Beyond that, actions show **Skipped** with "Rate limited".
+- If the integration's token expired, actions fail. See "[Integration token expired or sync errors](/troubleshooting/integration-token-expired-or-sync-errors)".
+
+### FAQ
+
+**The log says Success but nothing changed on the platform.** Expand the row and check **Actions Executed**. Some platforms don't support every action.
+
+**Can I force a run?** Yes. Use **Run Rule Now** on an active rule.
+
+### Related articles
+
+- [Rule logs and Run Rule Now](/automation/rule-logs-and-run-rule-now)
+- [Rule conditions, time frames and cooldown](/automation/rule-conditions-time-frames-and-cooldown)
+- [Error codes and messages](/reference/error-codes-and-messages)

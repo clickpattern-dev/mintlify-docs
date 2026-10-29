@@ -1,0 +1,95 @@
+---
+title: "Notifications and alerts"
+description: "Get notifications in the app, by email, in Slack or through your own webhook. Choose per topic which channels to use, and set a digest and quiet hours."
+---
+
+### Read notifications
+
+- Click the bell in the header to see recent notifications. Click **Mark all read**, or **View all** to open the inbox.
+- In the inbox, switch between **All** and **Unread**, and filter by **Category** and **Severity** (**Critical**, **Warning**, **Info**, **Success**).
+- Click **Mark all as read** to clear unread items, or the delete icon to remove one notification.
+
+<Frame>
+  <img src="/images/team/notifications-inbox.jpg" alt="Notifications inbox" />
+</Frame>
+
+### Global settings
+
+1. Go to **Settings → Notifications**.
+2. Under **Global settings**, set:
+
+| Setting | What to enter |
+| --- | --- |
+| Timezone (IANA) | Your time zone, for example `America/New_York` |
+| Digest cadence | **Daily**, **Weekly** or **Off** |
+| Digest time | When the digest is sent |
+| Digest day | The day for a weekly digest |
+| Quiet hours | Switch on, then set **Start** and **End** |
+| Slack | Your Slack incoming webhook URL, for example `https://hooks.slack.com/services/...` |
+
+3. Click **Save global settings**.
+
+**Required** topics, such as password resets and verification codes, always override quiet hours.
+
+<Frame>
+  <img src="/images/team/notification-settings.jpg" alt="Notifications settings, Global settings" />
+</Frame>
+
+### Outgoing webhooks
+
+Send every notification to your own server as an HTTP POST.
+
+1. Under **Outgoing webhooks**, click **Add webhook**.
+2. Enter the **URL** and an optional **Description**.
+3. Click **Create**.
+4. Copy the signing secret from **Webhook created**. You won't see it again.
+5. Click **Done**.
+
+The table shows each webhook's **URL**, **Description**, **Status** and **Last delivery**. Use **Remove** to delete one.
+
+### Verify webhook signatures
+
+Every delivery carries this header:
+
+`ClickPattern-Signature: v1=<HMAC-SHA256(timestamp.body)>`
+
+To check that a request came from ClickPattern:
+
+1. Join the timestamp and the raw request body with a dot: `timestamp.body`.
+2. Compute an HMAC-SHA256 of that string with your signing secret.
+3. Compare the result with the `v1` value. Reject the request if they don't match.
+
+### Choose channels per topic
+
+Topics are grouped by category. Open a category and, for each **Event**, tick the channels you want: **In-app** (bell icon and inbox), **Email**, **Slack** (needs a webhook URL) and **Webhook**. Set **Frequency** to **Immediately** or **Off**. Then click **Save preferences**.
+
+Some critical topics are marked **Required**. Their in-app and email channels can't be turned off.
+
+| Category | Examples |
+| --- | --- |
+| Account & Security | Sign-ins from new devices, security events |
+| Workspace | Invitations, members leaving, role changes |
+| Activity & Collaboration | Activity summaries |
+| Billing | Billing notices |
+| System | Maintenance, feature announcements |
+| Marketing & Updates | Product news, tips |
+| Integrations | Expired tokens, failed syncs, reconnections |
+| Automation Rules | Rule runs, rule errors, alert thresholds crossed |
+| Reports | Scheduled report ready or failed |
+| Tracking Domains | SSL certificates expiring, unreachable domains |
+| Anomaly Detection | Spikes and drops |
+
+The page only lists topics that ClickPattern can currently send.
+
+### FAQ
+
+**Do I need Slack to get alerts?** No. In-app and email work without any setup. Slack and webhooks are optional.
+
+**Why can't I turn off email for some topics?** They're required, for example password resets and verification codes, so in-app and email stay on.
+
+**I lost my webhook signing secret. What now?** Remove the webhook and add it again to get a new secret.
+
+### Related articles
+
+- [Profile and general settings](/team/profile-and-general-settings)
+- [Account activity and audit log](/team/account-activity-and-audit-log)

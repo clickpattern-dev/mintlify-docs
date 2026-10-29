@@ -1,0 +1,94 @@
+---
+title: "Upgrade, downgrade and billing"
+description: "Manage your plan, payment method and invoices from Settings → Billing & Subscription. Upgrades apply right away. Downgrades apply at the end of your billing period, and nothing is deleted."
+---
+
+### Who can manage billing
+
+Billing belongs to the account owner. The **Billing & Subscription** tab always shows your own account, so only you can change your plan or payment details. Team members working in your workspaces can't change them. Their billing banners tell them to contact the account owner.
+
+### The Billing & Subscription tab
+
+Go to **Settings → Billing & Subscription**.
+
+| Section | What it shows |
+| --- | --- |
+| **Current Plan** | Your plan name, subscription status chip and price per month or year, plus the current period's dates. On the Free plan you see **Free Plan** and an **Upgrade Now** button. |
+| **Payment Method** | The card on file (for example "Visa ending in 4242" and its expiry), another payment method's name, or "No payment method on file." Click **Update** to change it. |
+| **Billing History** | Your invoices, with **Date**, **Invoice**, **Amount** and **Status**. Click **View** to open an invoice or **PDF** to download it. |
+| Next invoice | A note with the amount and date of your next invoice. |
+
+{/* Screenshot to add: Billing & Subscription tab with Current Plan, Payment Method and Billing History. To be captured when the billing pages are switched on. */}
+
+### Choose your first plan
+
+1. Go to **Settings → Billing & Subscription** and click **Upgrade Now**.
+2. Pick **Monthly** or **Yearly** billing.
+3. Click **Start** on the plan you want, for example **Start Growth**.
+4. Enter your payment details on the secure Stripe checkout page and confirm.
+
+You return to the Billing & Subscription tab, where your new plan appears. For Enterprise, click **Contact Sales**.
+
+{/* Screenshot to add: Plan cards with Monthly/Yearly toggle. To be captured when the billing pages are switched on. */}
+
+### Upgrade your plan
+
+1. In **Current Plan**, click **Change Plan**.
+2. Click **Start** on a higher plan.
+
+The upgrade applies immediately. You're charged a prorated amount for the rest of your current billing period, and your new limits apply right away. Your current plan is marked **Your Plan**, and its button reads **Current Plan**.
+
+### Downgrade your plan
+
+1. In **Current Plan**, click **Change Plan**.
+2. Click **Start** on a lower plan.
+
+The downgrade is scheduled for the end of your current billing period. You keep your current plan and features until then, with no charge now. The Billing & Subscription tab shows: "Your plan changes to \{plan\} on \{date\}. You keep your current plan until then." You also get an email listing what will change.
+
+To move to the Free plan, cancel your subscription instead. See "[Trial, past due and cancellation](/billing/trial-past-due-and-cancellation)".
+
+### Check the impact of a downgrade
+
+If your account is over the new plan's limits, a banner appears at the top of every page. It reads **Plan change scheduled for \{date\}** and lists what is over, for example "3 campaigns, 2 offers". In the last 5 days before the change, it turns red and reads **Plan change in under 5 days — \{date\}**.
+
+Click **Review changes** in the banner to open the **Plan change impact** page. It shows:
+
+- **What downgrading to \{plan\} costs you**: how many campaigns will be archived, and an estimate of the events, conversions and revenue those campaigns bring in each month.
+- A card for each type of item that's over the new limit, with how far over you are and what happens to it.
+
+| Chip | What happens on the change date |
+| --- | --- |
+| **Will be archived** | Your lowest-traffic campaigns are archived: paused, with no data deleted. |
+| **Reduce to keep** | Offers, landers and traffic sources are shared across campaigns, so ClickPattern doesn't change them automatically. Reduce them yourself to fit the new plan. |
+
+Click **Manage** next to an item to open it. If you're already within the new limits, the page says nothing will be removed.
+
+Archiving is reversible. If you upgrade again, archived campaigns are restored.
+
+{/* Screenshot to add: Plan change impact page with cost summary and over-limit cards. To be captured when the billing pages are switched on. */}
+
+### Cancel a scheduled downgrade
+
+1. Open the **Plan change impact** page from **Review changes**.
+2. Click **Cancel downgrade**.
+
+You see "Downgrade canceled — your current plan is retained." To move to a higher plan instead, click **Upgrade instead**.
+
+### Manage your subscription in Stripe
+
+Click **Manage Subscription** (or **Update** under **Payment Method**) to open the Stripe customer portal. There you can update your payment method, see invoices and manage your subscription. When you're done, you return to the Billing & Subscription tab.
+
+### FAQ
+
+**Will I lose data if I downgrade?** No. Campaigns over the new limit are archived, not deleted. Upgrading again restores them.
+
+**When am I charged for an upgrade?** Right away. You pay a prorated amount for the rest of your current billing period.
+
+**Can I undo a downgrade?** Yes, any time before the change date. Click **Cancel downgrade** on the **Plan change impact** page.
+
+**Who do I contact about a billing question?** Email billing@clickpattern.com.
+
+### Related articles
+
+- [Plans, usage and limits](/billing/plans-usage-and-limits)
+- [Trial, past due and cancellation](/billing/trial-past-due-and-cancellation)

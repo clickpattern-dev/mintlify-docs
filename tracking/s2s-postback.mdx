@@ -1,0 +1,91 @@
+---
+title: "S2S postback"
+description: "A server-to-server (S2S) postback is a URL your affiliate network calls when a conversion happens. It is the most reliable way to count conversions, because it doesn't depend on cookies or the visitor's browser."
+---
+
+### The postback URL
+
+Copy it from **Settings → Tracking URLs → Postback URL**, or from the affiliate network's settings in ClickPattern.
+
+`https://{domain}/postback?cid={network_click_macro}&payout={network_payout_macro}&txid={network_txid_macro}&et=lead`
+
+ClickPattern accepts the parameters on GET requests, and on POST requests as query string or JSON body.
+
+### Parameters
+
+| Parameter | Aliases | What it does | Required |
+| --- | --- | --- | --- |
+| `cid` | `c`, `clickid`, `click_id` | ClickPattern click ID. Matches the conversion to the visit. | Yes |
+| `payout` | `revenue` | Conversion value. Must be 0 or more. | No |
+| `currency` | `payout_currency` | Three-letter currency code, such as `EUR`. Default `USD`. | No |
+| `txid` | `transaction_id` | The network's transaction ID. Used to stop duplicates and to count more than one sale per click. | No |
+| `status` | — | `approved`, `pending`, `rejected` or `refund`. Default `approved`. | No |
+| `et` | `event`, `event_type`, `type` | Event type, such as `lead` or `purchase`, or one of your custom conversion values. | No |
+| `refund_amount` | — | Refunds only: the amount to refund. Leave it out to refund the whole conversion. | No |
+| `refund_id` | — | Refunds only: the network's refund ID. Each ID is applied once. | No |
+| `ptoken` | — | Security token. Checked only when one is set up for the affiliate network. | No |
+| `param1`–`param5` | — | Extra values you want to store with the conversion | No |
+
+When aliases appear together, the first one in the list wins. For the event type that is `et`, then `event`, `event_type`, `type`.
+
+### Status values
+
+| Value | What happens |
+| --- | --- |
+| `approved` (or none) | The conversion is booked and counted |
+| `pending` | The conversion is booked as pending and counted. A later `approved` postback with the same `txid` approves it. |
+| `rejected` | Stored as rejected. On a click that already converted, a `rejected` without `et` changes nothing. |
+| `refund` | Reverses a conversion on the click. `refunded` and `chargeback` mean the same. |
+
+Any other word, such as `declined`, is refused and no conversion is booked.
+
+### Hashed customer data
+
+You can add customer details for ad platform conversion matching. ClickPattern hashes them (SHA-256) before storing them; the plain values are never saved.
+
+| Field | Aliases |
+| --- | --- |
+| `email` | `em` |
+| `phone` | `ph` |
+| `first_name` | `firstname`, `fn` |
+| `last_name` | `lastname`, `ln` |
+| `city` | `ct` |
+| `state` | `st` |
+| `zip` | `zp`, `postal_code` |
+| `country` | — |
+
+`external_id` (or `lead_id`) is stored as sent, not hashed.
+
+### Responses
+
+| HTTP code | Body message | Meaning |
+| --- | --- | --- |
+| 200 | `Postback received successfully` | Accepted and queued for processing |
+| 200 | `Postback received` | Received but refused: unknown click ID, IP not on the allow list, wrong `ptoken`, duplicate, or unknown status. The reason is not revealed to the sender. |
+| 400 | `Invalid postback request` | `cid` is missing, or `payout` is not a number of 0 or more |
+| 503 | `Postback not accepted, retry` | A temporary problem on our side. The response includes `Retry-After: 60`, and the network should send it again. |
+
+See every postback and its result in **Logs → Received Postbacks**. Postbacks with no matching click, or with a missing `cid`, show in **Logs → Errors Log**.
+
+<Frame>
+  <img src="/images/shared/logs-received-postbacks.jpg" alt="Received Postbacks log with Status and Reason columns" />
+</Frame>
+
+### Security
+
+In the affiliate network's **Additional settings**, tick **Only accept postbacks from white-listed IPs**. Enter one IP or IP block (CIDR notation) per line. Postbacks from other addresses are refused.
+
+### FAQ
+
+**My network uses `clickid=` instead of `cid=`. Is that OK?** Yes. `c`, `clickid` and `click_id` all work.
+
+**What if a macro isn't filled in?** Values such as `{payout}`, `OPTIONAL` or `REPLACE` that arrive unfilled are ignored. If `cid` is unfilled, the postback is refused with a 400.
+
+**How do I count two sales on one click?** Send a different `txid` with each sale. Without a `txid`, a second postback on a converted click is a duplicate.
+
+### Related articles
+
+- [Add your postback to an affiliate network](/tracking/add-your-postback-to-an-affiliate-network)
+- [Duplicates, refunds and statuses](/tracking/duplicates-refunds-and-statuses)
+- [Event types and custom conversion events](/tracking/event-types-and-custom-conversion-events)
+- [Tracking URLs page](/tracking/tracking-urls-page)

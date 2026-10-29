@@ -1,0 +1,79 @@
+---
+title: "Conversions not showing"
+description: "Work through the conversion path in order: the postback or pixel arrives, it carries a click ID ClickPattern knows, and the network's macros are filled in. The Logs tabs tell you which step failed."
+---
+
+### Check 1: Did the postback reach ClickPattern?
+
+1. Go to **Logs → Received Postbacks** and set the date range to when the conversion happened.
+2. If you see a row for the conversion, read its **Status** and go to Check 4.
+3. If you see nothing, go to **Logs → Errors Log**. Postbacks that couldn't be matched to any visit appear only there, not in Received Postbacks.
+4. If neither log has a row, the network never called your postback URL. Check the URL saved in the network, and ask the network for its postback delivery log.
+
+<Frame>
+  <img src="/images/shared/logs-received-postbacks.jpg" alt="Received Postbacks tab with status chips. Click the details icon on a row to see the Reason." />
+</Frame>
+
+### Check 2: Is the click ID reaching the network?
+
+The most common cause is a missing `{clickid}` token in the offer URL.
+
+1. Go to **Performance → Offers**, select the offer and click **Edit**.
+2. Check that **Offer URL** passes `{clickid}` in the network's sub ID parameter, for example `https://network.example/offer?aff_sub={clickid}`.
+3. In the network, check that the same sub ID macro is placed in the `cid` parameter of your postback URL.
+
+If the network sends back a value that matches no visit, the Errors Log shows the row with category **Invalid conversion request** and reason "click not found".
+
+### Check 3: Are the network's macros filled in?
+
+Open the row in **Errors Log** or **Received Postbacks** and look at the **URL**.
+
+| What you see in the URL | Cause | Fix |
+| --- | --- | --- |
+| `cid=REPLACE` or no `cid` | The template was pasted without replacing the placeholder. | Put the network's click ID macro in `cid`. |
+| `cid={aff_sub}` or another macro in braces | The network didn't fill its macro. | Use the exact macro name from the network's docs. |
+| `payout=OPTIONAL`, `txid=OPTIONAL` | Placeholders left in the template. | Replace them with the network's macros or remove them. |
+
+ClickPattern drops placeholder values such as `REPLACE`, `OPTIONAL`, `{...}`, `[...]`, `__X__`, `%%X%%` and `${...}` as if they weren't sent. A postback with only `cid=REPLACE` is answered with "Missing required parameter: cid (Click ID)".
+
+### Check 4: Read the status and reason
+
+In **Received Postbacks**, click a row's details icon. Failed rows show a **Reason**.
+
+| Status | Reason | What to do |
+| --- | --- | --- |
+| **Rejected** | ip not whitelisted | The network sent from an IP that isn't in the affiliate network's allowed list. Add the IP or turn off **Only accept postbacks from white-listed IPs**. |
+| **Rejected** | invalid ptoken | The security token is missing or wrong. Send the correct `ptoken` value. |
+| **Rejected** | unknown status | The `status` value isn't recognized. Use `approved`, `pending`, `rejected` or `refund`. |
+| **Rejected** or **Duplicate** | duplicate | The click already converted and this postback adds nothing new. Send a different `txid` for each real sale. |
+| **Failed** | (message) | Processing failed. Read the message and contact support if it repeats. |
+| **Pending** | — | Received and still processing. Refresh after a minute. |
+| **Processed** | — | The conversion was recorded. |
+
+### Check 5: Pixel conversions
+
+The pixel needs a click ID. It reads `cid` from the pixel URL first, then the `_cp_cid` cookie.
+
+- The cookie is only readable when your tracking domain and the page with the pixel share the same registrable domain. For example, `track.brand.com` and `shop.brand.com` work; `track.brand.com` and `offer.example.net` don't.
+- If the domains differ, pass the click ID in the pixel URL (`cid=`) or use the S2S postback instead.
+- Add `_dryrun=1` to the pixel URL and open it in a browser. You get a JSON report of which click ID was found and what's wrong, and no conversion is recorded.
+
+### Check 6: The conversion shows under the wrong name or not in Conversions
+
+- A conversion without an event type is recorded as the default conversion (Purchase). Add `et=` (for example `et=lead`) to the postback or pixel.
+- An event type set up in **Data Hub → Custom conversions** only counts in **Conversions** or **Revenue** when that event's include options are on.
+
+### FAQ
+
+**The network says it fired the postback, but nothing is in either log.** The request didn't reach ClickPattern. Make sure the URL uses your tracking domain and the `/postback` path, and that the network didn't use an old URL.
+
+**Why do refused postbacks get a 200 response?** ClickPattern answers "Postback received" so the sender can't probe which click IDs exist. Check the logs for the reason.
+
+**Can a `rejected` postback cancel an earlier sale?** No. Only `status=refund` (or `refunded`, `chargeback`) reverses a conversion.
+
+### Related articles
+
+- [Payout or revenue wrong](/troubleshooting/payout-or-revenue-wrong)
+- [Tokens arriving empty](/troubleshooting/tokens-arriving-empty)
+- [Postback and pixel parameters](/reference/postback-and-pixel-parameters)
+- [Error codes and messages](/reference/error-codes-and-messages)

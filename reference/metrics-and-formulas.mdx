@@ -1,0 +1,74 @@
+---
+title: "Metrics and formulas"
+description: "What each report column means and how it's calculated. Rates return 0 when the divisor is 0."
+---
+
+### Traffic
+
+| Column | Definition |
+| --- | --- |
+| **Visits** | Arrivals at the campaign URL (or tracked page, for direct tracking). |
+| **Unique Visits** | Visits from visitors not seen in the uniqueness window. |
+| **Clicks** | Lander CTA clicks: visitors who clicked through from a lander to an offer. |
+| **Unique Clicks** | Clicks counted once per unique visit. |
+| **Impressions** | Ad impressions reported by the connected ad platform. |
+| **Bot Visits** | Visits identified as bots. |
+| **Bot Rate** | Bot Visits ÷ Visits × 100. |
+| **Non-Bot Visits** | Visits − Bot Visits. |
+| **Suspicious Visits** | Visits flagged by at least one invalid-traffic signal. |
+| **Suspicious %** | Suspicious Visits ÷ Visits × 100. |
+| **Suspicious Clicks** | Clicks flagged as suspicious. |
+| **Suspicious Visits (enforced)** | Visits whose invalid-traffic score reached the blocking threshold (70 by default). |
+| **Suspicious Rate (enforced)** | Suspicious Visits (enforced) ÷ Visits × 100. |
+
+### Financial
+
+| Column | Formula |
+| --- | --- |
+| **Conversions** | Count of conversions. Refunds don't add to it. |
+| **Revenue** | Sum of conversion payouts, minus refunds. |
+| **Cost** | Spend, from the campaign's cost source. |
+| **Profit** | Revenue − Cost. |
+| **ROI** | (Revenue − Cost) ÷ Cost × 100. |
+| **ROAS** | Revenue ÷ Cost (a ratio, not a percentage). |
+| **Refunds** | Count of refund events. |
+| **Refund amount** | Total refunded money. |
+
+### Rates
+
+| Column | Formula |
+| --- | --- |
+| **CTR** | Clicks ÷ Visits × 100. Lander click-through rate. |
+| **CV** | Conversions ÷ Visits × 100. Whole-funnel conversion rate. |
+| **CR** | Conversions ÷ Clicks × 100. Offer conversion rate. |
+| **ICTR** | Visits ÷ Impressions × 100. |
+| **EPV** | Revenue ÷ Visits. |
+| **EPC** | Revenue ÷ Clicks. |
+| **CPV** | Cost ÷ Visits. |
+| **CPC** | Cost ÷ Clicks. |
+| **CPA** | Cost ÷ Conversions. |
+| **AP** | Revenue ÷ Conversions. Average payout. |
+| **RPM** | Revenue ÷ Impressions × 1,000. |
+| **eCPM** | Cost ÷ Impressions × 1,000. |
+| **eCPC** | Cost ÷ Clicks. Same as CPC. |
+| **eCPA** | Cost ÷ Conversions. Same as CPA. |
+
+### Time to convert
+
+| Column | Definition |
+| --- | --- |
+| **MTTC** | Mean time from visit to conversion. |
+| **Low TTC** | Conversions faster than the low threshold (default 10 seconds). |
+| **Optimal TTC** | Conversions between the low and high thresholds. |
+| **High TTC** | Conversions slower than the high threshold (default 1 hour). |
+
+Change the thresholds in **Data Hub → MTTC**.
+
+### Custom metrics
+
+You can build your own columns from these metrics with a formula. See Custom metrics.
+
+### Related articles
+
+- [Report dimensions](/reference/report-dimensions)
+- [Payout or revenue wrong](/troubleshooting/payout-or-revenue-wrong)

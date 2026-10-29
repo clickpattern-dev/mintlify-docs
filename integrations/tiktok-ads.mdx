@@ -1,0 +1,85 @@
+---
+title: "TikTok Ads"
+description: "Connect your TikTok Ads advertiser account to import cost and campaigns, send conversions through TikTok's Events API and let PatternPilot manage your ads."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks for campaigns, ad groups and ads, every 15 minutes |
+| Campaign import | Campaigns and ad groups |
+| CAPI | Server-side web events to your TikTok pixel (Events API) |
+| PatternPilot actions | **Pause**, **Resume**, **Adjust bid**, **Adjust budget** |
+
+### Connect TikTok
+
+1. Go to **Data Hub → Integrations**.
+2. Click the **TikTok Ads** card.
+3. Sign in to TikTok for Business and approve access.
+4. In **Configure TikTok Integration**, choose the **Advertiser Account**. Each option shows its ID, currency, time zone and status.
+5. Click **Save Configuration**.
+
+If the list is empty, you see "No advertiser accounts found." Connect again and make sure you grant ClickPattern access to your advertiser accounts.
+
+The advertiser account can't be changed after setup. To use another one, delete the integration and connect again.
+
+### Tracking macros
+
+TikTok adds its click ID, `ttclid`, to your landing URL automatically. To get campaign, ad group and ad details, add TikTok's macros to your URL parameters:
+
+| Macro | Value |
+| --- | --- |
+| `__CAMPAIGN_ID__` | Campaign ID |
+| `__CAMPAIGN_NAME__` | Campaign name |
+| `__AID__` | Ad group ID |
+| `__AID_NAME__` | Ad group name |
+| `__CID__` | Ad ID |
+| `__CID_NAME__` | Ad name |
+| `__PLACEMENT__` | Placement |
+| `__CLICKID__` | TikTok click ID |
+
+`__AID__` matters most. Automatic mapping needs the ad group ID.
+
+### The TikTok integration page
+
+Tabs: **Performance**, **Campaigns**, **Campaign Mapping**, **Events API**, **CAPI**, **Sync Logs** and **Health**.
+
+<Frame>
+  <img src="/images/integrations/30-tiktok-header.jpg" alt="TikTok Ads integration page with the Events API banner" />
+</Frame>
+
+### Send conversions with the Events API
+
+The **Events API** tab explains how ClickPattern captures `ttclid` and sends conversions, and lists the event mappings. Set it up from the **CAPI** tab:
+
+1. Click **Set Up CAPI**.
+2. Enter your **Pixel Code**. Find it in TikTok Events Manager > Assets > Events > Web Events > your pixel.
+3. Choose **Events to Send**.
+4. Optional: under **Advanced Settings**, add a **Test Event Code** and check **Event Type Mapping**. TikTok events are sent as web events only.
+5. Click **Save & Enable**.
+
+TikTok matches conversions on `ttclid`, email, phone, external ID, or the visitor's IP address and user agent. Use **Send Test Event** with your Test Event Code to check delivery.
+
+### PatternPilot actions
+
+Rules can pause and resume TikTok campaigns and adjust bids and budgets. Bids apply to the ad group, so map the ad group to your ClickPattern campaign.
+
+### Token renewal
+
+TikTok access doesn't expire unless the advertiser revokes it. If it's revoked, the status becomes **Token Expired**. Click **Reconnect**.
+
+### FAQ
+
+**Do I need to add `ttclid` to my URLs?** No. TikTok appends it automatically.
+
+**Why can't I pick an action source other than Web?** TikTok offline and CRM events need data ClickPattern doesn't send, so TikTok CAPI sends web events only.
+
+**My event mapping won't save.** TikTok accepts only its own event names. Pick a TikTok event for each mapping under **Advanced Settings**.
+
+### Related articles
+
+- [Server-side conversions (CAPI) setup](/integrations/server-side-conversions-capi-setup)
+- [Campaign mapping and unmapped objects](/integrations/campaign-mapping-and-unmapped-objects)
+- [Passing data with URL tokens](/tracking/passing-data-with-url-tokens)
+- [Integrations overview](/integrations/integrations-overview)

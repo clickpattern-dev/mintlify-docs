@@ -1,0 +1,46 @@
+---
+title: "Lander CTA not working"
+description: "A lander click must reach ClickPattern on the same tracking domain as the campaign URL, with the visit's tracking data. Most CTA failures come from a domain mismatch or a missing script."
+---
+
+### Check 1: Read the error
+
+Click the CTA yourself after arriving through the campaign URL.
+
+| HTTP status | Message | Cause | Fix |
+| --- | --- | --- | --- |
+| 400 | "Click tracking information not found. Please return to the original link." | The click didn't carry the visit's tracking data. | See Check 2. |
+| 410 | "This link has expired. Please return to the original page." | The visit is more than 24 hours old. | Normal for stale tabs. New visits work. |
+| 404 | "The campaign associated with this link no longer exists." | The campaign was deleted. | Use a live campaign. |
+| 403 | "This campaign is currently inactive." | The campaign isn't active. | Resume the campaign. |
+| 500 | "This campaign has no offers configured." | The lander's path has no offers. | Add an offer to the path. |
+| 500 | "No active offers available (all may have zero weight)." | All offers have zero weight. | Give at least one offer a weight. |
+| 404 | "The selected offer is no longer available." | A numbered CTA points to an offer that was removed. | Check the number of offers in the path. |
+| 404 | Page not found | The offer reached its cap and no redirect offer is set. | Set a redirect offer or raise the cap. |
+
+### Check 2: Domain mismatch
+
+The CTA link must use the same tracking domain as the campaign URL. ClickPattern stores the visit's tracking data in a cookie on that domain. A CTA on another domain can't read it.
+
+1. Open the lander in **Performance → Landers** and click **Edit**.
+2. Check **Tracking domain** matches the domain in the campaign URL.
+3. Copy the click URLs again from the lander's **Landing page setup** and replace the links on your page.
+
+### Check 3: Add the lander script
+
+The lander script `https://{domain}/l/script.js` adds the tracking data to your CTA links, so clicks work even when browsers block the cookie. Copy the script from the lander's setup and put it on the page.
+
+### Check 4: Multi-offer CTAs
+
+`/click` sends the visitor to an offer by weight. `/click/1` to `/click/10` send the visitor to offer 1 to 10 of the path. Set **Number of CTAs** on the lander to match the links on the page.
+
+### FAQ
+
+**The CTA works for me but not for some visitors.** Some browsers block the cookie. Add the lander script so the tracking data travels in the link.
+
+**Does lander protection affect CTAs?** Lander protection blocks direct visits to your lander. Visitors who arrive through the campaign URL are not affected.
+
+### Related articles
+
+- [Visits or clicks not recorded](/troubleshooting/visits-or-clicks-not-recorded)
+- [Tokens arriving empty](/troubleshooting/tokens-arriving-empty)

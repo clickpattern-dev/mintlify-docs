@@ -1,0 +1,60 @@
+---
+title: "PropellerAds"
+description: "Connect PropellerAds with an API token. ClickPattern syncs your cost, imports your campaigns and lets PatternPilot pause, resume and change bids and budgets on mapped campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks for campaigns and zones |
+| Campaign import | Your PropellerAds campaigns |
+| PatternPilot actions | **Pause campaign**, **Resume campaign**, **Adjust bid**, **Adjust budget** |
+
+PatternPilot acts on whole campaigns. Zone-level and banner-level actions aren't available in rules.
+
+### What you need
+
+- Your PropellerAds API token.
+
+### Connect PropellerAds
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **PropellerAds** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **API Token** | Your PropellerAds API token. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+You see **PropellerAds Connected!** when it works.
+
+<Frame>
+  <img src="/images/integrations/17-propellerads.jpg" alt="Integrate with PropellerAds dialog" />
+</Frame>
+
+### How bid and budget changes work
+
+- **Adjust bid** sets the new amount on every active rate of the campaign. Each rate keeps its countries.
+- If the campaign has no active rates, the bid change fails. Nothing is changed.
+- **Adjust budget** changes the campaign's daily or total spend limit.
+- **Pause campaign** stops the campaign. **Resume campaign** starts it again.
+
+### Manage the connection
+
+Click the PropellerAds card under **Connected Integrations**. The detail page has **Performance**, **Campaigns**, **Campaign Mapping** and **Sync Logs** tabs, plus **Sync Now** and **Delete**.
+
+### FAQ
+
+**My campaign has different bids per country. Will a rule flatten them?** Yes. **Adjust bid** applies the same amount to every active rate, though each rate keeps its country list.
+
+**My token stopped working. How do I update it?** Delete the integration on its detail page, then connect PropellerAds again with the new token.
+
+### Related articles
+
+- [Adsterra](/integrations/adsterra)
+- [Clickadu](/integrations/clickadu)
+- [Traffic source templates](/integrations/traffic-source-templates)

@@ -1,0 +1,49 @@
+---
+title: "Payout or revenue wrong"
+description: "Revenue is the sum of conversion payouts, minus refunds. Wrong revenue usually means the payout isn't sent, the offer's payout type ignores it, the currency is off, or conversions were counted twice."
+---
+
+### Check 1: Payout type on the offer
+
+Open the offer in **Performance → Offers** and check **Payout type**.
+
+| Payout type | Payout used |
+| --- | --- |
+| **Auto** | The `payout` value in the postback or pixel. If none is sent, the payout is 0. |
+| **Manual** | The geo-specific payout for the visitor's country if set, else **Default value**. Payouts sent in the postback are ignored. |
+
+If you see 0 revenue with **Auto**, the network isn't sending `payout`. If revenue never changes with **Manual**, switch to **Auto**.
+
+### Check 2: The payout parameter
+
+1. Open the conversion in **Logs → Received Postbacks** and check **Payout** and the **URL**.
+2. The postback must use `payout=` (or `revenue=`) with the network's payout macro.
+3. Values that aren't numbers, or are negative, are refused with "Invalid payout value: must be a positive number". Values above 10,000,000 are dropped.
+
+### Check 3: Currency
+
+- Send `currency=` (or `payout_currency=`) with a 3-letter code. If none is sent, the amount is treated as USD.
+- Reports convert to the currency you pick in the toolbar currency selector.
+- Add the **Revenue in Original Currency** and **Original Currency** columns to see what the network sent.
+
+### Check 4: Duplicates
+
+- Repeat postbacks with no `txid` on a click that already converted are refused as duplicates.
+- Postbacks with a new `txid` count as a new conversion on the same click. Make sure your network sends a unique transaction ID per sale, not a new random value on retries.
+- Pixel and postback both firing for the same sale can count twice. Use one method per offer.
+
+### Check 5: Refunds
+
+A refund is a separate negative event. Send `status=refund` with the original sale's `txid`. Revenue in reports is net of refunds; **Refund amount** shows what was refunded.
+
+### FAQ
+
+**Why does the Payout column on the offer differ from revenue?** The offer's payout is its configured default. Revenue comes from actual conversions.
+
+**Why does a later postback with `status=rejected` not remove the sale?** A rejection never reverses a conversion. Send `status=refund` with the sale's `txid` instead.
+
+### Related articles
+
+- [Conversions not showing](/troubleshooting/conversions-not-showing)
+- [Postback and pixel parameters](/reference/postback-and-pixel-parameters)
+- [Metrics and formulas](/reference/metrics-and-formulas)

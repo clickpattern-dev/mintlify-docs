@@ -1,0 +1,83 @@
+---
+title: "Shopify: products, events and refunds"
+description: "After you connect Shopify, map products to offers, choose which store events to track and let ClickPattern handle refunds and cancellations. Product costs and Shopify fees come in with each order."
+---
+
+### Map products to offers
+
+Mapping tells ClickPattern which offer a product page belongs to. A visit to a mapped product's page is attributed to that offer when the offer is part of the visit's campaign.
+
+1. Create the offers first in ClickPattern. Use the product page URL as the **Offer URL**.
+2. In your Shopify admin, open **Apps → ClickPattern → Products**.
+3. Find the product. Use **Search products** if the list is long.
+4. Choose an offer in the **Offer** list, or **No offer** to clear it.
+5. Click **Save**.
+
+Changes apply to new visits within 5 minutes. If the workspace has no offers, the page shows **Create an offer first**.
+
+### Events tracked
+
+The ClickPattern pixel reports these store events. Choose which ones count on the Shopify integration's **Settings** tab in ClickPattern.
+
+| Event | Shopify trigger | Default |
+| --- | --- | --- |
+| Purchase | Checkout completed | On |
+| Add to Cart | Product added to cart | On |
+| Initiate Checkout | Checkout started | On |
+| Add Payment Info | Payment info submitted | On |
+| View Content | Product viewed | Off |
+| Search | Search submitted | Off |
+| Page View | Page viewed | Off |
+
+View Content, Search and Page View are under **High Volume Events** (**Use with caution**). They fire often and create a lot of data.
+
+### Purchases come from Shopify's order notification
+
+Shopify's paid-order webhook is the main source for purchases. It's recorded on the server, so ad blockers can't stop it. When the pixel also reports the purchase, both are merged into one conversion, so a sale is counted once.
+
+### Refunds and cancellations
+
+When you refund or cancel an order in Shopify, ClickPattern finds the original conversion and records a separate refund with negative revenue. Partial refunds deduct only the refunded amount. The original conversion stays, so your conversion count doesn't drop, but revenue and profit go down.
+
+Refunds are also sent to Google Ads through CAPI if you've set it up. Other ad platforms don't receive refunds.
+
+### Product costs and fees
+
+For each attributed order, ClickPattern pulls the product unit cost from Shopify and the order's Shopify transaction fees. Add the **COGS (Shopify)** and **Transaction Fees (Shopify)** columns with **Columns** on your Performance views. To see profit after these costs, create a custom metric such as `revenue - shopify_cogs - shopify_tx_fees - cost`.
+
+### The Shopify integration page in ClickPattern
+
+Open **Data Hub → Integrations** and click the connected Shopify card. The header shows the store domain, status, **Connect a store** and **Delete**. Tabs:
+
+| Tab | What it shows |
+| --- | --- |
+| **Setup** | Event tracking status, the **Ad click capture** steps with **Open App embeds**, webhook status with **Register webhooks now**, **Events Being Tracked**, **Test Your Integration** steps and **Troubleshooting** |
+| **Settings** | **Enable Event Tracking** switch, **Recommended Events**, **High Volume Events** and **Save Event Configuration** |
+
+<Frame>
+  <img src="/images/integrations/51-shopify-settings.jpg" alt="Shopify integration Settings tab with event switches" />
+</Frame>
+
+### Change which events are tracked
+
+1. Open the Shopify integration and click **Settings**.
+2. Make sure **Enable Event Tracking** is on.
+3. Turn individual events on or off.
+4. Click **Save Event Configuration**.
+
+### FAQ
+
+**Why isn't a product page attributed to my offer?** The offer must be part of the visit's campaign, and the mapping takes up to 5 minutes to apply.
+
+**Does a refund remove the conversion?** No. ClickPattern adds a separate negative-revenue refund. The conversion count stays the same.
+
+**Why are my COGS zero?** Product cost comes from the unit cost on the product's inventory item in Shopify. Fill it in there.
+
+**How do I test the setup?** Follow **Test Your Integration** on the **Setup** tab: place a test order, check it in ClickPattern, then refund it and check the revenue goes down.
+
+### Related articles
+
+- [Shopify: connect your store](/integrations/shopify-connect-your-store)
+- [Add an offer](/tracking/add-an-offer)
+- [Duplicates, refunds and statuses](/tracking/duplicates-refunds-and-statuses)
+- [Direct (redirectless) tracking](/tracking/direct-redirectless-tracking)

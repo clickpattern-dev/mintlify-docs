@@ -1,0 +1,107 @@
+---
+title: "Grouping and drill-down"
+description: "Group a report by up to four levels, such as campaign → country → device, to see where results come from. You can show the result as a flat table or an expandable tree."
+---
+
+### Build a grouped report
+
+1. Open **Performance**.
+2. In the first group menu, choose the main grouping. It starts on the tab you're on.
+3. Choose **Group 2**, then optionally **Group 3** and **Group 4**.
+4. Click **Generate**. The button appears once your groupings differ from the default.
+5. Use **Table** or **Drill** to change how the result is shown.
+
+Each grouping can be used once. To remove a grouping, click the **×** on the last group you set.
+
+<Frame>
+  <img src="/images/reports/grouping-drill.jpg" alt="Campaigns, Country and Device Type in the group menus, shown in Drill view with one campaign expanded" />
+</Frame>
+
+### Table vs Drill
+
+| View | What you see |
+| --- | --- |
+| **Table** | One flat row per combination, with a column for each grouping. |
+| **Drill** | A tree. Expand a row to see the next grouping under it. |
+
+### First grouping options
+
+| Category | Options |
+| --- | --- |
+| Entities | Campaigns, Offers, Landers, Flows, Traffic Sources, Affiliate Networks, Conversions |
+| Tracking | Click ID, Transaction ID, External ID, Postback Param 1–5 |
+| Geo | Country |
+| Time | Hour of Day, Day of Week, Day, Month |
+| Device | Device Type, Brand, Model |
+| Network | Connection Type, ISP / Carrier, Mobile Carrier, Proxy |
+| Software | OS, OS Version, Browser, Browser Version |
+| Other | Traffic Type, Tracking Domain |
+
+Inside a campaign's detail tab, the first menu also lists **V1**–**V10**. If the campaign's traffic source names its variables, you'll see those names instead.
+
+### Extra options for Groups 2–4
+
+Groups 2–4 can also offer **Paths**, **V1**–**V10**, **State / Region**, **City**, **Language**, **Referrer** and **Referrer Domain**. Which ones appear depends on the first grouping.
+
+### What you can combine
+
+The options in Groups 2–4 depend on your first grouping:
+
+| First grouping | Groups 2–4 |
+| --- | --- |
+| **Campaigns** | Other entities, Conversions, V1–V10, Paths, Referrer, Referrer Domain, plus geo, time, device, network and software options. City isn't offered. |
+| **Traffic Sources** | Other entities, V1–V10, Paths, Referrer Domain, plus geo, time, device, network and software options. City isn't offered. |
+| **Offers** | Campaigns, Landers, Flows, Traffic Sources, Conversions, plus geo (including City), time, device, network and software options. |
+| **Landers**, **Flows**, **Affiliate Networks** | Other entities plus geo (including City), time, device, network and software options. Flows and Affiliate Networks also offer Paths. |
+| **Conversions** | Entities, geo, time, device, network and software options, Traffic Type and Tracking Domain. |
+| **Click ID**, **Transaction ID**, **External ID**, **Postback Param 1–5** | Group 2 is always **Conversions**. Group 3 can be most other reports. Group 4 is off. |
+| **Tracking Domain** | Group 2 is **Campaigns** only. Groups 3 and 4 are off. |
+| Any other report (Country, Device Type, OS…) | Entities, geo, time, device, network and software options, Traffic Type and Tracking Domain. |
+
+Whether you can use **Group 4** depends on your plan. A lock icon shows when it isn't included. See [pricing](https://www.clickpattern.com/pricing).
+
+### Detail tabs
+
+Double-click a row to open a detail tab for it. The tab strip above the toolbar keeps your open tabs, so you can jump between them.
+
+| You double-click | The detail tab opens on |
+| --- | --- |
+| A campaign | Offers |
+| An offer | Landers |
+| A lander, traffic source, flow or affiliate network | Campaigns |
+| A country, device, OS or similar row | Campaigns |
+
+Inside a detail tab:
+
+- The report tabs show the other reports for that item. Campaign and flow tabs also add a **Paths** tab.
+- **Edit Campaign** (or the matching item name) edits the item that owns the tab.
+- Click **Home** to go back to the main report.
+- Click the **×** on a tab to close it. When there are too many tabs, they collapse into one button with a count. Open it and choose **Close all tabs** to clear them.
+
+<Frame>
+  <img src="/images/reports/detail-tab.jpg" alt="Detail tab strip with Home, a campaign tab and the star icon" />
+</Frame>
+
+### Favorites
+
+Save a detail tab to open it again later.
+
+1. Click the star on the tab (**Add to favorites**).
+2. Enter a **Favorite name** in **Save as Favorite** and click **Save**.
+3. To open it later, click the star next to **Performance** in the sidebar.
+
+Favorites are saved in your browser, so they don't follow you to other devices.
+
+### FAQ
+
+**Why is an option missing from Group 2?** It doesn't apply to your first grouping, or it's already used in another group.
+
+**Can I group by rule?** Not in Performance. Scheduled reports can group by **Rule**.
+
+**Why does Group 3 stay greyed out?** Some first groupings turn it off, such as **Tracking Domain**.
+
+### Related articles
+
+- [Performance reports](/reports/performance-reports)
+- [Columns and column templates](/reports/columns-and-column-templates)
+- [Scheduled reports](/reports/scheduled-reports)

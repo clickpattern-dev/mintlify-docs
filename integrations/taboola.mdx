@@ -1,0 +1,72 @@
+---
+title: "Taboola"
+description: "Connect your Taboola account with a Client ID and Client Secret. ClickPattern then syncs your Taboola cost, imports your campaigns and lets PatternPilot pause, resume and change bids and budgets on mapped campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks for your campaigns and sites |
+| Campaign import | Your Taboola campaigns and ads |
+| PatternPilot actions | **Pause campaign**, **Resume campaign**, **Adjust bid**, **Adjust budget** |
+
+PatternPilot acts on whole campaigns. Site-level actions aren't available in rules.
+
+### What you need
+
+- Your Taboola **Client ID** and **Client Secret**. If you don't have them, ask your Taboola account manager.
+- Advertiser access to at least one Taboola account on those credentials.
+
+### Connect Taboola
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, find **Taboola**. Use **Search by name** or set **Category** to **Traffic source**.
+3. Click the Taboola card. The **Integrate with Taboola** dialog opens.
+4. Fill in the fields below and click **Integrate**.
+5. If Taboola returns more than one account, an **Ad account** list appears. Select the account and click **Integrate** again.
+
+| Field | What to enter |
+| --- | --- |
+| **Client ID** | Your Taboola Client ID. Required. |
+| **Client Secret** | Your Taboola Client Secret. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. Defaults to "Taboola". |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+When the connection succeeds, you see **Taboola Connected!** and the card moves to **Connected Integrations**. The first sync starts right away.
+
+If ClickPattern can't list your accounts, a **Taboola account ID** field appears instead. Enter the Account ID shown in Taboola. ClickPattern checks that your credentials can reach that account before it connects.
+
+### Manage the connection
+
+Click the Taboola card under **Connected Integrations** to open its detail page. It shows **Status**, **Last Sync** and **Total Campaigns**, plus these tabs:
+
+| Tab | What it shows |
+| --- | --- |
+| **Performance** | Impressions, clicks, CTR, cost, CPM and CPC for the last 7, 30 or 90 days |
+| **Campaigns** | Imported Taboola campaigns with their IDs and status |
+| **Campaign Mapping** | Which ClickPattern campaign each Taboola campaign is linked to |
+| **Sync Logs** | Recent sync runs and errors |
+
+Taboola has no ad set level, so you map each Taboola campaign directly to a ClickPattern campaign. Click **Sync Now** to sync immediately, or **Delete** to remove the integration.
+
+<Frame>
+  <img src="/images/integrations/41-taboola-header.jpg" alt="Taboola integration detail page" />
+</Frame>
+
+### FAQ
+
+**I get "Invalid Taboola credentials". What now?** Check that you copied the Client ID and Client Secret exactly. They must belong to the same Taboola API client.
+
+**I get "No advertiser accounts found for these Taboola credentials".** Your credentials work, but they don't have advertiser access. Ask your Taboola account manager to grant it, then connect again.
+
+**I get "That Taboola account is not on these credentials".** The account you chose or entered isn't available to this Client ID. Pick an account from the list instead.
+
+**Why doesn't a rule's action reach Taboola?** PatternPilot can only act on Taboola campaigns that are mapped to a ClickPattern campaign. Check the **Campaign Mapping** tab.
+
+### Related articles
+
+- [Outbrain](/integrations/outbrain)
+- [MGID](/integrations/mgid)
+- [Traffic source templates](/integrations/traffic-source-templates)

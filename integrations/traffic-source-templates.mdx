@@ -1,0 +1,73 @@
+---
+title: "Traffic source templates"
+description: "A traffic source template fills in the URL parameters and macros your ad platform uses, so every visit arrives with campaign, ad and placement details. It can also prefill the platform's postback URL."
+---
+
+### What a template prefills
+
+When you pick a traffic source in **Add traffic source**, ClickPattern fills in:
+
+| Item | What it is |
+| --- | --- |
+| **Name** | The traffic source's name. You can change it. |
+| **External IDs** | The parameter and macro that carry the platform's click ID. Mapped to `{externalid}` (up to 3: `{externalid}`, `{externalid2}`, `{externalid3}`). |
+| **Cost** | The parameter and macro that pass the cost per click, mapped to `{cost}` |
+| **Other Parameters** | Campaign, ad, placement and similar fields, mapped to `{var1}` to `{var10}` |
+| **Traffic source postback URL** | The platform's postback URL, filled in when you tick the box |
+
+Each row has a **TS Parameter** (the URL parameter name), a **TS Token** (the platform's macro) and a **CP Token** (where ClickPattern stores the value).
+
+### Add a traffic source from a template
+
+1. Go to **Performance → Traffic Sources** and click **Create**.
+2. Search for the platform with **Search by traffic source name** and click its card.
+3. Check **Name** and the workspace.
+4. Review the **Parameters** tables. Tick **Enable** for each optional parameter you want.
+5. Set **Currency** under **Cost Currency**.
+6. To send conversions back to the platform, tick **Traffic source postback URL**.
+7. Click **Save**.
+
+<Frame>
+  <img src="/images/shared/add-traffic-source.jpg" alt="Add traffic source template grid" />
+</Frame>
+
+### Custom traffic sources
+
+If your platform isn't listed, click **Custom**. Enter the parameters yourself:
+
+1. Under **External IDs**, enter the platform's click ID parameter in **TS Parameter** and its macro in **TS Token**.
+2. Under **Other Parameters**, enter the cost parameter, then click **Add parameter** for each extra field.
+3. Tick **Enable** on each optional parameter you want in your campaign URL.
+
+### The postback URL
+
+When you tick **Traffic source postback URL**, the template's postback URL appears in **Postback URL**. To add a value, open **Available Tokens** and click a token. ClickPattern appends it as `token={token}`.
+
+In the postback URL you can use either the platform's macro (the **TS Token**) or the ClickPattern token (the **CP Token**). Both are replaced with the value captured on the click. For example, `{externalid}` returns the platform's own click ID.
+
+<Frame>
+  <img src="/images/shared/ts-template-params.jpg" alt="Add traffic source form, Parameters tables and Passing conversion info to traffic source" />
+</Frame>
+
+### How to check the mapping
+
+1. Open the traffic source from **Performance → Traffic Sources** with **Edit**.
+2. Compare each **TS Parameter** and **TS Token** with the platform's macro list.
+3. Open a campaign that uses this traffic source with **Edit**, then the **Tracking & PatternPilot** tab.
+4. Check the campaign URL. It should read `https://{domain}/c/7d2f4a10-…?` followed by each enabled parameter, for example `campaign_id={campaign_id}`.
+
+A parameter is added to the campaign URL only when it has both a **TS Parameter** and a **TS Token** and is enabled. External IDs have no **Enable** box: each one with both fields filled is added.
+
+### FAQ
+
+**I picked the wrong template. Can I switch?** Yes. Click **Switch source** next to **Name**, or the back arrow, and pick another one.
+
+**Do I still need the integration if I use a template?** A template only shapes your tracking URL. To sync cost or use PatternPilot actions, connect the platform in **Data Hub → Integrations**.
+
+**Why does my integration's cost not match my campaigns?** Cost is matched using the platform's campaign ID in your click data. Make sure the template's campaign ID parameter is enabled and that your ad uses the full campaign URL.
+
+### Related articles
+
+- [Affiliate network templates](/integrations/affiliate-network-templates)
+- [Your first campaign in 10 minutes](/start-here/your-first-campaign-in-10-minutes)
+- [Taboola](/integrations/taboola)

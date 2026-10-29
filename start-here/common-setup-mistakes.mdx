@@ -1,0 +1,28 @@
+---
+title: "Common setup mistakes"
+description: "Nine mistakes cause most 'tracking isn't working' problems. Check this list before anything else."
+---
+
+| # | Mistake | What you see | Fix |
+| --- | --- | --- | --- |
+| 1 | No `{clickid}` in the offer URL | Visits are tracked, conversions never arrive; **Logs → Errors Log** shows click not found | Put `{clickid}` in the network's sub ID parameter of the Offer URL |
+| 2 | Postback still says `cid=REPLACE` or the network macro is wrong | Postbacks rejected for a missing click ID | Replace `REPLACE` with the network's click ID macro; check the macro name in the network's docs |
+| 3 | Lander CTA uses a different domain from the campaign URL | "Click tracking information not found" when a visitor clicks the CTA | Use the click URL on the same tracking domain as the campaign URL |
+| 4 | Conversion pixel with no event type | Conversions are recorded as a generic conversion and sent to ad platforms as Purchase, so platforms that don't expect Purchase ignore them | Choose an event type before copying the pixel or script |
+| 5 | The network sends the same transaction ID for every sale | Later sales show as duplicates | Make the network send a unique `txid` per sale, or remove `txid` |
+| 6 | IP whitelist or security token on the affiliate network doesn't match | Postbacks show as received but no conversion appears | Add the network's postback IPs, or check the token in the postback URL |
+| 7 | Direct tracking links without `cpid` | Visits are never recorded | Use the URL from the campaign's tracking tab in every ad |
+| 8 | Custom conversion event uses a standard event name such as `lead` | The form won't save the event | Give the custom event a different `et` value |
+| 9 | Custom domain proxied through Cloudflare (orange cloud) | The domain never verifies | Set the DNS record to "DNS only" (grey cloud) |
+
+### Still stuck?
+
+- **Logs → Received Postbacks** shows postbacks that matched a click and why each was or wasn't counted.
+- **Logs → Errors Log** shows requests ClickPattern couldn't match to any workspace, such as postbacks with an unknown click ID.
+- Contact support at [support@clickpattern.com](mailto:support@clickpattern.com) with the campaign name and a click ID.
+
+### Related articles
+
+- [Test a campaign before sending traffic](/start-here/test-a-campaign-before-sending-traffic)
+- [Conversions not showing](/troubleshooting/conversions-not-showing)
+- [Lander CTA not working](/troubleshooting/lander-cta-not-working)

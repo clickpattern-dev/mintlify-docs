@@ -1,0 +1,36 @@
+---
+title: "Connect Cursor and other MCP clients"
+description: "Any MCP client that supports remote servers over Streamable HTTP with OAuth can connect to ClickPattern. You only need the server URL."
+---
+
+### Connection settings
+
+| Setting | Value |
+| --- | --- |
+| Server URL | `https://mcp.clickpattern.com/api/mcp` |
+| Transport | Streamable HTTP (remote MCP) |
+| Authentication | OAuth |
+| OAuth client ID / secret | Leave blank. The client registers itself. |
+
+### Steps
+
+1. In your client's MCP settings, add a remote MCP server with the URL above.
+2. Start the connection. The client opens ClickPattern's sign-in page in your browser.
+3. Sign in, choose a **Workspace** and an **Access level**, then click **Approve**.
+4. Return to your client. It now lists ClickPattern's tools.
+
+Desktop clients that receive the sign-in result on your own computer (a `localhost` or `127.0.0.1` address) are supported.
+
+### FAQ
+
+**My client only supports local (stdio) MCP servers. Can I still connect?** Not directly. ClickPattern runs as a remote server only. Use a client that supports remote MCP servers over Streamable HTTP.
+
+**How long does the connection last?** The client renews its access automatically in the background. It keeps working until you revoke it under **Settings → MCP Access**, as long as the client is used at least once every 90 days and you keep access to the workspace.
+
+**Is there a request limit?** Yes. You can make up to 30 requests per minute. If you go over, wait a moment and try again.
+
+### Related articles
+
+- [Connect Claude to ClickPattern](/ai/connect-claude-to-clickpattern)
+- [What your AI assistant can do](/ai/what-your-ai-assistant-can-do)
+- [Manage and revoke AI connections](/ai/manage-and-revoke-ai-connections)

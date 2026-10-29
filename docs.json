@@ -1,72 +1,296 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "ClickPattern Knowledge Base",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#6C55F5",
+    "light": "#8D78FB",
+    "dark": "#6C55F5"
   },
   "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
   "logo": {
     "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "dark": "/logo/dark.svg",
+    "href": "https://www.clickpattern.com"
   },
   "navbar": {
     "links": [
       {
+        "label": "Pricing",
+        "href": "https://www.clickpattern.com/pricing"
+      },
+      {
         "label": "Support",
-        "href": "mailto:support@mintlify.com"
+        "href": "mailto:support@clickpattern.com"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Log in",
+      "href": "https://app.clickpattern.com"
     }
   },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Start here",
+            "pages": [
+              "index",
+              "start-here/what-is-clickpattern",
+              "start-here/sign-up-and-verify-your-email",
+              "start-here/account-setup-checklist",
+              "start-here/navigating-the-dashboard",
+              "start-here/your-first-campaign-in-10-minutes",
+              "start-here/test-a-campaign-before-sending-traffic",
+              "start-here/redirect-or-direct-tracking",
+              "start-here/common-setup-mistakes"
+            ]
+          },
+          {
+            "group": "Core concepts",
+            "pages": [
+              "core-concepts/visits-clicks-and-conversions",
+              "core-concepts/campaigns",
+              "core-concepts/traffic-sources",
+              "core-concepts/offers-and-payout",
+              "core-concepts/landers",
+              "core-concepts/flows-and-paths",
+              "core-concepts/affiliate-networks",
+              "core-concepts/workspaces-public-and-private",
+              "core-concepts/cost-models"
+            ]
+          },
+          {
+            "group": "Tracking",
+            "pages": [
+              {
+                "group": "Traffic sources, networks and offers",
+                "pages": [
+                  "tracking/add-a-traffic-source-from-a-template",
+                  "tracking/add-a-custom-traffic-source",
+                  "tracking/add-an-affiliate-network",
+                  "tracking/add-an-offer",
+                  "tracking/offer-caps-and-redirect-offers",
+                  "tracking/add-a-lander",
+                  "tracking/multi-offer-landers"
+                ]
+              },
+              {
+                "group": "Campaigns and routing",
+                "pages": [
+                  "tracking/create-a-campaign-simple-form",
+                  "tracking/create-a-campaign-advanced-form",
+                  "tracking/create-a-flow",
+                  "tracking/rule-based-paths-and-conditions",
+                  "tracking/traffic-distribution-ai-and-smart-rotation",
+                  "tracking/transition-modes",
+                  "tracking/redirect-tracking",
+                  "tracking/direct-redirectless-tracking"
+                ]
+              },
+              {
+                "group": "URLs, tokens and conversions",
+                "pages": [
+                  "tracking/tracking-urls-page",
+                  "tracking/passing-data-with-url-tokens",
+                  "tracking/custom-variables-and-external-ids",
+                  "tracking/s2s-postback",
+                  "tracking/add-your-postback-to-an-affiliate-network",
+                  "tracking/conversion-pixel-and-script",
+                  "tracking/event-types-and-custom-conversion-events",
+                  "tracking/upload-conversions-by-csv",
+                  "tracking/duplicates-refunds-and-statuses",
+                  "tracking/send-conversions-back-to-your-traffic-source"
+                ]
+              },
+              {
+                "group": "Cost, payout and domains",
+                "pages": [
+                  "tracking/track-and-update-cost",
+                  "tracking/payout-and-currencies",
+                  "tracking/add-a-custom-tracking-domain",
+                  "tracking/domains-across-workspaces"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Automation and protection",
+            "pages": [
+              "automation/patternpilot-overview",
+              "automation/create-an-automation-rule",
+              "automation/rule-conditions-time-frames-and-cooldown",
+              "automation/rule-metrics",
+              "automation/rule-logs-and-run-rule-now",
+              "automation/which-platforms-support-which-actions",
+              "automation/traffic-filtering",
+              "automation/anti-fraud-kit",
+              "automation/time-to-convert-mttc",
+              "automation/lander-protection-script"
+            ]
+          },
+          {
+            "group": "Reports and analytics",
+            "pages": [
+              "reports/dashboard-overview",
+              "reports/performance-reports",
+              "reports/grouping-and-drill-down",
+              "reports/date-ranges-comparison-and-time-zone",
+              "reports/columns-and-column-templates",
+              "reports/custom-metrics",
+              "reports/search-filters-and-share-links",
+              "reports/synced-vs-estimated-cost",
+              "reports/bulk-edit-with-csv-exportimport",
+              "reports/scheduled-reports",
+              "reports/shared-reports",
+              "reports/logs",
+              "reports/why-numbers-differ-from-your-ad-platform"
+            ]
+          },
+          {
+            "group": "AI assistants",
+            "pages": [
+              "ai/connect-claude-to-clickpattern",
+              "ai/connect-chatgpt",
+              "ai/connect-cursor-and-other-mcp-clients",
+              "ai/what-your-ai-assistant-can-do",
+              "ai/manage-and-revoke-ai-connections"
+            ]
+          },
+          {
+            "group": "Team and account",
+            "pages": [
+              "team/workspaces-create-switch-delete",
+              "team/move-elements-between-workspaces",
+              "team/roles-and-permissions",
+              "team/invite-team-members",
+              "team/custom-editor-permissions-and-hidden-columns",
+              "team/profile-and-general-settings",
+              "team/change-your-password-or-email",
+              "team/two-factor-authentication",
+              "team/active-sessions",
+              "team/account-activity-and-audit-log",
+              "team/notifications-and-alerts",
+              "team/delete-or-reactivate-your-account"
+            ]
+          },
+          {
+            "group": "Plans and billing",
+            "pages": [
+              "billing/plans-usage-and-limits",
+              "billing/upgrade-downgrade-and-billing",
+              "billing/trial-past-due-and-cancellation"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Integrations",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "integrations/integrations-overview",
+              "integrations/campaign-mapping-and-unmapped-objects",
+              "integrations/server-side-conversions-capi-setup"
+            ]
+          },
+          {
+            "group": "Ad platforms",
+            "pages": [
+              "integrations/meta-ads",
+              "integrations/google-ads",
+              "integrations/tiktok-ads",
+              "integrations/snapchat-ads",
+              "integrations/taboola",
+              "integrations/outbrain",
+              "integrations/mgid",
+              "integrations/propellerads",
+              "integrations/adsterra",
+              "integrations/clickadu",
+              "integrations/clickadilla",
+              "integrations/mediago",
+              "integrations/mondiad",
+              "integrations/exoclick"
+            ]
+          },
+          {
+            "group": "Stores and affiliate networks",
+            "pages": [
+              "integrations/shopify-connect-your-store",
+              "integrations/shopify-products-events-and-refunds",
+              "integrations/trackier"
+            ]
+          },
+          {
+            "group": "Templates",
+            "pages": [
+              "integrations/affiliate-network-templates",
+              "integrations/traffic-source-templates"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Troubleshooting and reference",
+        "groups": [
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "troubleshooting/conversions-not-showing",
+              "troubleshooting/visits-or-clicks-not-recorded",
+              "troubleshooting/lander-cta-not-working",
+              "troubleshooting/tokens-arriving-empty",
+              "troubleshooting/cost-not-pulling",
+              "troubleshooting/payout-or-revenue-wrong",
+              "troubleshooting/domain-wont-verify",
+              "troubleshooting/server-side-conversions-capi-not-firing",
+              "troubleshooting/integration-token-expired-or-sync-errors",
+              "troubleshooting/rule-didnt-trigger"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "reference/tracking-tokens",
+              "reference/postback-and-pixel-parameters",
+              "reference/metrics-and-formulas",
+              "reference/report-dimensions",
+              "reference/error-codes-and-messages",
+              "reference/glossary",
+              "reference/mcp-tool-reference"
+            ]
+          }
+        ]
+      }
     ]
   },
   "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    "links": [
+      {
+        "header": "ClickPattern",
+        "items": [
+          {
+            "label": "Website",
+            "href": "https://www.clickpattern.com"
+          },
+          {
+            "label": "App",
+            "href": "https://app.clickpattern.com"
+          },
+          {
+            "label": "Privacy policy",
+            "href": "https://www.clickpattern.com/privacy-policy"
+          },
+          {
+            "label": "Terms of service",
+            "href": "https://www.clickpattern.com/terms-of-service"
+          }
+        ]
+      }
+    ]
   }
 }

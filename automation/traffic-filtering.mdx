@@ -1,0 +1,98 @@
+---
+title: "Traffic filtering"
+description: "Block or allow-list traffic by IP, user agent, ASN, referer, or visit conditions. Filters apply to your whole account and to future traffic only."
+---
+
+### Open traffic filtering
+
+Go to **Data Hub → Traffic filtering**. Owners and Admins can add, edit and switch filters.
+
+<Frame>
+  <img src="/images/automation/tf-page.jpg" alt="Traffic filtering page with the master switch and filter table" />
+</Frame>
+
+### Turn filtering on
+
+The switch under **Filtering rules** is the master switch. It reads **All filters enabled** or **All filters disabled**.
+
+When it's off, no traffic is filtered, even if single filters are enabled. You can still set up filters while it's off; they take effect once you switch it on.
+
+### Add a filter
+
+1. Click **Add filter**.
+2. Under **Filter kind**, choose **IP / UA list** or **Conditions**.
+3. Enter a **Filter name**.
+4. Fill in the fields for that kind (below).
+5. Click **Add filter**.
+
+Changes apply to traffic within about 5 minutes.
+
+### IP / UA list filters
+
+| Field | What to enter |
+| --- | --- |
+| **Type** | **IP**, **IP range**, **User agent**, **ASN** or **Referer**. |
+| **Action** | **Block** or **Allow**. |
+| **Entries (one per line)** | Up to 50 entries. |
+
+Entry formats:
+
+| Type | Example entries |
+| --- | --- |
+| **IP** | `203.0.113.7`, `2a0b:f4c0::1` |
+| **IP range** | `45.134.26.0/24` or `10.0.0.1 - 10.0.0.255` |
+| **User agent** | `curl`, `HeadlessChrome` (matches anywhere in the user agent) |
+| **ASN** | `AS15169` or `13335` |
+| **Referer** | `spam-domain.com`, `*.spam-domain.com*` |
+
+**Referer matching:** plain text matches anywhere in the referrer URL. A pattern with `*` must match the whole URL. Use `*.spam-domain.com*`; a bare `*.spam-domain.com` misses referrers that have a path.
+
+**Allow** works as an allow list. Matching traffic is let through and skips all remaining filters.
+
+<Frame>
+  <img src="/images/automation/tf-add-filter.jpg" alt="Add filter dialog, IP / UA list kind with Type and Entries" />
+</Frame>
+
+### Conditions filters
+
+A conditions filter blocks visits that match visit details. It always blocks.
+
+1. Under **Match mode**, choose **All conditions must match** or **Any condition must match**.
+2. Add up to 10 conditions. Each needs at least one value.
+
+Condition types can include country, region, city, time zone, ISP, carrier, device type, brand and model, OS and OS version, browser and browser version, day of week, hour of day, connection type, referrer, user agent and IP.
+
+### How filters are applied
+
+- Filters run in the order listed. The first filter that matches decides the outcome.
+- You can have up to 50 filters per account. The count shows as **Available filters: X of 50**.
+- Each filter has its own **Enabled** switch. Disabled filters show a **Disabled** chip.
+- A blocked visitor sees a plain notice page with no link to your offer.
+
+### Suggest filters
+
+Click **Suggest filters** to see referrers, IPs, user agents and ASNs whose traffic was mostly flagged as suspicious in the last 30 days and that no filter covers yet. Each suggestion shows the suspicious share and top signals. Click **Review & add** to open a prefilled block filter, check it, and save.
+
+<Frame>
+  <img src="/images/automation/tf-suggest.jpg" alt="Suggested filters dialog, with visitor IP addresses blurred" />
+</Frame>
+
+### See what was filtered
+
+Go to **Logs → Traffic Filtering**. Each entry shows the time, IP, user agent, the filter that matched (**Filtered by**), **Rule kind**, **Reason**, **Event type** and campaign.
+
+### FAQ
+
+**My filter is enabled but nothing is blocked. Why?** Check the master switch. If it says **All filters disabled**, no filter runs. Also allow about 5 minutes after a change.
+
+**Does filtering affect past data?** No. Filters apply to future traffic only.
+
+**Why didn't my block filter catch a visit?** An earlier **Allow** filter may have matched first. The first match wins, and an allow match skips all later filters.
+
+**Can a conditions filter allow traffic?** No. Conditions filters always block. Use an IP / UA list filter with **Allow** for an allow list.
+
+### Related articles
+
+- [Anti-Fraud Kit](/automation/anti-fraud-kit)
+- [Lander protection script](/automation/lander-protection-script)
+- [Time-to-convert (MTTC)](/automation/time-to-convert-mttc)

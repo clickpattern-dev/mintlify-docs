@@ -1,0 +1,75 @@
+---
+title: "Tracking tokens"
+description: "Tokens are placeholders in offer and lander URLs that ClickPattern replaces with visit data when it sends the visitor on."
+---
+
+### Syntax
+
+- `{token}` is replaced with the value, or removed if there's no value.
+- `{token:default}` uses `default` when there's no value, for example `{country:XX}`.
+- Standard token names are not case-sensitive. Spaces inside the braces are ignored.
+
+### Standard tokens
+
+| Token | Description | Example value |
+| --- | --- | --- |
+| `{clickid}` | ClickPattern's unique click ID for the visit. Required for conversion tracking. | `9b1c2d3e-4f5a-6b7c-8d9e-0f1a2b3c4d5e` |
+| `{externalid}` | The traffic source's click ID, from the parameter set as External ID. | `IwAR0abc123` |
+| `{externalidparameter}` | The name of the URL parameter that carries the external ID. | `fbclid` |
+| `{campaign.id}` | Campaign ID. | `7d2f4a10-3b1e-4c8a-9f21-5a6b7c8d9e0f` |
+| `{campaign.name}` | Campaign name. | `US - Summer Promo` |
+| `{workspace.id}` | Workspace ID. | `a3c9e2f1-…` |
+| `{offer.id}` | Offer ID. | `c4d5e6f7-…` |
+| `{offer.name}` | Offer name. | `Sweepstakes US` |
+| `{lander.id}` | Lander ID. | `e8f9a0b1-…` |
+| `{lander.name}` | Lander name. | `Quiz Lander v2` |
+| `{trafficsource.id}` | Traffic source ID. | `f1e2d3c4-…` |
+| `{trafficsource.name}` | Traffic source name. | `Meta Ads` |
+| `{trackingdomain}` | The campaign's tracking domain. | `track.yourdomain.com` |
+| `{country}` | Two-letter country code. | `US` |
+| `{countryname}` | Country name. | `United States` |
+| `{region}` | Region or state. | `California` |
+| `{city}` | City. | `Los Angeles` |
+| `{language}` | Browser language. | `en-US` |
+| `{device}` | Device type. | `mobile` |
+| `{brand}` | Device brand. | `Apple` |
+| `{model}` | Device model. | `iPhone` |
+| `{os}` | Operating system. | `iOS` |
+| `{osversion}` | OS version. | `17.4` |
+| `{browser}` | Browser. | `Mobile Safari` |
+| `{browserversion}` | Browser version. | `17.4` |
+| `{isp}` | Internet service provider. | `Comcast Cable` |
+| `{carrier}` | Mobile carrier or ISP. | `T-Mobile USA` |
+| `{ip}` | Visitor IP address. | `203.0.113.24` |
+| `{useragent}` | URL-encoded user agent. | `Mozilla%2F5.0%20(iPhone…` |
+| `{referrerdomain}` | Domain of the referring page. | `facebook.com` |
+| `{cost}` | Cost of the visit from the traffic source. | `0.35` |
+| `{cachebuster}` | Random number, new on every request. | `482915307` |
+
+### Custom variables
+
+| Token | Description | Example value |
+| --- | --- | --- |
+| `{var1}` … `{var10}` | Value of `var1`…`var10` (or `sub1`…`sub10`) on the campaign URL. | `zone_8841` |
+| `{var:name}` | Value of the campaign URL parameter `name`. Supports a default: `{var:name:default}`. | `{var:zone}` → `8841` |
+| `{anyparam}` | Any other campaign URL parameter, by its exact name. Case-sensitive. | `{placement}` → `feed` |
+
+### Traffic source postback tokens
+
+Use these in a traffic source's postback URL.
+
+| Token | Description | Example value |
+| --- | --- | --- |
+| `{payout}` | Conversion payout, in the conversion's currency. | `25.00` |
+| `{revenue}` | Same as `{payout}`. | `25.00` |
+| `{currency}` | Currency code of the payout. | `EUR` |
+| `{txid}` / `{transaction_id}` | Transaction ID from the network. | `ORD-55821` |
+| `{click_id}` | ClickPattern click ID. | `9b1c2d3e-…` |
+| `{campaign_id}` | Campaign ID. | `7d2f4a10-…` |
+| `{event_type}` | Conversion event type. `sale` when none was sent. | `lead` |
+| Traffic source parameter tokens | The tokens you set on the traffic source's parameters, filled with the values from the visit. | `{zoneid}` → `8841` |
+
+### Related articles
+
+- [Tokens arriving empty](/troubleshooting/tokens-arriving-empty)
+- [Postback and pixel parameters](/reference/postback-and-pixel-parameters)

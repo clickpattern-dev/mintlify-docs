@@ -1,0 +1,54 @@
+---
+title: "Add a traffic source from a template"
+description: "Templates add a traffic source with the right URL parameters already filled in. Your campaign URLs then pass click IDs, cost and placement details from the network."
+---
+
+### When to use it
+
+Use a template when your ad network appears in the list. If it doesn't, follow **Add a custom traffic source**.
+
+### Steps
+
+1. Go to **Performance → Traffic Sources** and click **Create**. You can also use **Create → Traffic Sources** from any Performance tab.
+2. In **Add traffic source**, type the network name in **Search by traffic source name**.
+3. Click the network's card. Some cards carry a **PREMIUM** label.
+4. Check the **Name**. It starts as the template name. Change it if you run several accounts on the same network.
+5. Pick a **Workspace**.
+6. Review the **Parameters** section. The template has already filled in the external ID, cost and variable rows.
+7. Set **Currency** under **Cost Currency**. It defaults to USD.
+8. To send conversions back to the network, tick **Traffic source postback URL**. The template's postback URL is filled in for you.
+9. Click **Save**.
+
+You'll see a "Traffic source created" message and the new source in the table.
+
+<Frame>
+  <img src="/images/shared/add-traffic-source.jpg" alt="Add traffic source template grid with search box" />
+</Frame>
+
+<Frame>
+  <img src="/images/shared/ts-template-params.jpg" alt="Template configure step, showing Parameters and Cost Currency" />
+</Frame>
+
+### Field reference
+
+| Field | What to enter |
+| --- | --- |
+| **Name** | A unique name. Required. **Switch source** takes you back to the template list. |
+| **Workspace** | The workspace that owns the source. Required. |
+| **Parameters** | Pre-filled by the template. See **Add a custom traffic source** for each column. |
+| **Currency** | The currency the network bills you in. Default USD. |
+| **Traffic source postback URL** | Tick to send conversions to the network. The URL comes from the template. |
+
+### FAQ
+
+**Can I edit the template's parameters?** Yes. Every row stays editable, and you can add rows. Changes apply only to your copy, not the template.
+
+**What does the back arrow do?** It returns you to the template list. The same happens when you click **Switch source** in the **Name** field.
+
+**Why did I get "Please select a workspace"?** The Workspace field is empty. Pick a workspace and click **Save** again.
+
+### Related articles
+
+- [Add a custom traffic source](/tracking/add-a-custom-traffic-source)
+- [Create a campaign: Simple form](/tracking/create-a-campaign-simple-form)
+- [Redirect tracking](/tracking/redirect-tracking)

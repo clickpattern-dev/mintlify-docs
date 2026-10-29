@@ -1,0 +1,67 @@
+---
+title: "Custom variables and external IDs"
+description: "Your traffic source's parameters tell you which zone, ad or placement each visit came from. Map them to ClickPattern's custom variables and external ID slots so you can report on them and send conversions back."
+---
+
+### Where to set them up
+
+1. Go to **Performance → Traffic Sources** and open the traffic source with **Edit**, or click **Create**.
+2. Find the **Parameters** section. It has two tables: **External IDs** and **Other Parameters**.
+3. Fill in each row and click **Save**.
+
+Templates fill most rows for you. Check them against your traffic source's macro list.
+
+<Frame>
+  <img src="/images/shared/ts-template-params.jpg" alt="Traffic source Parameters section with External IDs and Other Parameters tables" />
+</Frame>
+
+### Columns in both tables
+
+| Column | What to enter |
+| --- | --- |
+| **Name** | Set for you: External ID 1–3, Cost, Variable 1–10 |
+| **TS Parameter** | The parameter name in your link, such as `zone` |
+| **TS Token** | The traffic source's macro, such as `{zoneid}` |
+| **CP Token** | Set for you: the ClickPattern slot, such as `{var1}` |
+
+ClickPattern adds each row to your campaign URL as `parameter=token`, for example `zone={zoneid}`. The traffic source fills in the macro on every click.
+
+### External IDs
+
+You get up to three slots: `{externalid}`, `{externalid2}` and `{externalid3}`. Use them for the traffic source's own click ID, which it needs when you send conversions back.
+
+- Click **Add external ID** to add a slot. Only the last row can be removed, so External ID 1 stays the primary.
+- External IDs have no enable switch: a row that exists is active.
+
+### Other parameters
+
+- **Cost** is always on. Map it to the traffic source's cost or bid macro.
+- **Variable 1** to **Variable 10** are custom variables. Tick **Enable** for each one you use. Click **Add parameter** to add more, up to 10.
+
+Each variable becomes a report column: group by **V1** to **V10** under Campaigns or Traffic Sources. You can also use **Custom Variable 1–10** in flow rules.
+
+### Click IDs captured automatically
+
+ClickPattern stores these ad platform click IDs even if your template doesn't list them. They fill empty external ID slots in this order:
+
+`fbclid`, `gclid`, `gbraid`, `wbraid`, `ttclid`, `twclid`, `li_fat_id`, `epik`, `msclkid`, `ScCid`, `dclid`, `oppref`, `tblci`, `dicbo`, `obclid`
+
+A value you mapped yourself always wins. A slot that your template reserves for one click ID, such as the `gclid` slot on the Google Ads template, only ever holds that ID.
+
+### Unfilled macros are dropped
+
+Sometimes a traffic source sends a macro without filling it in, such as `zone={zoneid}`. ClickPattern doesn't store these values. The same goes for placeholder words such as `OPTIONAL` or `REPLACE`. Your reports show the variable as empty instead of a fake value.
+
+### FAQ
+
+**How many custom variables can I use?** Ten per traffic source: Variable 1 to Variable 10.
+
+**Why is a variable column empty in my report?** Check that the row is enabled and that the traffic source fills the macro. A macro that arrives unfilled is dropped.
+
+**How do I pass a variable on to my offer?** Use the parameter's own name in the offer URL, such as `{var:zone}` or `{zone}`.
+
+### Related articles
+
+- [Passing data with URL tokens](/tracking/passing-data-with-url-tokens)
+- [Send conversions back to your traffic source](/tracking/send-conversions-back-to-your-traffic-source)
+- [Track and update cost](/tracking/track-and-update-cost)

@@ -1,0 +1,49 @@
+---
+title: "ClickAdilla"
+description: "Connect ClickAdilla with an API token. ClickPattern syncs your cost, imports your campaigns and lets PatternPilot pause, resume and change bids and budgets on mapped campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks per campaign |
+| Campaign import | Your ClickAdilla campaigns |
+| PatternPilot actions | **Pause campaign**, **Resume campaign**, **Adjust bid**, **Adjust budget** |
+
+### What you need
+
+- Your ClickAdilla API token.
+
+### Connect ClickAdilla
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **ClickAdilla** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **API Token** | Your ClickAdilla API token. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+<Frame>
+  <img src="/images/integrations/11-clickadilla.jpg" alt="Integrate with ClickAdilla dialog" />
+</Frame>
+
+### Manage the connection
+
+Click the ClickAdilla card under **Connected Integrations**. The detail page has **Performance**, **Campaigns**, **Campaign Mapping** and **Sync Logs** tabs, plus **Sync Now** and **Delete**.
+
+### FAQ
+
+**A sync failed right after I connected. Why?** ClickPattern treats an unreadable response from ClickAdilla as a failed sync, so a bad token shows up as an error. Check the **Sync Logs** tab, and reconnect with a fresh token if needed.
+
+**My token stopped working. How do I update it?** Delete the integration on its detail page, then connect ClickAdilla again with the new token.
+
+### Related articles
+
+- [Clickadu](/integrations/clickadu)
+- [PropellerAds](/integrations/propellerads)
+- [Traffic source templates](/integrations/traffic-source-templates)

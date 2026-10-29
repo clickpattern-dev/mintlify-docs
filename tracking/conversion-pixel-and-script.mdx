@@ -1,0 +1,77 @@
+---
+title: "Conversion pixel and script"
+description: "Put a pixel or script on your thank-you page when the offer can't send a postback. It fires in the visitor's browser and records the conversion against their click."
+---
+
+### Which one to use
+
+| Option | Snippet | Click ID comes from |
+| --- | --- | --- |
+| Image pixel | `<img src="https://{domain}/conversion.gif?et=lead" width="1" height="1" />` | `cid` in the pixel URL, or the ClickPattern cookie |
+| JavaScript script | The **Conversion tracking script** snippet | `cid` in the script URL, ClickPattern cookies, local storage, or `cid` / `click_id` in the page URL |
+
+The script is better when you can run JavaScript, because it looks in more places for the click ID.
+
+### Get the snippet
+
+1. Go to **Settings → Tracking URLs** and scroll to **Conversion Tracking Pixel**.
+2. Pick the **Tracking Domain** used by the campaign.
+3. Choose a **Conversion event**. It's required: **Copy** stays disabled until you choose.
+4. Copy the pixel or the script and paste it into the body of your thank-you page.
+
+You can also copy pixels from **Data Hub → Custom conversions**, or from the offer when its tracking method is a pixel or script.
+
+### Pixel parameters
+
+| Parameter | Aliases | What it does |
+| --- | --- | --- |
+| `cid` | — | Click ID. Optional when the cookie is available. |
+| `payout` | `revenue`, `sum` | Conversion value |
+| `currency` | `payout_currency` | Three-letter code. Default `USD`. |
+| `txid` | `transaction_id` | Order or lead ID, to stop duplicates |
+| `status` | — | `approved` (default), `pending` or `rejected` |
+| `et` | `event`, `event_type`, `type` | Event type |
+| `eid` | `event_id` | Event ID, to deduplicate against ad platform browser pixels |
+| `param1`–`param5` | — | Extra values to store |
+
+The pixel accepts the same hashed customer fields as the postback, such as `email` and `phone`. Refunds are not accepted on the pixel. Send `status=refund` by postback instead.
+
+### The cookie only works on the same domain
+
+After a redirect click, ClickPattern sets a click ID cookie on your tracking domain's main domain. It lasts 30 days. The cookie is set only when the tracking domain and the offer or lander share the same main domain.
+
+| Tracking domain | Thank-you page | Cookie works? |
+| --- | --- | --- |
+| `track.yourshop.com` | `www.yourshop.com/thanks` | Yes |
+| A platform domain | `www.yourshop.com/thanks` | No |
+
+To use the cookie, add a custom tracking domain on the same main domain as your site.
+
+### Thank-you pages on another domain
+
+When the thank-you page is on a different domain, pass the click ID to it yourself:
+
+1. Pass `{clickid}` to the offer in your offer URL.
+2. Have the offer add it to the thank-you page URL, for example `https://offer.example/thanks?cid=c1a8f0e2-…`.
+3. Use the JavaScript script. It reads `cid` or `click_id` from the page URL.
+
+With the image pixel, put the click ID straight into the pixel: `conversion.gif?cid={offer_click_macro}&et=lead`. If you can't pass the click ID at all, use an S2S postback.
+
+### Test a pixel without recording anything
+
+Add `_dryrun=1` to the pixel URL and open it in the browser that clicked the campaign. You get a JSON report instead of an image. It shows the click ID found, how the event type was read, and any parameters that were ignored.
+
+### FAQ
+
+**Why must I choose an event type?** Nobody fills `et` after you paste the pixel. Without one, the conversion is recorded untyped and sent to ad platforms as Purchase.
+
+**Can I put the pixel in a tag manager?** Yes. Use **Conversion tracking pixel URL** as an image tag, or paste the script as a custom HTML tag.
+
+**My pixel fires, but no conversion appears. What should I check?** Run the pixel with `_dryrun=1` in the same browser. If no click ID is found, pass `cid` in the URL or move to a same-domain tracking domain.
+
+### Related articles
+
+- [Tracking URLs page](/tracking/tracking-urls-page)
+- [Event types and custom conversion events](/tracking/event-types-and-custom-conversion-events)
+- [Add a custom tracking domain](/tracking/add-a-custom-tracking-domain)
+- [S2S postback](/tracking/s2s-postback)

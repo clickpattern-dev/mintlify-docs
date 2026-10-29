@@ -1,0 +1,115 @@
+---
+title: "Create a campaign: Advanced form"
+description: "The Advanced form gives you full control: custom weights, rules and conditions in an inline flow editor, Redirect or Direct tracking, and per-campaign conversion reporting."
+---
+
+### Steps
+
+1. Go to **Performance → Campaigns** and click **Create → Campaign Advanced**.
+2. On **GENERAL**, fill in the campaign details and cost, choose **Redirect** or **Direct**, then click **Next**.
+3. On **DESTINATION**, choose **Flow** or **Path** and build the destination.
+4. Click **Save**. The form opens **TRACKING & PATTERNPILOT**.
+5. Copy the campaign URL and scripts, then click **Done**.
+
+The **TRACKING & PATTERNPILOT** tab is only available after the campaign is saved.
+
+### GENERAL tab
+
+| Field | What to enter | Notes |
+| --- | --- | --- |
+| **Workspace** | Owning workspace | Required. Changing it later removes items not in the new workspace. A dialog lists them first. |
+| **Country label (optional)** | A country for naming |  |
+| **Campaign name** | A unique name | Required. Up to 100 characters. |
+| **Traffic source** | Where traffic comes from | Required. |
+| **Traffic type (optional)** | Desktop, Mobile, Tablet, Mixed |  |
+| **Tags** | Type to search or create tags |  |
+| **Notes (optional)** | Free text |  |
+| **Cost tracking** | Not Tracked, Manual, Token (Auto), API (Integrated) | Same as the Simple form. Manual CPC has a **Traffic loss (%)** switch. API cost syncs every 2 hours. |
+| **Transition between ad and campaign funnel** | **Redirect** or **Direct** | Default Redirect. |
+
+<Frame>
+  <img src="/images/shared/campaign-adv-general-ts.jpg" alt="GENERAL tab with Cost tracking and Redirect/Direct choice" />
+</Frame>
+
+### Redirect vs Direct
+
+| Method | How it works | URL you use |
+| --- | --- | --- |
+| **Redirect** | Visitors pass through ClickPattern's tracking server, then go to your lander or offer. | `https://{domain}/c/{campaignId}?…` |
+| **Direct** | Tracking runs by JavaScript on your page. No redirect. | Your lander or offer URL with `cpid={campaignId}` added |
+
+For **Direct**, add the tracking script shown on the **TRACKING & PATTERNPILOT** tab to your lander or offer page. Use the campaign URL in every ad, post and link you want tracked: traffic that never carries its cpid is not counted. The script can also read the campaign ID from a cookie an earlier tagged visit left, for up to 30 days.
+
+### Conversion reporting to traffic source
+
+This section on the **GENERAL** tab controls where conversions are reported for this campaign. Each setting has **Default** (use the traffic source's setting) and **Unique for this campaign**.
+
+| Setting | With Unique for this campaign on |
+| --- | --- |
+| **Traffic source postback URL** | Enter a traffic source postback URL for this campaign only. It replaces the traffic source's URL. |
+| **Traffic source postback URL per event type** | Add one row per event type (**1 - install**, **2 - download**, **3 - sell**) with its own URL. Click **Add event** for more rows. |
+| **Pixel redirect URL** | Enter a pixel redirect URL for client-side conversion reporting. |
+
+Each URL box has a token picker. Leave the switches off to use the traffic source's settings.
+
+<Frame>
+  <img src="/images/shared/campaign-conv-reporting.jpg" alt="Conversion reporting to traffic source expanded" />
+</Frame>
+
+### DESTINATION tab
+
+**Campaign destination** has two modes.
+
+**Flow.** Pick a saved flow in **Select a flow**. Confirm with **Use flow**. A preview shows the flow's default transition, paths and rules. The campaign references the flow, so edits to the flow apply to every campaign using it.
+
+**Path.** The inline flow editor opens. It works like the flow editor in **Create a flow**:
+
+- **Traffic distribution AI (paths)**, **Rule-based paths** with **Add rule**, and **Default paths** with **Add path**.
+- Each path has a **Path name**, **Path Destination** (Landers & Offers or Offers only), landers, offers and custom weights.
+- Click a rule to edit its **Rule name** and **Conditions**.
+
+<Frame>
+  <img src="/images/shared/campaign-adv-destination.jpg" alt="DESTINATION tab in Path mode with inline flow editor" />
+</Frame>
+
+### Load from flow template
+
+1. In Path mode, click **Load from flow template**.
+2. Pick a flow in **Select a flow**.
+3. Confirm with **Load template**. Your current paths are replaced with the flow's paths.
+
+A chip shows **From: \{flow name\}**. If you change the loaded paths and save without **Save as flow**, the source flow is updated too. That affects every campaign using it.
+
+### Save as flow
+
+In Path mode, tick **Save as flow** at the bottom and enter a **Flow name**. Saving creates a new flow from your paths. The campaign then uses the new flow, and the template flow stays unchanged.
+
+If you build paths without a template and don't tick **Save as flow**, ClickPattern still saves them as a flow named `{campaign name} Flow`.
+
+### TRACKING & PATTERNPILOT tab
+
+| Item | What it is |
+| --- | --- |
+| **Campaign Details** | Campaign name and ID |
+| **Select Domain for Preview** | Preview the URL on another domain |
+| **Campaign Tracking URL** / **Campaign URL (Direct Tracking)** | The URL for your ads |
+| **Tracking Script** | Direct tracking only |
+| **Lander Tracking Script** | When the destination has landers |
+| **Click URLs** | CTA links for landers |
+
+The tab looks the same as on the Simple form. See the screenshot in **Create a campaign: Simple form**.
+
+### FAQ
+
+**I changed a template's paths and another campaign changed too. Why?** You saved without **Save as flow**, so the source flow was updated. Tick **Save as flow** to keep the original unchanged.
+
+**Where are Meta Refresh and Double Meta Refresh in the Advanced form?** The Advanced form offers Redirect (302) or Direct. For meta refresh options, set them in a flow and pick it in Flow mode.
+
+**Does "Unique for this campaign" change the traffic source for other campaigns?** No. It applies to this campaign only.
+
+### Related articles
+
+- [Create a flow](/tracking/create-a-flow)
+- [Rule-based paths and conditions](/tracking/rule-based-paths-and-conditions)
+- [Transition modes](/tracking/transition-modes)
+- [Direct (redirectless) tracking](/tracking/direct-redirectless-tracking)

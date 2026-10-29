@@ -1,0 +1,106 @@
+---
+title: "Add an offer"
+description: "An offer is the page that pays you: the affiliate link or product page. You set its URL with the click ID token, how conversions come back, and how payout is counted."
+---
+
+### Steps
+
+1. Go to **Performance → Offers** and click **Create**.
+2. In **New offer**, pick a **Workspace** and, optionally, a **Country label**.
+3. Enter a **Name**.
+4. Optional: pick an **Affiliate network**, **Vertical market** and **Tags**.
+5. Paste your link into **Offer URL**.
+6. Turn on **Append Click ID to Offer URL**, or add `{clickid}` yourself in the network's sub ID parameter.
+7. Under **Conversion tracking**, pick a **Tracking domain** and **Tracking method**. Pick a **Conversion event** if asked.
+8. Copy the postback URL, pixel or script into your affiliate network.
+9. Under **Payout**, choose **Auto** or **Manual**.
+10. Click **Create Offer**.
+
+<Frame>
+  <img src="/images/shared/new-offer.jpg" alt="New offer form, General section with Offer URL and Append Click ID switch" />
+</Frame>
+
+### General
+
+| Field | What to enter | Notes |
+| --- | --- | --- |
+| **Workspace** | Owning workspace | Required. |
+| **Country label - optional** | A country for naming | Picking one adds it to the front of the name, for example `Germany - My offer`. Default: Global. |
+| **Name** | A unique name | 2 to 100 characters. Starts as `Global - `. |
+| **Affiliate network - optional** | The network that pays this offer | Default: None. |
+| **Vertical market - optional** | The offer's vertical | Default: None. |
+| **Tags** | Labels for filtering | Optional. |
+| **Offer URL** | The full link, with tokens | `https://` is added if you leave it out. Duplicate parameters are not allowed. |
+| **Append Click ID to Offer URL** | Switch | Adds or removes `clickid={clickid}` on the URL. |
+
+**About `{clickid}`.** `{clickid}` is replaced with each visit's click ID. Your network must send it back in the postback. Put it in the parameter the network expects, for example `?s2={clickid}`. With **S2S Postback URL** selected, a warning icon appears next to the switch if the URL has no `{clickid}` token.
+
+Open **Available URL tokens** to add other tokens. Common ones:
+
+| Token | Value |
+| --- | --- |
+| `{clickid}` | ClickPattern click ID |
+| `{externalid}` | The traffic source's click ID |
+| `{campaign.id}`, `{campaign.name}` | Campaign |
+| `{offer.id}`, `{offer.name}` | Offer |
+| `{trafficsource.name}` | Traffic source |
+| `{country}`, `{countryname}` | Visitor country code, country name |
+| `{device}`, `{os}`, `{browser}` | Visitor device details |
+| `{var:name}` | Any parameter from the campaign URL, by name |
+| `{cachebuster}` | Random number |
+
+You can give a token a fallback: `{country:US}` uses `US` when the value is empty.
+
+### Conversion tracking
+
+| Field | What to enter | Default |
+| --- | --- | --- |
+| **Tracking domain** | The domain used in the postback, pixel or script. A campaign that uses this offer takes its tracking domain from here. | Your first domain |
+| **Tracking method** | **S2S Postback URL**, **Tracking Pixel**, **Tracking Pixel URL** or **Tracking Script** | S2S Postback URL |
+| **Conversion event** | The event this snippet records. See below. | Empty |
+| **Include additional parameters (param1-param5)** | Adds `param1` to `param5` to the snippet. Payout and transaction ID stay in. | Off |
+
+**Conversion event.** The choice is written into the snippet's `et=` value. Pick a standard event (for example **Lead**, **Purchase**, **CompleteRegistration**) or one of your custom conversions.
+
+- **S2S Postback URL:** optional. You can also type your network's event macro, for example `{goal}`.
+- **Tracking Pixel, Tracking Pixel URL, Tracking Script:** required. The copy button stays disabled until you pick one.
+
+Without an event type, the conversion is recorded untyped and sent to ad platforms as Purchase.
+
+For the S2S URL, replace `REPLACE` in `cid=REPLACE` with your network's click ID macro. Fill in the other parameters with the network's macros, or leave them.
+
+<Frame>
+  <img src="/images/shared/offer-conversion-payout.jpg" alt="Conversion tracking section with S2S Postback URL and Conversion event" />
+</Frame>
+
+### Payout
+
+| Field | What to enter | Default |
+| --- | --- | --- |
+| **Payout type** | **Auto**: payout comes from the postback or pixel. **Manual**: you set a fixed value. | Auto |
+| **Default value** | The fixed payout. Required for Manual. Disabled for Auto. | Empty |
+| **Currency** | Payout currency | USD |
+| **Geo-specific payout** | Manual only. Set a different payout per country. | Off |
+
+With **Geo-specific payout** on, each row has **Select geo**, a value and a currency. Click **Add geo location** for more rows. At least one row is required. A geo payout overrides the default value for visitors from that country.
+
+### Offer cap and notes
+
+**Offer cap** limits daily clicks or conversions. See **Offer caps and redirect offers**.
+
+**Notes (optional)** holds free text for your team.
+
+### FAQ
+
+**Auto or Manual payout?** Use **Auto** when the network sends payout in the postback. Use **Manual** for fixed CPA deals or when the network can't pass payout.
+
+**Why is the copy button greyed out?** Pixel and script methods need a **Conversion event** first. Pick one, then copy.
+
+**What happens if I forget `{clickid}`?** Conversions can't be matched to visits. Add the token in the network's sub ID parameter and update the offer.
+
+### Related articles
+
+- [Add an affiliate network](/tracking/add-an-affiliate-network)
+- [Offer caps and redirect offers](/tracking/offer-caps-and-redirect-offers)
+- [Passing data with URL tokens](/tracking/passing-data-with-url-tokens)
+- [S2S postback](/tracking/s2s-postback)

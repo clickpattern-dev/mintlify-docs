@@ -1,0 +1,85 @@
+---
+title: "Rule logs and Run Rule Now"
+description: "The rules list shows each rule's status and history. Logs show what every run checked and did. Run Rule Now runs an active rule immediately."
+---
+
+### The rules list
+
+Go to **PatternPilot**. Filter with **Status**: **All**, **Active**, **Paused** or **Archived**.
+
+| Column | What it shows |
+| --- | --- |
+| **Name** | Rule name and description. |
+| **Status** | Active, paused or archived, with a switch to pause or activate the rule. |
+| **Conditions** | Number of conditions and the match mode, for example "2 conditions (AND)". |
+| **Actions** | The rule's actions, for example "Pause campaign, Send alert". |
+| **Schedule** | How often it's checked, for example "Every hour". |
+| **Last Triggered** | When the rule last acted. |
+| **Executions** | Number of runs. Click it to open the logs. |
+
+### Row menu
+
+Click the menu at the end of a row:
+
+| Item | What it does |
+| --- | --- |
+| **View Rule** | Shows the rule's settings. |
+| **Edit Rule** | Opens the wizard to change the rule. |
+| **Duplicate** | Opens the wizard prefilled as a new rule named "Copy of …". |
+| **View Logs** | Opens the execution logs. |
+| **Run Rule Now** | Runs the rule immediately. |
+| **Pause Rule** / **Activate Rule** | Stops or restarts scheduled checks. |
+| **Delete Rule** | Deletes the rule after you confirm. This cannot be undone. |
+
+### Run Rule Now
+
+1. Open the row menu and click **Run Rule Now**.
+2. Read the dialog **Run this rule against live data?** It warns that the rule will pause campaigns or adjust bids on connected platforms.
+3. Click **Run now**.
+
+You'll see **Rule Execution Queued**. Open **View Logs** after a few seconds to see the result. Manual runs follow the same rate limits as scheduled runs.
+
+**Run Rule Now** is disabled when:
+
+- The rule is paused or archived. Activate it first.
+- Your role can't run rules. Only Owners and Admins can.
+
+### Read the logs
+
+Open **View Logs**. The **Execution Logs** window lists every run. Filter with **Status**: **All Statuses**, **Success**, **Failed**, **Partial** or **Skipped**. Counters at the top show successes, failures and skips.
+
+| Status | Meaning |
+| --- | --- |
+| **Success** | Conditions were met and the actions ran. |
+| **Failed** | The run or its actions failed. |
+| **Partial** | Some actions ran and some didn't. |
+| **Skipped** | Nothing ran, for example because conditions weren't met or the cooldown was active. |
+
+Each row shows **Time**, **Status**, **Conditions** (met out of checked, for example `1/2`), **Actions**, **Targets** and **Error**. Click a row to expand it:
+
+- **Metrics Snapshot at Trigger Time**: the metric values the rule saw.
+- **Actions Executed**: each action with its status, target, old value, new value and any error.
+- **Targets Affected**: the campaigns, ad sets or ad groups touched.
+- **Error Details**, if the run failed.
+- **Execution ID** and **Exact Time**.
+
+The **Rule Summary** at the bottom repeats the rule's schedule, cooldown, match mode and counts.
+
+### Retention and rate limits
+
+- Logs are kept for 90 days.
+- Each connected ad integration accepts up to 100 rule actions per hour and 1,000 per day. When a limit is reached, the run's actions are skipped and the log shows "Rate limited".
+
+### FAQ
+
+**Why is Run Rule Now greyed out?** The rule isn't active, or your role can't run rules. Activate the rule, or ask an Owner or Admin.
+
+**I ran the rule but the log is empty.** The run is queued and takes a few seconds. Click the refresh icon in the **Execution Logs** window.
+
+**Why does a run show Skipped?** Usually the conditions weren't met or the cooldown was still running. Expand the row to see the metric values.
+
+### Related articles
+
+- [PatternPilot overview](/automation/patternpilot-overview)
+- [Rule conditions, time frames and cooldown](/automation/rule-conditions-time-frames-and-cooldown)
+- [Which platforms support which actions](/automation/which-platforms-support-which-actions)

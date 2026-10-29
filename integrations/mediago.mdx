@@ -1,0 +1,51 @@
+---
+title: "MediaGo"
+description: "Connect MediaGo with an API token. ClickPattern syncs your cost, imports your campaigns and lets PatternPilot pause and resume mapped campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks per campaign |
+| Campaign import | Your MediaGo campaigns |
+| PatternPilot actions | **Pause campaign**, **Resume campaign** |
+
+MediaGo's API can't change a bid or budget on its own, so **Adjust bid** and **Adjust budget** don't work for MediaGo. Change those in MediaGo.
+
+### What you need
+
+- Your MediaGo API token. If you don't have one, ask your MediaGo account manager.
+
+### Connect MediaGo
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **MediaGo** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **API Token** | Your MediaGo API token. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+<Frame>
+  <img src="/images/integrations/14-mediago.jpg" alt="Integrate with MediaGo dialog" />
+</Frame>
+
+### Manage the connection
+
+Click the MediaGo card under **Connected Integrations**. The detail page has **Performance**, **Campaigns**, **Campaign Mapping** and **Sync Logs** tabs, plus **Sync Now** and **Delete**.
+
+### FAQ
+
+**Can rules change MediaGo bids or budgets?** No. Rules can pause and resume MediaGo campaigns only.
+
+**Why don't I see cost for some days?** MediaGo reports only campaigns that spent money in the period. A campaign with no spend has no cost rows.
+
+### Related articles
+
+- [Taboola](/integrations/taboola)
+- [Outbrain](/integrations/outbrain)
+- [Mondiad](/integrations/mondiad)

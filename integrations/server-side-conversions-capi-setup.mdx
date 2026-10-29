@@ -1,0 +1,107 @@
+---
+title: "Server-side conversions (CAPI) setup"
+description: "CAPI sends your ClickPattern conversions straight to the ad platform from the server, so ad blockers and browser limits don't hide them. You set it up per integration on the CAPI tab."
+---
+
+### Which platforms
+
+CAPI is available for **Meta**, **Google Ads**, **TikTok** and **Snapchat**.
+
+### Set it up
+
+1. Go to **Data Hub → Integrations** and open the connected integration.
+2. Click **CAPI**, then **Set Up CAPI**.
+3. Fill in the platform's pixel or conversion setting (see the table below).
+4. Choose **Events to Send** (not for Google Ads).
+5. Optional: open **Advanced Settings** for **Action Source**, **Test Event Code**, **Event Type Mapping** and **Event Filters**.
+6. Click **Save & Enable**.
+
+### Pixel field per platform
+
+| Platform | Field | Helper text in the app |
+| --- | --- | --- |
+| Meta | **Pixel ID** | Find in Facebook Events Manager > Data Sources > Your Pixel > Settings |
+| Google Ads | **Conversion Actions** | Pick a **Google Ads account**, then a conversion action for each event |
+| TikTok | **Pixel Code** | Find in TikTok Events Manager > Assets > Events > Web Events > your pixel |
+| Snapchat | **Pixel ID** | Find in Snapchat Ads Manager > Events Manager > Pixel details |
+
+If you picked a pixel when you connected Meta or Snapchat, the field is filled in for you. ClickPattern checks the pixel exists on the connected ad account. If it doesn't, saving fails with: "That pixel does not exist on the connected ad account."
+
+### Events to Send
+
+Click event chips to select them, or **Select Common Events** for Purchase, Lead, Add to Cart, Initiate Checkout, View Content and Complete Registration. Purchase is selected by default. You must select at least one.
+
+The full list: Purchase, Add to Cart, Add to Wishlist, View Content, Initiate Checkout, Add Payment Info, Lead, Complete Registration, Contact, Submit Application, Search, Page View, Customize Product, Find Location, Subscribe, Start Trial, Schedule, Donate.
+
+**Events to Send** doesn't block delivery by itself. To stop an event type from being sent, turn it off in **Event Type Mapping**. The window warns you when your recent conversions would be skipped, or sent as an event you didn't select. A conversion with no event type is sent as Purchase.
+
+### Advanced Settings
+
+| Setting | What it does |
+| --- | --- |
+| **Action Source** | Where the event happened. Meta offers **Website** (default), **App**, **Email**, **Phone Call**, **Chat**, **Physical Store**, **System Generated** and **Other**. TikTok and Snapchat are fixed to **Web**. Not shown for Google Ads. |
+| **Test Event Code** | Meta and TikTok only. The code from the platform's Test Events tool. Only **Send Test Event** uses it. Real conversions are sent without it. |
+| **Event Type Mapping** | Maps each ClickPattern event to the platform's event name, with an **Enabled** switch per event. |
+| **Event Filters** | Include or exclude conversions by field, operator and value. |
+
+### Turn CAPI on or off
+
+Once set up, the CAPI tab shows **CAPI enabled for this integration** with a switch. When it's off, no events are sent, whatever the other settings say. Click **Edit** to change settings, or **Remove CAPI** in the edit window to delete the setup.
+
+The platform card shows **Active**, **Paused**, **Not sending** or **Not delivering**. **Not delivering** means CAPI is on but no conversion reached the platform in the last 7 days. The delivery logs say why.
+
+<Frame>
+  <img src="/images/integrations/32-tiktok-capi.jpg" alt="CAPI tab with master switch, status card and action buttons" />
+</Frame>
+
+### Send Test Event
+
+1. On the CAPI tab, click **Send Test Event**.
+2. Pick an **Event Type**, **Value** and **Currency**. Optional: add test identifiers such as **Email**, **IP Address**, **User Agent** or a click ID.
+3. Click **Send Test Event**.
+
+Results show **Test Passed**, **Partial Success**, **Not Sent** or **Test Failed**. Test events need a saved **Test Event Code**, so they work on Meta and TikTok only. A test event isn't a sandbox: the platform still receives it.
+
+On Snapchat, use **Validate** instead. It checks an event with Snapchat's validation endpoint and records nothing.
+
+### Delivery Logs
+
+Click **View Delivery Logs** to see every send. Filter by **Platform** and **Status** (**All**, **Success**, **Failed**). Columns are **Time**, **Platform**, **Event**, **Status**, **Duration** and **Transaction ID**. Statuses are **Success**, **Skipped**, **Scheduled** and **Failed**. Expand a row for the reason and how to fix it.
+
+**Get Setup Snippets** gives you pixel, JavaScript and webhook snippets for sending conversions into ClickPattern.
+
+### Which conversions are sent
+
+- Only approved conversions, or conversions with no status, are sent. Pending and rejected conversions aren't.
+- Refunds aren't sent as conversions.
+- Each platform needs at least one identifier it can match on. Without one, the conversion is skipped and the log says so.
+
+| Platform | Needs at least one of |
+| --- | --- |
+| Meta | `fbc` (built from `fbclid`), `fbp` or a hashed email |
+| Google Ads | A Google click ID (`gclid`, `wbraid` or `gbraid`), or email or phone with enhanced conversions turned on |
+| TikTok | `ttclid`, email, phone, external ID, or the visitor's IP address and user agent |
+| Snapchat | Email, phone, or the visitor's IP address and user agent |
+
+Emails and phone numbers are hashed before they're sent.
+
+### Refunds
+
+Only Google Ads receives refunds through CAPI, and only from Shopify refunds and cancellations. A full refund retracts the conversion. A partial refund restates it with the new total. Other platforms receive nothing, and the log shows **Refund not sent**. Refunds are always deducted in ClickPattern's own reports.
+
+### FAQ
+
+**Do I need a dedicated access token for Meta?** It's optional but recommended. Without one, ClickPattern uses your Meta integration's OAuth token. See "[Meta Ads](/integrations/meta-ads)".
+
+**Why does Send Test Event say "No test event code saved"?** Add your **Test Event Code** under **Advanced Settings** and save. Only Meta and TikTok support test events.
+
+**Why are my Google Ads conversions shown as Scheduled?** Google accepts a conversion only after its click is at least 6 hours old. ClickPattern waits and uploads it then.
+
+**My conversions are skipped with "No … attribution data". What's wrong?** The conversion carries none of the identifiers the platform needs. Make sure your tracking links pass the platform's click ID.
+
+### Related articles
+
+- [Meta Ads](/integrations/meta-ads)
+- [Google Ads](/integrations/google-ads)
+- [Send conversions back to your traffic source](/tracking/send-conversions-back-to-your-traffic-source)
+- [Duplicates, refunds and statuses](/tracking/duplicates-refunds-and-statuses)

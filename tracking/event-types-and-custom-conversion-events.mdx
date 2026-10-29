@@ -1,0 +1,98 @@
+---
+title: "Event types and custom conversion events"
+description: "An event type tells ClickPattern what kind of conversion happened, such as a lead or a purchase. Use standard events, or define your own under Data Hub → Custom conversions."
+---
+
+### How to send an event type
+
+Add `et=` to your postback, pixel or script, for example `et=lead`. ClickPattern also reads `event`, `event_type` and `type`. Values are not case-sensitive: `Lead`, `lead` and `LEAD` are the same.
+
+Without an event type, the conversion is recorded untyped and sent to ad platforms as Purchase.
+
+### Standard events
+
+| `et` value | Name | Typical use |
+| --- | --- | --- |
+| `lead` | Lead | Contact form filled |
+| `complete_registration` | CompleteRegistration | Account created |
+| `contact` | Contact | Inquiry submitted |
+| `submit_application` | SubmitApplication | Loan or financing application |
+| `schedule` | Schedule | Appointment booked |
+| `purchase` | Purchase | Final sale |
+| `add_to_cart` | AddToCart | Item added to cart |
+| `add_to_wishlist` | AddToWishlist | Item wishlisted |
+| `initiate_checkout` | InitiateCheckout | Checkout started |
+| `add_payment_info` | AddPaymentInfo | Payment method added |
+| `view_content` | ViewContent | Product or detail page viewed |
+| `search` | Search | On-site search |
+| `page_view` | PageView | Generic page view |
+| `subscribe` | Subscribe | Subscription signup |
+| `start_trial` | StartTrial | Free trial signup |
+| `donate` | Donate | Donation |
+| `customize_product` | CustomizeProduct | Product configured |
+| `find_location` | FindLocation | Store locator used |
+
+You can also send the name form, such as `CompleteRegistration`.
+
+### Micro-conversions
+
+Some events are steps on the way to a sale, not sales. ClickPattern treats these as micro-conversions:
+
+`add_to_cart`, `add_to_wishlist`, `initiate_checkout`, `add_payment_info`, `page_view`, `view_content`, `search`, `customize_product`, `find_location`, `start_trial`, `schedule`
+
+Micro-conversions:
+
+- don't count in the **Conversions** column and add no revenue;
+- can repeat on the same click, with no duplicate check;
+- don't trigger a postback to your traffic source.
+
+### Create a custom conversion
+
+1. Go to **Data Hub → Custom conversions** and click **Add Event**.
+2. Enter a **Custom conversion event name**, such as `Tour booked`.
+3. Under **Values of the et parameter**, type each value that should count as this event and press Enter or comma. Example: `tour`, `tour_booked`.
+4. Tick the options you want (see below).
+5. Click **Create Event**.
+
+<Frame>
+  <img src="/images/shared/custom-conversion-dialog.jpg" alt="Create Custom Conversion Event dialog with et values and include checkboxes" />
+</Frame>
+
+| Field | What to enter | Limits |
+| --- | --- | --- |
+| **Custom conversion event name** | A name for reports. Must be unique. | Required |
+| **Values of the et parameter** | Values that trigger this event. Stored in lowercase. | 1 to 10 values |
+| **Include in "Conversions" column** | Count this event as a conversion | Off by default |
+| **Include in "Revenue" column** | Add this event's payout to revenue | Off by default |
+| **Send postback to traffic source** | Fire your traffic source postback for this event | Off by default |
+
+You can create up to 20 custom conversion events per account. Your plan may set a lower limit; see [pricing](https://www.clickpattern.com/pricing).
+
+### Reserved names
+
+A standard event name can't be a custom value. If you type `purchase`, `lead` or another standard value, you see **Reserved event name**: the standard event is already tracked, so the custom conversion would never fire.
+
+### How an `et` value is matched
+
+1. ClickPattern checks the standard events first.
+2. If none match, it checks your active custom conversions' `et` values.
+3. If nothing matches, the conversion is recorded untyped.
+
+### Get the tracking snippets
+
+The **Tracking** section on the same page gives you a postback URL, pixel URL, pixel and script. Choose **Postback conversion event** and **Pixel / script conversion event** to fill `et=` for you.
+
+### FAQ
+
+**My custom conversion doesn't show in the Conversions column. Why?** **Include in "Conversions" column** is off by default. Edit the event and tick it.
+
+**Can the same click record two different custom events?** Yes. Each custom event can be recorded once per click, so a click can have a lead and a booking.
+
+**Is the `et` value case-sensitive?** No. ClickPattern compares values in lowercase.
+
+### Related articles
+
+- [S2S postback](/tracking/s2s-postback)
+- [Conversion pixel and script](/tracking/conversion-pixel-and-script)
+- [Send conversions back to your traffic source](/tracking/send-conversions-back-to-your-traffic-source)
+- [Duplicates, refunds and statuses](/tracking/duplicates-refunds-and-statuses)

@@ -1,0 +1,62 @@
+---
+title: "Flows and paths"
+description: "A flow is a reusable routing plan. It decides which landers and offers each visitor sees, based on rules such as country or device, and splits traffic between paths by weight."
+---
+
+### Paths
+
+A path is one route: optionally a lander, then an offer. Each path has a **Path name** and its own landers and offers, and it is set to **Landers & Offers** or **Offers only**. Inside a path, landers and offers are rotated by weight.
+
+### Default paths and rule-based paths
+
+A flow has two sections.
+
+| Section | Who it serves |
+| --- | --- |
+| **Rule-based paths** | Visitors who match a rule's conditions. Add one with **Add rule**. |
+| **Default paths** | Everyone who matches no rule. A flow needs at least one. |
+
+A rule has a **Rule name**, one or more conditions, and its own paths. Conditions cover the visitor's location, device, operating system and browser, network (ISP, carrier, proxy), time and weekday, language, referrer, unique visit, and Custom Variable 1–10. Operators are **Is**, **Is Not**, **Contains**, **Not Contains**, **Starts With** and **Ends With**.
+
+A visitor must match every condition in a rule for it to apply. Within one condition, matching any of its values is enough.
+
+### Priority
+
+Rules are checked from the top down, in priority order. The first rule whose conditions all match wins, and lower rules are not checked. Put your most specific rules at the top.
+
+If a rule matches but none of its paths are enabled with a weight above 0, the visitor does not fall back to the default paths. Keep at least one active path in every rule.
+
+### Weights
+
+Each path, lander and offer has a weight. Weights are relative: the editor shows each one as a percentage of the total in its group. Two offers with weights 1 and 3 get 25% and 75% of visitors.
+
+The **Traffic distribution AI (paths)** switch shifts path weights toward better performers by **Auto**, **ROI**, **EPV** or **CV**. Until there's enough performance data, your configured weights are used. See Traffic Distribution AI and smart rotation.
+
+<Frame>
+  <img src="/images/shared/new-flow-rule.jpg" alt="Flow editor with one rule-based path and the Default paths section" />
+</Frame>
+
+### Transition to the offer
+
+**Default transition** sets how visitors are sent from the lander to the offer: **302**, **Meta refresh**, **Double meta refresh** or **Direct**. A path can override it. ClickPattern uses the path's setting first, then the flow's, then 302.
+
+### Reuse across campaigns
+
+A flow is saved once and can be picked by many campaigns. Campaigns point to the flow, so editing the flow changes routing for every campaign that uses it.
+
+To share a flow with campaigns in several Private workspaces, put it in the Public Workspace. In the Advanced campaign form you can also start from a flow's paths with **Load from flow template**, or save a campaign's paths as a new flow with **Save as flow**. Tick **Save as flow** if you change loaded paths and don't want the original flow, and every campaign using it, to change too.
+
+### FAQ
+
+**What's the difference between a flow and a path on a campaign?** A flow is saved separately and shared by any number of campaigns. A path set on the campaign belongs to that campaign only.
+
+**Why does a visitor see the default path when my rule should match?** Check that the rule is above any broader rule, and that every condition matches. All conditions in a rule must match.
+
+**Do weights have to add up to 100?** The editor shows each weight as a share of the total, so use whatever numbers are easiest. 50 and 50 behave the same as 1 and 1.
+
+### Related articles
+
+- [Create a flow](/tracking/create-a-flow)
+- [Rule-based paths and conditions](/tracking/rule-based-paths-and-conditions)
+- [Campaigns](/core-concepts/campaigns)
+- [Workspaces: Public and Private](/core-concepts/workspaces-public-and-private)

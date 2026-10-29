@@ -1,0 +1,74 @@
+---
+title: "Date ranges, comparison and time zone"
+description: "Choose the period for any report, compare it to an earlier period, and view numbers in a different time zone without changing your settings."
+---
+
+### Choose a date range
+
+1. Click the date range button in the toolbar.
+2. Click a preset on the left: **Today**, **Yesterday**, **Last 7 Days**, **Last 30 Days**, **This Month**, **Last Month**, **This Year**, **Last Year** or **Custom**.
+3. For **Custom**, click the **From** and **To** fields and pick days in the two-month calendar.
+4. Click **Apply**.
+
+When Compare is off, clicking a preset applies it right away.
+
+The button shows the preset and the dates, for example `Last 7 Days | Oct 18 - Oct 24, 2026`.
+
+<Frame>
+  <img src="/images/reports/date-picker.jpg" alt="Date picker with presets, two-month calendar, Compare switch and Timezone field" />
+</Frame>
+
+### Move to the previous or next period
+
+Click the left or right arrow next to the date button.
+
+| Range | Arrows move by |
+| --- | --- |
+| Today, Yesterday | 1 day |
+| Last 7 Days, Last 30 Days | 7 or 30 days |
+| This Month, Last Month, or a custom full month | 1 month |
+| This Year, Last Year, or a custom full year | 1 year |
+| Other custom ranges | The length of the range |
+
+The right arrow is disabled once the range reaches today.
+
+### Compare two periods
+
+1. Open the date picker and turn on **Compare**.
+2. Under **Compare To**, pick **Previous Period**, **Previous Year** or **Custom**.
+3. For **Custom**, set **Compare From** and **Compare To**.
+4. Click **Apply**.
+
+| Option | Compares with |
+| --- | --- |
+| **Previous Period** | The same number of days, ending the day before your range starts |
+| **Previous Year** | The same dates one year earlier |
+| **Custom** | Any dates you choose |
+
+With Compare on, the button shows both ranges, for example `Last 7 Days | … vs …`. In Performance, each metric gets a **Chg** column with the change. On the Dashboard, the trend chart adds "(prev)" lines.
+
+### View in another time zone
+
+Reports use your **Default report time zone** from **Settings → General settings**. To check numbers in another zone without changing that setting:
+
+1. Open the date picker.
+2. In **Timezone**, search for a zone and select it.
+3. Click **Apply**.
+
+The button adds the city, for example `· New York`, so you know an override is on. To go back, choose **Use my settings (…)** at the top of the Timezone list.
+
+The time zone decides where each day starts and ends. A different zone can move visits and conversions between days.
+
+### FAQ
+
+**Does the time zone override change my account setting?** No. It applies to the view you're looking at. It's also kept in the share link.
+
+**Why does "Today" look short in the morning?** Today runs from midnight in the selected time zone until now.
+
+**Why doesn't a preset apply when I click it?** With Compare on, presets wait for you to click **Apply**.
+
+### Related articles
+
+- [Performance reports](/reports/performance-reports)
+- [Why numbers differ from your ad platform](/reports/why-numbers-differ-from-your-ad-platform)
+- [Dashboard overview](/reports/dashboard-overview)

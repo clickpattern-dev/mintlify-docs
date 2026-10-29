@@ -1,0 +1,42 @@
+---
+title: "Tokens arriving empty"
+description: "A token is replaced only when ClickPattern has a value for it. Empty values usually mean the traffic source didn't fill its macro, the token name is wrong, or the value arrives under a different parameter name."
+---
+
+### Check 1: Look at the campaign URL in the ad
+
+Open **Performance → Campaigns**, select the campaign, then **Edit → Tracking & PatternPilot**. The **Campaign URL** includes the traffic source's parameters, for example `?zone={zoneid}&cost={cost}`.
+
+1. Make sure your ad uses this full URL, including the query string.
+2. Check each macro in braces is a macro your traffic source supports. If the source doesn't recognize it, it sends the literal text.
+
+### Check 2: Literal macro text in reports
+
+If a report or postback shows `{zoneid}` instead of a value, the traffic source didn't replace its macro. ClickPattern discards values that look like unfilled macros (`{x}`, `{{x}}`, `[x]`, `__X__`, `%%x%%`, `${x}`) and words like `REPLACE` or `OPTIONAL`, so they arrive as empty rather than as junk.
+
+Fix the macro name in the traffic source, under **Performance → Traffic Sources → Edit → Parameters**.
+
+### Check 3: Offer or lander URL tokens
+
+In offer and lander URLs:
+
+- Standard tokens such as `{clickid}`, `{country}` or `{campaign.id}` are not case-sensitive.
+- A token with no value is removed from the URL. Add a default with `{token:default}`, for example `{country:XX}`.
+- `{var1}` to `{var10}` read the parameters named `var1` to `var10` (or `sub1` to `sub10`) on the campaign URL.
+- To pass a traffic source parameter with its own name, use that name as the token: `{zone}` or `{var:zone}`. These pass-through tokens **are case-sensitive**. `{Zone}` won't match `zone=`.
+
+### Check 4: Postback tokens to the traffic source
+
+In the traffic source postback URL, use `{payout}`, `{currency}`, `{txid}`, `{click_id}`, `{campaign_id}`, `{event_type}` and the tokens of the traffic source's own parameters. Check the result in **Logs → Sent Postbacks**: open a row and read the **URL**.
+
+### FAQ
+
+**Why is `{cost}` empty?** The traffic source didn't send a value for its cost parameter, or the campaign's cost source isn't **Token (Auto)**.
+
+**Can I see which tokens are available?** Yes. See the Tracking tokens reference.
+
+### Related articles
+
+- [Tracking tokens](/reference/tracking-tokens)
+- [Conversions not showing](/troubleshooting/conversions-not-showing)
+- [Cost not pulling](/troubleshooting/cost-not-pulling)

@@ -1,0 +1,91 @@
+---
+title: "Add a custom traffic source"
+description: "Set up a traffic source by hand when there's no template. You map the network's URL macros to ClickPattern tokens, so each visit records the network's click ID, cost and up to 10 custom variables."
+---
+
+### Before you start
+
+From your ad network's docs, collect:
+
+- The macro for its click ID (for example `{clickid}` or `[CLICK_ID]`).
+- The macro for cost or bid, if it has one.
+- Any macros you want to report on, such as placement, zone or creative.
+
+### Steps
+
+1. Go to **Performance → Traffic Sources** and click **Create**.
+2. Click the **Custom** card ("Create your own traffic source configuration").
+3. Enter a **Name** and pick a **Workspace**.
+4. Fill in **External IDs**. Click **Add external ID** for a second or third one.
+5. Fill in **Other Parameters**: the **Cost** row and any **Variable** rows. Click **Add parameter** for more variables.
+6. Tick **Enable** on each variable you want to use.
+7. Set **Currency**.
+8. Optional: tick **Traffic source postback URL** and enter the network's postback URL.
+9. Click **Save**.
+
+<Frame>
+  <img src="/images/shared/traffic-source-custom.jpg" alt="Parameters section with External IDs and Other Parameters tables" />
+</Frame>
+
+### Parameters columns
+
+Each row maps one network macro to one ClickPattern token.
+
+| Column | What to enter |
+| --- | --- |
+| **Name** | Row label, shown for you (External ID 1, Cost, Variable 3). |
+| **TS Parameter** | The query parameter name in your campaign URL, for example `zoneid`. |
+| **TS Token** | The network's macro that fills it, for example `{zone_id}`. |
+| **CP Token** | The ClickPattern token that receives the value. Read only. |
+| **Enable** | Variables only. Ticked rows are used. |
+
+### External IDs
+
+| Row | CP Token | Notes |
+| --- | --- | --- |
+| External ID 1 | `{externalid}` | The network's click ID. Always present. |
+| External ID 2 | `{externalid2}` | Optional. |
+| External ID 3 | `{externalid3}` | Optional. |
+
+- You can add up to 3 external IDs. **Add external ID** disappears at 3.
+- Only the last row has a delete button, so External ID 1 always stays.
+
+### Other Parameters
+
+| Row | CP Token | Notes |
+| --- | --- | --- |
+| Cost | `{cost}` | Always on and can't be deleted. Used when a campaign's cost source is **Token (Auto)**. |
+| Variable 1 to Variable 10 | `{var1}` to `{var10}` | Up to 10. A new custom source starts with Variable 1 unticked. Only the last variable row can be deleted. |
+
+Variable values appear in reports and can be used in flow conditions as **Custom Variable 1** to **Custom Variable 10**.
+
+### Cost Currency
+
+Pick the currency the network bills you in. It defaults to USD.
+
+### Traffic source postback URL
+
+Tick **Traffic source postback URL** to report conversions back to the network.
+
+1. Paste the network's postback URL into **Postback URL**, for example `https://your-traffic-source.com/postback?clickid={externalid}`.
+2. Open **Available Tokens** and click a token to add it. Each click appends `token={token}` to the URL.
+
+ClickPattern calls this URL when a conversion arrives for a visit from this source. A campaign can replace it with its own URL. See **Create a campaign: Advanced form**.
+
+<Frame>
+  <img src="/images/shared/ts-postback-tokens.jpg" alt="Passing conversion info to traffic source, with Available Tokens open" />
+</Frame>
+
+### FAQ
+
+**Why can't I add a fourth external ID?** ClickPattern keeps three external ID slots per traffic source. Use variables for any other value.
+
+**Do I need to fill in the Cost row?** Only if the network passes cost in the URL and you want **Token (Auto)** cost. Otherwise leave it empty.
+
+**My variable doesn't appear in the campaign URL. Why?** Check that the row is ticked under **Enable** and that both **TS Parameter** and **TS Token** are filled in.
+
+### Related articles
+
+- [Add a traffic source from a template](/tracking/add-a-traffic-source-from-a-template)
+- [Rule-based paths and conditions](/tracking/rule-based-paths-and-conditions)
+- [Create a campaign: Advanced form](/tracking/create-a-campaign-advanced-form)

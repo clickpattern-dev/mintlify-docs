@@ -1,0 +1,53 @@
+---
+title: "Connect Claude to ClickPattern"
+description: "Add ClickPattern to Claude as a custom connector, sign in, and pick one workspace and an access level. Claude can then read your reports and, if you allow it, create campaigns and other elements for you."
+---
+
+### Before you start
+
+- Your workspace's plan must include API access. See [pricing](https://www.clickpattern.com/pricing).
+- You need at least one workspace. If you have none, the sign-in screen shows **No workspaces available**.
+- One connection covers one workspace. To use a second workspace, add a second connection.
+
+### Step 1: Add the connector in Claude
+
+1. In Claude, open the connectors settings and add a **custom connector**.
+2. Enter a name, for example `ClickPattern`.
+3. Enter the server URL: `https://mcp.clickpattern.com/api/mcp`
+4. For the OAuth client, keep the automatic option. You don't need a client ID or client secret. Leave those blank if your Claude version shows them.
+5. Finish adding the connector.
+
+ClickPattern registers Claude automatically during sign-in, so there's nothing to copy from the ClickPattern app.
+
+### Step 2: Sign in and approve
+
+1. When Claude connects, a ClickPattern sign-in page opens. Sign in with your ClickPattern account.
+2. The **Authorize** screen shows who is asking for access, the account you're **Signed in as**, and where it **Redirects to**.
+3. Under **Workspace**, choose the workspace this connection can use. Each option shows your role in that workspace.
+4. Under **Access level**, choose:
+   - **Read only**: view your profile and the workspace's campaigns, offers, landing pages, flows, traffic sources, domains, integrations, automation rules, reports and analytics.
+   - **Read and write**: everything in Read only, plus create campaigns and their elements, create automation rules and invite workspace members. If your role allows it, the assistant can also create account-wide traffic filters and new workspaces in the same organization.
+5. Click **Approve**. Click **Deny** to cancel.
+
+Access is always limited by your role and plan. A Read and write connection can't do anything your role can't do in the app.
+
+### Step 3: Try it
+
+Ask Claude something about your data, for example: "How did my campaigns perform last week?" Claude calls ClickPattern and answers with numbers from the workspace you chose.
+
+### FAQ
+
+**I don't see the Read and write option. Why?** The option appears only when the AI client asks for write access. If your client asks for read access only, you'll see just **Read only**.
+
+**Can one connection see all my workspaces?** No. Each connection is bound to the workspace you picked when you approved it. Add another connection for another workspace.
+
+**Do I need to generate a token in ClickPattern?** No. Sign-in handles access. The connection appears under **Settings → MCP Access** once you approve it.
+
+**The connection fails after I approve it. What should I check?** Check that the workspace's plan includes API access and that you're still a member of that workspace.
+
+### Related articles
+
+- [Connect ChatGPT](/ai/connect-chatgpt)
+- [Connect Cursor and other MCP clients](/ai/connect-cursor-and-other-mcp-clients)
+- [What your AI assistant can do](/ai/what-your-ai-assistant-can-do)
+- [Manage and revoke AI connections](/ai/manage-and-revoke-ai-connections)

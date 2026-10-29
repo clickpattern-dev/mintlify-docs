@@ -1,0 +1,49 @@
+---
+title: "Landers"
+description: "A lander is your own pre-sell page that visitors see before the offer. ClickPattern tracks the visit to the lander and the CTA click that sends the visitor on to an offer."
+---
+
+### CTAs and click URLs
+
+Each lander has a **Number of CTAs** from 1 to 10 under **Landing page setup**. ClickPattern generates one click URL per CTA on the **Tracking domain** you choose. Put each one in the `href` of its CTA's `<a>` tag.
+
+| Number of CTAs | Click URL | Where the visitor goes |
+| --- | --- | --- |
+| 1 | `https://{domain}/click` | One of the path's offers, picked by weight |
+| 2–10 | `https://{domain}/click/1` … `https://{domain}/click/10` | The offer in that position in the path: `/click/1` is the first offer, `/click/2` the second, and so on |
+
+Use several CTAs when one page promotes several offers, for example a comparison page.
+
+### The lander script
+
+**Lander Tracking Script - Add this to your lander page** gives you a snippet in two versions.
+
+| Version | How it loads |
+| --- | --- |
+| **Inline** | The code is pasted into the page and runs right away. Recommended when CTAs are above the fold. |
+| **External** | Loads `https://{domain}/l/script.js`. Simpler and cached by the browser. |
+
+The script reads the visit's tracking data on the lander and adds it to your `/click` links, so CTA clicks don't rely on a cookie alone. Click **Verify** under **Setup verification** to check that your lander URL loads.
+
+### Why the domain must match
+
+When ClickPattern redirects a visitor to your lander, it stores the visit's tracking data in a cookie on your tracking domain. The cookie lasts 24 hours. When the visitor clicks a CTA, the `/click` URL reads that cookie to know which visit, campaign and offers it belongs to.
+
+Browsers only send that cookie to the same domain. If the campaign URL uses one tracking domain and the lander's click URLs use another, the click arrives without its data. The visitor then sees "Click tracking information not found. Please return to the original link."
+
+Use the same tracking domain for the campaign URL, the lander's click URLs and the offers in the campaign. A visitor who clicks more than 24 hours after landing sees "This link has expired. Please return to the original page."
+
+### FAQ
+
+**Do I need the lander script if my click URLs are set?** Add it anyway. Without it, CTA clicks depend on the cookie alone and can fail when the visitor's browser blocks it.
+
+**Can one lander be used with different offers?** Yes. The lander's click URLs point to positions, not to fixed offers. Which offer is in position 1 or 2 is set on the campaign or flow path.
+
+**What happens if I archive a lander?** It can't be added to new campaigns or flows, but campaigns already using it keep working.
+
+### Related articles
+
+- [Add a lander](/tracking/add-a-lander)
+- [Multi-offer landers](/tracking/multi-offer-landers)
+- [Flows and paths](/core-concepts/flows-and-paths)
+- [Campaigns](/core-concepts/campaigns)

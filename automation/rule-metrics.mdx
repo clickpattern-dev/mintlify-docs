@@ -1,0 +1,85 @@
+---
+title: "Rule metrics"
+description: "The metrics you can use in rule conditions, grouped as they appear in the Metric dropdown."
+---
+
+### Financial
+
+| Metric | Meaning |
+| --- | --- |
+| **Cost** | Ad spend. |
+| **Revenue** | Conversion payouts. |
+| **Profit** | Revenue minus cost. |
+| **ROI** | Profit as a % of cost. |
+| **ROAS** | Revenue divided by cost, as a ratio. A value of `2` means $2 back per $1 spent. |
+
+### Performance
+
+| Metric | Meaning |
+| --- | --- |
+| **Conversions** | Number of conversions. |
+| **Click-Through Rate (CTR)** | Clicks as a % of visits. |
+| **Conversion Rate (CR)** | Conversions as a % of clicks. |
+| **Clicks** | Clicks from your lander to the offer. |
+| **Impressions** | Ad impressions. |
+| **Conversion Rate per Visit (CV%)** | Conversions as a % of visits. |
+| **Impression CTR (iCTR)** | Visits as a % of impressions. |
+| **Custom Conversions** | Counts all custom-event conversions, whatever their include-in-conversions setting. |
+
+### Cost Efficiency
+
+| Metric | Meaning |
+| --- | --- |
+| **Cost per Visit (CPV)** | Cost divided by visits. |
+| **eCPM** | Cost per 1,000 impressions. |
+
+### Revenue Efficiency
+
+| Metric | Meaning |
+| --- | --- |
+| **RPM (Revenue per 1k Impressions)** | Revenue per 1,000 impressions. |
+
+### Engagement
+
+| Metric | Meaning |
+| --- | --- |
+| **Cost per Click (CPC)** | Cost divided by clicks. |
+| **Cost per Acquisition (CPA)** | Cost divided by conversions. |
+| **Earnings per Click (EPC)** | Revenue divided by clicks. |
+| **Earnings per Visit (EPV)** | Revenue divided by visits. |
+| **Visits** | Number of visits. |
+| **Hours Since Conversion** | Hours since the last conversion. |
+
+### Traffic
+
+| Metric | Meaning |
+| --- | --- |
+| **Unique Visits** | Visits counted once per visitor. |
+| **Unique Clicks** | Clicks counted once per visitor. |
+
+### Quality
+
+| Metric | Meaning |
+| --- | --- |
+| **Suspicious Visits (enforced)** | Visits whose fraud score crossed the enforcement threshold. |
+| **Suspicious Visit Rate (%, enforced)** | Enforced suspicious visits as a % of visits. |
+
+Quality metrics appear only if your plan includes the Anti-Fraud Kit. They use the enforced ("Blocked") count. The tracker's **Suspicious Visits** column shows the broader flagged count, so its numbers are higher. Set your thresholds with that in mind.
+
+<Frame>
+  <img src="/images/automation/rule-metric-dropdown.jpg" alt="Metric dropdown open, showing group headings" />
+</Frame>
+
+### FAQ
+
+**Why don't I see the Quality group?** Your plan doesn't include the Anti-Fraud Kit. See [pricing](https://www.clickpattern.com/pricing).
+
+**Why is my suspicious-visits rule not firing when the tracker shows many suspicious visits?** The rule uses the enforced count, which is lower than the flagged count in the tracker. Lower your threshold.
+
+**Is ROAS a percentage?** No. ROAS is a ratio. Enter `2` for 2×, not `200`.
+
+### Related articles
+
+- [Rule conditions, time frames and cooldown](/automation/rule-conditions-time-frames-and-cooldown)
+- [Anti-Fraud Kit](/automation/anti-fraud-kit)
+- [Time-to-convert (MTTC)](/automation/time-to-convert-mttc)

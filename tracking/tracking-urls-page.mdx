@@ -1,0 +1,87 @@
+---
+title: "Tracking URLs page"
+description: "Settings → Tracking URLs gives you ready-made click URLs, postback URLs and conversion pixels for any of your tracking domains. Pick a domain, choose options, and copy."
+---
+
+### Before you start
+
+You need at least one tracking domain that is ready to use: a platform domain, or a custom domain that has passed verification. Without one, the page shows **No Verified Domains**. Go to **Settings → Domains** to add and verify a domain.
+
+### Pick a tracking domain
+
+Each section has a **Tracking Domain** selector. Platform domains carry a **Platform** badge. Verified custom domains carry **Verified** or **Cloudflare**.
+
+Use the same domain everywhere in one funnel. The domain in your click URLs and conversion pixels must match the domain in the campaign URL exactly.
+
+<Frame>
+  <img src="/images/shared/tracking-urls-click.jpg" alt="Tracking URLs page with the Tracking Domain selector open" />
+</Frame>
+
+### Click URLs
+
+This section is labeled **Click URL** on the page. Click URLs send visitors from your landing page to an offer. Paste one into the link of each call-to-action button on the lander.
+
+| Field | Format | Use it when |
+| --- | --- | --- |
+| **Click URL** | `https://{domain}/click` | The lander leads to one offer |
+| **Multi-offer click URL** | `https://{domain}/click/1` | The lander has several buttons, each for a different offer. Use `/click/2`, `/click/3` and so on up to `/click/10`. |
+
+Landing pages with a click URL don't need any other script to track clicks or send visitors to offers.
+
+### Postback URLs
+
+This section is labeled **Postback URL** on the page. A server-to-server postback is the most reliable way to count conversions. The affiliate network calls the URL when a conversion happens, so cookies and browsers don't matter.
+
+1. Pick your **Tracking Domain**.
+2. Optional: turn on **Include additional parameters in the postback URL** to add `param1`–`param5`.
+3. Optional: choose a **Conversion event**. Pick a standard event or one of your custom conversions, or type the macro your network fills in, such as `{goal}`.
+4. Copy **Postback URL** (`http://`) or **Secure postback URL** (`https://`).
+5. Replace each `REPLACE` and `OPTIONAL` with your network's macros, then paste the URL into your network.
+
+The basic URL looks like this:
+
+`https://{domain}/postback?cid=REPLACE&et=OPTIONAL&payout=OPTIONAL&currency=OPTIONAL&txid=OPTIONAL`
+
+No change needed if the shared with-params template fix ships. If it doesn't: With **Include additional parameters** on, the URL keeps `currency` and adds `param1=OPTIONAL` through `param5=OPTIONAL`. Add `payout` and `txid` yourself.
+
+If you leave **Conversion event** empty, `et=OPTIONAL` stays in the URL for you to replace. Without an event type, the conversion is recorded untyped and sent to ad platforms as Purchase.
+
+Make sure your offer URL includes the `{clickid}` token, for example `http://my_offer_URL.com/?aff_net_parameter={clickid}`. Otherwise conversions can't be registered.
+
+<Frame>
+  <img src="/images/shared/tracking-urls-postback-2.jpg" alt="Postback URL section with Include additional parameters on and a Conversion event chosen" />
+</Frame>
+
+### Conversion pixels
+
+This section is labeled **Conversion Tracking Pixel** on the page. Use a pixel when an offer only supports cookie-based tracking. You paste it on the thank-you page.
+
+1. Pick your **Tracking Domain**.
+2. Optional: turn on **Include additional parameters in the conversion tracking pixel** to add `param1`–`param5`.
+3. Choose a **Conversion event**. It is required: **Copy** stays disabled until you choose one.
+4. Copy one of the three snippets.
+
+| Snippet | What it is |
+| --- | --- |
+| **Conversion tracking pixel URL** | The pixel address only, for tools that ask for a URL: `https://{domain}/conversion.gif?et=lead` |
+| **Conversion tracking pixel** | A 1x1 image tag to paste into the page body |
+| **Conversion tracking script** | A JavaScript snippet that also finds the click ID automatically. Click **Expand** to see all of it. |
+
+<Frame>
+  <img src="/images/shared/tracking-urls-pixel.jpg" alt="Conversion Tracking Pixel section with the three snippets" />
+</Frame>
+
+### FAQ
+
+**Why is Copy greyed out in the pixel section?** Choose a **Conversion event** first. A thank-you page always records the same event, and nobody fills it in after you copy.
+
+**Do I have to replace every `OPTIONAL`?** No. ClickPattern ignores values left as `OPTIONAL` or `REPLACE`. Replace them when you want that data recorded.
+
+**Why doesn't my domain appear in the list?** Custom domains appear only after they pass verification. Check the domain's status in **Settings → Domains**.
+
+### Related articles
+
+- [S2S postback](/tracking/s2s-postback)
+- [Add your postback to an affiliate network](/tracking/add-your-postback-to-an-affiliate-network)
+- [Conversion pixel and script](/tracking/conversion-pixel-and-script)
+- [Add a custom tracking domain](/tracking/add-a-custom-tracking-domain)

@@ -1,0 +1,53 @@
+---
+title: "Offer caps and redirect offers"
+description: "A cap limits how many clicks or conversions an offer gets per day. When the cap is hit, new visitors go to a redirect offer you choose."
+---
+
+### Before you start
+
+You need at least one other offer in the same workspace. Until then, **Enable offer cap** is disabled and you'll see: "You need to create at least one other offer in this workspace to enable offer capping."
+
+### Steps
+
+1. Open the offer: go to **Performance → Offers**, select it and click **Edit**. Or create a new one.
+2. Scroll to **Offer cap** and tick **Enable offer cap**.
+3. Under **Cap type**, pick **Conversion cap** or **Click cap**.
+4. Enter the **Daily cap**.
+5. Pick a **Time zone** for the daily reset.
+6. Pick a **Redirect offer**. To make one now, choose **Create a new offer** at the bottom of the list.
+7. Click **Update Offer** (or **Create Offer**).
+
+<Frame>
+  <img src="/images/shared/offer-cap.jpg" alt="Offer cap section with Cap type, Daily cap, Time zone and Redirect offer" />
+</Frame>
+
+### Field reference
+
+| Field | What to enter | Default |
+| --- | --- | --- |
+| **Enable offer cap** | Turns capping on | Off |
+| **Cap type** | **Conversion cap** counts conversions. **Click cap** counts visitors sent to the offer. | None |
+| **Daily cap** | A whole number of 1 or more | Empty |
+| **Time zone** | When the day starts and ends for the count. **None** uses UTC. | None |
+| **Redirect offer** | Where new visitors go after the cap is reached | None |
+
+### How capping works
+
+- Counts reset at midnight in the offer's time zone.
+- Once the cap is reached, new visitors go to the redirect offer.
+- With **Conversion cap**, conversions above the cap on the same day are rejected.
+- If the redirect offer is also capped, or no redirect offer is set, the visitor gets a "Page not found" page.
+- Redirects don't chain. The redirect offer's own redirect offer is not used.
+
+### FAQ
+
+**Can I cap without a redirect offer?** Yes, but capped traffic is then lost. Visitors see "Page not found" until the day resets.
+
+**Do caps work on lander CTAs?** Yes. Clicks from a lander to a capped offer also go to the redirect offer.
+
+**Why is Enable offer cap greyed out?** Pick a workspace first, and make sure it has at least one other offer.
+
+### Related articles
+
+- [Add an offer](/tracking/add-an-offer)
+- [Multi-offer landers](/tracking/multi-offer-landers)

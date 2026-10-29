@@ -1,0 +1,53 @@
+---
+title: "Test a campaign before sending traffic"
+description: "Two checks catch almost every setup problem: click your own campaign URL to confirm the visit, then send a test postback to confirm the conversion. It takes about two minutes."
+---
+
+Use a test campaign, or remember that test conversions show up in your reports like real ones.
+
+### Check 1: The visit
+
+1. Open your campaign URL in a private browser window.
+2. You should land on your offer. Look at the address bar: the sub ID parameter should hold a long ID such as `aff_sub=7d2f4a10-…`, not the literal text `{clickid}`.
+3. Copy that ID. This is your test click ID.
+4. In **Performance → Campaigns**, refresh. Your campaign should show one visit.
+
+If the browser shows an error page instead, see Visits or clicks not recorded.
+
+### Check 2: The conversion
+
+1. Build a test postback with your click ID: `https://{domain}/postback?cid=7d2f4a10-…&payout=1`
+2. Open it in your browser.
+3. Read the response:
+
+| Response | Meaning |
+| --- | --- |
+| Postback received successfully | The postback was accepted for processing. Confirm it shows as **Processed** in Received Postbacks. |
+| Postback received | The request arrived but no conversion was recorded. Check **Logs → Received Postbacks** for the reason, or **Logs → Errors Log** if the click ID wasn't found. |
+| Missing required parameter: cid (Click ID) | The `cid` value is missing or still a placeholder. |
+| Invalid payout value | `payout` must be a positive number. |
+
+4. Open **Logs → Received Postbacks**. Your postback should show as **Processed**.
+5. In **Performance → Campaigns**, the campaign should now show one conversion and the test payout as revenue.
+
+<Frame>
+  <img src="/images/shared/logs-received-postbacks.jpg" alt="Logs, Received Postbacks with processed postbacks" />
+</Frame>
+
+### Common reasons the conversion isn't recorded
+
+| Reason in Received Postbacks | Fix |
+| --- | --- |
+| Click not found (shown in **Logs → Errors Log**, not Received Postbacks) | The `cid` doesn't match a click. Copy the ID again from the offer URL. |
+| Duplicate | That click already has a conversion. Add a different `txid` for a second sale, or start a new test click. |
+| IP not whitelisted / invalid token | Your affiliate network settings restrict which IPs or tokens may post. Test from an allowed source or relax the setting. |
+
+### Last: test the real postback
+
+If your affiliate network has a "test postback" or "test conversion" button, use it with a real test click. It confirms the network's macros are filled in correctly, which a manual test can't.
+
+### Related articles
+
+- [Your first campaign in 10 minutes](/start-here/your-first-campaign-in-10-minutes)
+- [Conversions not showing](/troubleshooting/conversions-not-showing)
+- [Duplicates, refunds and statuses](/tracking/duplicates-refunds-and-statuses)

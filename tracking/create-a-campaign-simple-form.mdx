@@ -1,0 +1,99 @@
+---
+title: "Create a campaign: Simple form"
+description: "The Simple form builds a campaign on one screen: traffic source, cost, and either a flow or a list of landers and offers. After saving, you get the campaign URL for your ads."
+---
+
+### Steps
+
+1. Go to **Performance → Campaigns** and click **Create → Campaign Simple**.
+2. On the **General** tab, pick a **Workspace** and a **Country label**.
+3. Edit the **Campaign name**.
+4. Pick a **Traffic source**. To add one now, choose **Create a new traffic source**.
+5. Optional: set **Traffic type - optional**, **Tags** and **Notes (optional)**.
+6. Under **Cost tracking**, pick a **Cost source**.
+7. Under **Campaign destination**, pick **Flow** or **Path**.
+8. For **Path**, choose **Landers & Offers** or **Offers only**, pick **Transition to offer**, then add landers and offers.
+9. Click **Create Campaign**.
+10. Open the **Tracking & PatternPilot** tab and copy the campaign URL.
+
+<Frame>
+  <img src="/images/shared/new-campaign-simple.jpg" alt="Simple campaign form, General tab with Cost tracking and Campaign destination" />
+</Frame>
+
+### General fields
+
+| Field | What to enter | Notes |
+| --- | --- | --- |
+| **Workspace** | Owning workspace | Required. |
+| **Country label** | A country, or Global | Required. Picking one adds it to the front of the name. |
+| **Campaign name** | A unique name | Required. Up to 100 characters. Must be unique in the workspace. |
+| **Traffic source** | Where the traffic comes from | Required. |
+| **Traffic type - optional** | **Desktop**, **Mobile**, **Tablet** or **Mixed** | For your own reference. |
+| **Tags** | Labels for filtering | Optional. |
+| **Notes (optional)** | Free text |  |
+
+### Cost tracking
+
+**Cost tracking** appears after you pick a traffic source.
+
+| Cost source | What happens |
+| --- | --- |
+| **Not Tracked** (default) | No cost is recorded. ROI and profit show as unavailable. |
+| **Manual** | You set a fixed cost. Pick a **Cost model**: **CPC**, **CPM**, **CPA** or **RevShare**. |
+| **Token (Auto)** | Cost is read from the traffic source's cost parameter (`{cost}`). |
+| **API (Integrated)** | Cost comes from a connected ad platform with cost sync on. It takes priority over all other cost sources. |
+
+For **Manual**:
+
+- **CPC** asks for **Cost per click**, **CPM** for **Cost per 1,000 impressions**, **CPA** for **Cost per conversion**.
+- **RevShare** asks for **Percentage share** (0 to 100%).
+- **CPC** also offers **Traffic loss (%)**: the share of billed clicks that never reach your page. It grosses up the recorded cost.
+
+See **Cost models** for how each one is counted.
+
+### Destination
+
+| Field | Options | Default |
+| --- | --- | --- |
+| **Campaign destination** | **Flow** (use a saved flow) or **Path** (pick landers and offers here) | Path |
+| **Select a flow** | Flow mode. Shows each flow's path count. |  |
+| **Path destination** | **Landers & Offers** or **Offers only** | Offers only |
+| **Transition to offer** | **302 Redirect**, **Meta Refresh**, **Double Meta Refresh**, **Direct** | 302 Redirect |
+| **Select lander** / **Select offer** | Add one or more | At least one offer. At least one lander for Landers & Offers. |
+
+A "Traffic flow" diagram shows the route, for example Ad → Lander → Offer.
+
+**Weights.** Weights are spread evenly when you save the Simple form. For example, three offers save as 34, 33 and 33. Use **Create a campaign: Advanced form** if you need custom weights.
+
+### Tracking & PatternPilot tab
+
+This tab becomes available once the campaign is saved. To open it later, select the campaign and click **Edit**.
+
+| Item | What it is |
+| --- | --- |
+| **Tracking Domain (Preview)** | Preview the URL on another domain. It doesn't change the campaign. |
+| **Campaign URL** | `https://{domain}/c/{campaignId}` plus your traffic source parameters. Use it in your ads. |
+| **CTA Link** / **CTA 1…N** | Lander click URLs for Landers & Offers campaigns. |
+| Tracking scripts | Lander or direct tracking scripts, when they apply. |
+
+<Frame>
+  <img src="/images/shared/campaign-tracking-tab.jpg" alt="Tracking & PatternPilot tab with Campaign URL and CTA links" />
+</Frame>
+
+### Convert to Advanced Campaign
+
+Click **Convert to Advanced Campaign** to move your settings into the Advanced form. A dialog asks you to confirm: "Once converted, this campaign can only be edited as an advanced campaign — you won't be able to switch back." Click **Convert**.
+
+### FAQ
+
+**I set weights and they changed after saving. Why?** The Simple form spreads weights evenly on save. Use the Advanced form for custom weights.
+
+**What does "A campaign with this name already exists" mean?** Another active campaign in the workspace has that name. Pick a different name.
+
+**Can I switch an advanced campaign back to Simple?** No. Conversion is one way.
+
+### Related articles
+
+- [Create a campaign: Advanced form](/tracking/create-a-campaign-advanced-form)
+- [Transition modes](/tracking/transition-modes)
+- [Redirect tracking](/tracking/redirect-tracking)

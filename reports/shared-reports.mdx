@@ -1,0 +1,76 @@
+---
+title: "Shared reports"
+description: "Publish a read-only report that anyone with the link can open without logging in. Use it for clients or partners who don't have a ClickPattern account."
+---
+
+### Create a shared report
+
+1. In Performance, open the report you want to share: **Campaigns**, **Offers**, **Landers**, **Traffic Sources** or **Country**.
+2. Click **Export/import → Share report**.
+3. Fill in **Share Report**:
+
+| Field | What to enter |
+| --- | --- |
+| **Report name** | Defaults to the report type, for example "[Campaigns](/core-concepts/campaigns)" |
+| **Name visible in shared report** | Untick to hide the name from viewers |
+| **Timezone** | The zone used for the dates. Defaults to your browser's zone |
+| **Date range type** | **Fixed date range** or **Dynamic period** |
+| **Start date** / **End date** | For a fixed range |
+| **Period** | For a dynamic period: **Yesterday**, **Last 7 days**, **Last 30 days**, **Last month**, **This month** or **Custom days** |
+| **Days** | For Custom days, 1–365 |
+| **Time range visible in shared report** | Untick to hide the dates from viewers |
+| **Columns** | Tick the columns to show. Starts with your current columns. Use **Select all** or search |
+
+4. Click **Create Link**.
+5. Copy the link, or click **Preview** to open it. Click **Done**.
+
+You need the Editor role or higher to share a report. How many shared reports you can have depends on your plan; see [pricing](https://www.clickpattern.com/pricing).
+
+<Frame>
+  <img src="/images/reports/share-report.jpg" alt="Share Report dialog with Dynamic period selected" />
+</Frame>
+
+### Fixed vs dynamic range
+
+| Type | Viewers see |
+| --- | --- |
+| **Fixed date range** | Always the same dates |
+| **Dynamic period** | A rolling period that updates, for example always the last 7 days |
+
+### What viewers see
+
+- The ClickPattern header, the report name and the date range, unless you hid them
+- A row for each item, with the columns you chose and a totals row
+- Sortable columns and page controls
+
+Viewers can't change the report, drill down or see other data.
+
+If the report is disabled or deleted, the link shows **Report Not Found** with "This report may have been disabled or deleted."
+
+### Manage shared reports
+
+Go to **Data Hub → Shared reports**. The list shows **Name**, **Dimension**, **Date Range**, **Created**, **Views**, **Link**, **Status** and **Actions**.
+
+| Action | What it does |
+| --- | --- |
+| Copy link | Copies the public URL |
+| **Edit** | Changes the name, visibility options, time zone and date range |
+| **Disable** / **Enable** | Turns the link off or back on. Status shows **Active** or **Disabled** |
+| **More** | **Export as PDF** or **Export as XML** |
+| **Delete** | Removes the report. The link stops working immediately |
+
+Shared reports belong to one workspace. If you select several workspaces, the page shows the first one's reports.
+
+### FAQ
+
+**Is a shared report the same as a share link?** No. A share link only works for signed-in members of your workspace. A shared report works for anyone with the link.
+
+**Can I stop someone using a link?** Yes. Click **Disable** or **Delete** in Data Hub → Shared reports.
+
+**Can I change the columns later?** Not from **Edit**. Create a new shared report with the columns you want.
+
+### Related articles
+
+- [Search, filters and share links](/reports/search-filters-and-share-links)
+- [Scheduled reports](/reports/scheduled-reports)
+- [Columns and column templates](/reports/columns-and-column-templates)

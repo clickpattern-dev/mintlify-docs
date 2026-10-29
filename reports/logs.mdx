@@ -1,0 +1,94 @@
+---
+title: "Logs"
+description: "Logs show the raw events behind your reports: postbacks received and sent, cost syncs, errors, account changes and filtered traffic. Use them to troubleshoot."
+---
+
+### Open Logs
+
+1. Go to **Logs** in the sidebar.
+2. Pick a tab: **Received Postbacks**, **Sent Postbacks**, **Cost Logs**, **Errors Log**, **Audit Logs**, **Account Activity** or **Traffic Filtering**.
+3. Set the date range. Each tab remembers its own range while you move between tabs.
+
+Every tab has these tools:
+
+- The eye icon (**View details**) opens the full record.
+- **Columns** lets you show, hide and reorder columns.
+- **Download CSV** saves the rows in your current view.
+- Rows per page: 25, 50 or 100.
+
+The postback, Errors Log and Traffic Filtering tabs also have a search box. Cost Logs, Audit Logs and Account Activity use filter menus instead.
+
+<Frame>
+  <img src="/images/shared/logs-received-postbacks.jpg" alt="Received Postbacks tab with status chips" />
+</Frame>
+
+### Received Postbacks
+
+Conversion postbacks your affiliate networks sent to ClickPattern, for the selected workspaces. Default columns: **Campaign**, **Status**, **Time**, **Offer**, **Affiliate network**, **Payout**. More are available, such as **Click ID**, **Transaction ID**, **Reason** and **URL**.
+
+| Status | Meaning |
+| --- | --- |
+| **Processed** | Recorded as a conversion |
+| **Approved** | Received as approved |
+| **Pending** | Received and waiting to be processed |
+| **Duplicate** | Already recorded, so it was not counted again |
+| **Refund** / **Partial refund** | A refund was applied |
+| **Rejected** / **Failed** | Not recorded. The **Reason** column says why |
+
+Postbacks with a click ID that doesn't match any click are listed in the Errors Log instead.
+
+### Sent Postbacks
+
+Postbacks ClickPattern sent to your traffic sources. Default columns: **Campaign**, **Status**, **Time**, **Error description**, **URL**.
+
+- **Delivered**: the traffic source accepted it.
+- **Failed**: **Error description** shows the reason, for example `Unexpected HTTP response code: 400` or `Network error`.
+
+More columns include **Click ID**, **Click time**, **Latency** and **Method**.
+
+### Cost Logs
+
+Each cost sync from your connected ad platforms. Columns include **Time**, **Platform**, **Ad Account**, **Event**, **Status**, **Date Range**, **Spend Imported**, **Records Imported**, **Message** and **Triggered By**.
+
+- Filter by **Platform**, **Status** and **Trigger**.
+- Status values: **Success**, **Failed**, **Partial**, **In Progress**, **Skipped**.
+- Trigger values include **Scheduled**, **Manual**, **First sync** and **Backfill**.
+
+Open the details to see records processed and failed, the duration, and any error code.
+
+### Errors Log
+
+Conversion requests that couldn't be linked to a workspace. Columns: **Time**, **Category**, **Click ID**, **Reason**, **Payout**, **IP**. Use **Search errors…** to find a click ID.
+
+| Category | Common causes |
+| --- | --- |
+| **Invalid conversion request** | The click ID matched no click, the click ID was missing, or the payout was invalid |
+| **Postback sending error** | A traffic source postback URL leads back to a ClickPattern tracking domain |
+
+### Audit Logs
+
+Changes made in your workspaces, such as create, change, archive, restore, delete, connect, disconnect, invite and export. Filter by **Workspaces**, **Users**, **Entity types** and **Actions**.
+
+Columns: **Workspace**, **User e-mail**, **Entity type**, **Action type**, **Entity name / IP address**, **Entity ID**, **IP address**, **Occurred At**. Open **Event Details** to see what changed.
+
+### Account Activity
+
+Sign-in and security events: login, logout, password change, two-factor enable and disable, session revoke and role change. It uses the same filters and columns as Audit Logs.
+
+### Traffic Filtering
+
+Visits and clicks blocked by your traffic-filter rules. Filtered traffic doesn't appear in reports, only here. Columns: **Time**, **IP**, **User agent**, **Filtered by**, **Reason**, **Event type**. The tab shows the most recent 200 filtered events in the date range.
+
+### FAQ
+
+**A conversion is missing. Where do I look first?** Check **Received Postbacks** for its click ID. If it isn't there, check **Errors Log**.
+
+**Why is Sent Postbacks showing Failed?** The traffic source rejected the request or couldn't be reached. Check the URL and the error description.
+
+**Does Download CSV include hidden columns?** Yes. The CSV includes every column for the rows in your current view, not just the visible columns.
+
+### Related articles
+
+- [Why numbers differ from your ad platform](/reports/why-numbers-differ-from-your-ad-platform)
+- [Synced vs estimated cost](/reports/synced-vs-estimated-cost)
+- [Conversions not showing](/troubleshooting/conversions-not-showing)

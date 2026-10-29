@@ -1,0 +1,84 @@
+---
+title: "Add an affiliate network"
+description: "An affiliate network record gives you a ready-made postback URL or pixel to paste into the network. It also sets payout currency and which servers may send you postbacks."
+---
+
+### Steps
+
+1. Go to **Performance → Affiliate Networks** and click **Create**.
+2. In **Select affiliate network**, search for your network and click its card. If it isn't listed, click **Custom affiliate network**.
+3. Check the **Name** and pick a **Workspace**.
+4. Review **Parameters**. Templates fill these in. For a custom network, type the network's macro names.
+5. Under **Conversion tracking**, pick a **Tracking domain** and a **Method**.
+6. Optional: tick **Include additional parameters in the postback URL**.
+7. Set **Payout currency**.
+8. Optional: open **Additional settings**.
+9. Copy the generated URL or code with the copy button and paste it into your network's conversion settings.
+10. Click **Save**.
+
+<Frame>
+  <img src="/images/shared/an-grid.jpg" alt="Select affiliate network grid with Custom affiliate network card" />
+</Frame>
+
+<Frame>
+  <img src="/images/shared/an-form.jpg" alt="Add affiliate network form with Parameters and Conversion tracking" />
+</Frame>
+
+### Parameters
+
+| Name | AN Parameter / AN Token | CP Token |
+| --- | --- | --- |
+| Click ID | The network's macro that returns your click ID | `{clickid}` |
+| Payout | The network's payout macro | `{payout}` |
+| Transaction ID | The network's transaction ID macro | `{txid}` |
+| Event Type | The network's event or goal macro | `{eventType}` |
+
+For a custom network, type the macro names in **AN Parameter** (placeholder `e.g., clickRef2`). The postback URL updates as you type.
+
+### Conversion tracking fields
+
+| Field | What to enter | Default |
+| --- | --- | --- |
+| **Tracking domain** | The domain in the postback URL. Custom and shared domains are labeled. | Your first domain |
+| **Method** | **S2S Postback URL**, **Tracking Pixel URL**, **Tracking Pixel** or **Tracking Script** | S2S Postback URL |  (and add a row to "What each method gives you": | **Tracking Script** | A JavaScript snippet | Your conversion confirmation page |)
+| **Include additional parameters in the postback URL** | Adds `param1` to `param5` placeholders. Payout and transaction ID stay in the URL. | Off |
+| **Payout currency** | The currency the network reports payouts in. | USD |
+
+### What each method gives you
+
+| Method | You get | Where it goes |
+| --- | --- | --- |
+| **S2S Postback URL** | `https://{domain}/postback?cid=…` | The network's global conversion tracking settings |
+| **Tracking Pixel URL** | `https://{domain}/conversion.gif?…` | An image source in your conversion setup |
+| **Tracking Pixel** | An `<img>` tag | Your conversion confirmation page |
+
+### Additional settings
+
+| Setting | What it does | Default |
+| --- | --- | --- |
+| **Only accept postbacks from white-listed IPs** | Accepts postbacks only from the IPs you list. | Off |
+| **Enter one IP or IP block (CIDR notation) per line** | Shown when the whitelist is on, for example `192.168.1.1` or `10.0.0.0/24`. IPv6 works too. | Empty |
+
+If you turn on the whitelist and leave the list empty, you'll see "Postbacks whitelist cannot be empty".
+
+Postbacks from IPs that aren't on the list are not recorded. Check **Logs → Received Postbacks** if conversions stop after you turn this on.
+
+You can also add **Notes**.
+
+<Frame>
+  <img src="/images/shared/an-additional.jpg" alt="Additional settings expanded with IP whitelist" />
+</Frame>
+
+### FAQ
+
+**Where do I paste the postback URL?** In the affiliate network's global conversion tracking (postback) settings. The blue note under the URL says the same for each method.
+
+**Does ClickPattern add the click ID to my offer URLs automatically?** No. Add the `{clickid}` token to each offer URL in the network's sub ID parameter. See **Add an offer**.
+
+**My template's postback URL has `ct=` in it. Is that right?** Change `ct=` to `et=` before you paste it. ClickPattern reads the event type from `et`. See **Add your postback to an affiliate network**.
+
+### Related articles
+
+- [Add an offer](/tracking/add-an-offer)
+- [Add your postback to an affiliate network](/tracking/add-your-postback-to-an-affiliate-network)
+- [S2S postback](/tracking/s2s-postback)

@@ -1,0 +1,102 @@
+---
+title: "Direct (redirectless) tracking"
+description: "Direct tracking records visits with a script on your page instead of a redirect through ClickPattern. Your ad links straight to your lander or offer page, with a cpid parameter that names the campaign."
+---
+
+### When to use it
+
+- The ad platform doesn't allow redirect links, or prefers ads that point to your own domain.
+- You want the fastest page load, with no extra hop.
+- You own the landing page and can add a script to it.
+
+Use redirect tracking (the `https://{domain}/c/…` campaign URL) when you can't edit the page.
+
+### Step 1: Switch the campaign to direct tracking
+
+1. Go to **Performance → Campaigns** and open the campaign with **Edit**, or click **Create** to start a new one.
+2. In the Advanced form, under **Transition between ad and campaign funnel**, select **Direct**. In the Simple form, set **Transition to offer** to **Direct**.
+3. Click **Save**.
+
+### Step 2: Copy the campaign URL
+
+1. Open the campaign's **Tracking & PatternPilot** tab.
+2. Copy **Campaign URL (Direct Tracking)**.
+
+The URL is your lander or offer URL with the campaign ID added, plus your traffic source's parameters. For example:
+
+`https://lander.example.com/page?cpid=7d2f4a10-3c1e-4b8a-9f2d-5e6a7b8c9d01&zone={zoneid}`
+
+Use this URL in every ad, post and link you want tracked. Traffic that never carries its `cpid` is not counted.
+
+<Frame>
+  <img src="/images/shared/campaign-direct-tracking.jpg" alt="Tracking & PatternPilot tab of a direct-tracking campaign, showing Campaign URL (Direct Tracking) and Tracking Script" />
+</Frame>
+
+### Step 3: Add the tracking script to your page
+
+Under **Tracking Script**, choose a version and click the copy icon. Paste it on every page that receives the campaign URL.
+
+| Option | How it works | Best for |
+| --- | --- | --- |
+| **Inline** (default) | The script is pasted into the page. It runs immediately, with no extra request. | Landers with call-to-action buttons above the fold |
+| **External** | One line that loads the script from your tracking domain: `<script async src="https://{domain}/d/script.js"></script>` | Simple setups; the browser caches the file |
+
+### How the script finds the campaign
+
+1. It reads `cpid` from the page URL.
+2. If the URL has no `cpid`, it reads a cookie that an earlier tracked visit left in the same browser. The cookie lasts up to 30 days; Safari may clear it sooner.
+3. With neither, it records nothing. The browser console shows `[CP] Missing cpid parameter in URL`.
+
+Visits without a `cpid` and their conversions are not recorded. Traffic from other ad campaigns, influencer links or organic posts counts only when its links carry a campaign's `cpid`. Create a campaign for each source, or reuse this campaign's URL.
+
+### Repeat page views
+
+If the same visitor loads a tracked page again within 30 minutes, for the same campaign and with the same external ID, ClickPattern keeps the first click ID. The page view is not counted as a new visit.
+
+### Lander buttons
+
+If the campaign sends visitors to a lander, use the **Click URLs** shown on the same tab for your buttons: `https://{domain}/click` for one offer, or `https://{domain}/click/1`, `/click/2` and so on for several. The script turns them into the real offer links, and each button click is counted.
+
+### Read tracking values on the page
+
+After the script loads, `window.clickpattern.getTokens()` returns an object with the visit's values. It includes `click_id`, `campaign_id`, `campaign_name`, `offer_id`, `offer_name`, `country_code`, `region`, `city`, `device_type`, `os`, `browser`, `isp` and `external_id`.
+
+```html
+<script>
+  var tokens = window.clickpattern.getTokens();
+  // tokens.click_id → "c1a8f0e2-5b7d-4f3a-8e9c-2d4b6a1f0e37"
+</script>
+```
+
+### Record a conversion from the page
+
+Call `window.clickpattern.registerConversion()` after the visitor converts, for example after a form submit:
+
+```html
+<script>
+  window.clickpattern.registerConversion({ payout: 25, transactionId: 'ORDER-1001' });
+</script>
+```
+
+| Field | What to enter |
+| --- | --- |
+| `payout` | Conversion value. Default `0`. |
+| `transactionId` | Your order or lead ID. Used to stop duplicates. |
+| `status` | `approved` (default), `pending` or `rejected`. |
+
+This call sends no event type, so the conversion is recorded untyped. To record a specific event, such as `lead`, use the conversion pixel or script with an event type instead.
+
+### FAQ
+
+**Do tokens like `{clickid}` work in a direct campaign URL?** No. Nothing redirects, so nothing replaces tokens in the page URL. Read values with `window.clickpattern.getTokens()` instead.
+
+**Which script should I pick?** Pick **Inline** if visitors can click a button the moment the page appears. Pick **External** if you want one short line that you never need to update.
+
+**My visits aren't showing. What should I check?** Open the page from your campaign URL and check the address bar for `cpid=`. Then check the browser console for `[CP] Missing cpid parameter in URL`.
+
+### Related articles
+
+- [Tracking URLs page](/tracking/tracking-urls-page)
+- [Passing data with URL tokens](/tracking/passing-data-with-url-tokens)
+- [Conversion pixel and script](/tracking/conversion-pixel-and-script)
+- [Add a custom tracking domain](/tracking/add-a-custom-tracking-domain)

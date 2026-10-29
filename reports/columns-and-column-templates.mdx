@@ -1,0 +1,98 @@
+---
+title: "Columns and column templates"
+description: "Choose which columns a report shows, put them in your preferred order, pin key columns and save the setup as a template to reuse."
+---
+
+### Open column settings
+
+1. In Performance, click **Columns**.
+2. Choose **Default** to reset to the default columns, or **Columns settings...** to customize.
+
+<Frame>
+  <img src="/images/reports/columns-settings.jpg" alt="Columns settings dialog with Columns visibility on the left and Columns order on the right" />
+</Frame>
+
+### Choose columns
+
+The left side, **Columns visibility**, lists the columns you can show.
+
+- **Search for column** finds a column by name.
+- **Select all** ticks or clears every regular column.
+- The first row is the name column, for example **Campaign Name**.
+- Hover the info icon next to a column to see its format.
+
+Regular columns include:
+
+| Type | Columns |
+| --- | --- |
+| Traffic | Visits, Unique Visits, Bot Visits, Bot Rate, Suspicious Visits, Suspicious %, Suspicious Clicks, Clicks, Unique Clicks, Offer Clicks |
+| Financial | Conversions, Cost, Revenue, Profit |
+| Rates | ROAS, ROI, CTR, CV, CR, EPV, EPC, CPV |
+| Other | Impressions, Errors |
+| Time to convert | Low TTC, Optimal TTC, MTTC, High TTC |
+| Advanced | ICTR, AP, RPM, eCPM, eCPC, eCPA |
+
+Campaign reports also list campaign details, such as **Campaign ID**, **Campaign Tags**, **ClickPattern Status**, **Cost Model** and **Campaign URL**. Your custom conversion events appear as columns too, with a revenue column (for example **Lead Rev**) when the event counts toward revenue.
+
+### Show extended columns
+
+Turn on **Show extended columns** to add columns about related items and visitor data. For example, on Campaigns you can add offer, lander, flow and traffic source details. Turning it off removes extended columns from your selection.
+
+### Common formulas
+
+| Column | Formula |
+| --- | --- |
+| Profit | Revenue − Cost |
+| ROI | (Revenue − Cost) ÷ Cost × 100 |
+| ROAS | Revenue ÷ Cost |
+| CTR | Clicks ÷ Visits × 100 |
+| CR | Conversions ÷ Clicks × 100 |
+| CV | Conversions ÷ Visits × 100 |
+| EPV | Revenue ÷ Visits |
+| EPC | Revenue ÷ Clicks |
+| CPV | Cost ÷ Visits |
+| AP | Revenue ÷ Conversions |
+
+Hover a column header's info icon in the table to see its definition.
+
+### Set the column order
+
+On the right, **Columns order** offers three modes:
+
+| Mode | What it does |
+| --- | --- |
+| **Default order** | Uses the standard order. |
+| **Custom order** | Lets you drag columns into place. |
+| **Template order** | Loads the order from a saved template. |
+
+Ticking or unticking columns switches you to **Custom order** automatically.
+
+Visibility applies to every report. Order applies only to the report you're on, as the note in the dialog explains (for example, "Columns order will apply specifically to the report grouped by Campaigns").
+
+### Pin columns
+
+In **Custom order** or **Template order**, hover a column and click the pin icon (**Pin column**). You can pin up to three columns. Pinned columns stay in view when you scroll sideways. The panel shows the count, for example `2/3 columns pinned`.
+
+### Save and use templates
+
+1. Set up your columns.
+2. At the bottom, tick **Save as template** and type a name.
+3. Click **Save**.
+
+To use a template, choose **Template order** and pick it from **Select Template**. Click the bin icon next to a template to delete it.
+
+Templates are saved to the workspace for that report type. Two templates for the same report can't share a name. You'll see `A template named "…" already exists for this report`.
+
+### FAQ
+
+**Why did my columns reset on another computer?** Your column choices are stored in your browser. Save them as a template to reuse them anywhere.
+
+**Why are my changes not showing?** Click **Save**. Closing the dialog with **Cancel** discards changes.
+
+**Can I add my own calculated column?** Yes. See "[Custom metrics](/reports/custom-metrics)".
+
+### Related articles
+
+- [Custom metrics](/reports/custom-metrics)
+- [Performance reports](/reports/performance-reports)
+- [Shared reports](/reports/shared-reports)

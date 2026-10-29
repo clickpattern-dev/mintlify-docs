@@ -1,0 +1,59 @@
+---
+title: "MCP tool reference"
+description: "The tools an AI assistant can use once connected to ClickPattern by MCP. Read tools work on any connection. Write tools need Read and write access."
+---
+
+### Connection basics
+
+- Server URL: `https://mcp.clickpattern.com/api/mcp`. Connect with OAuth: add the connector in your AI client, log in, then choose a workspace and **Read only** or **Read and write**.
+- Each connection covers one workspace.
+- Requests are limited to 30 per minute per user.
+- Most write tools aren't idempotent: retrying a call creates a duplicate. `create_campaign_complete` takes an `idempotency_key`; reuse it on retries to avoid a second campaign.
+- Manage connections in **Settings → MCP Access**.
+
+### Read tools
+
+| Tool | What it does | Main parameters |
+| --- | --- | --- |
+| `get_current_user` | Your user ID, email and name. | None |
+| `list_workspaces` | The workspace this connection covers, with your role. | `filter` (owned, shared or all) |
+| `list_campaigns` | Campaigns with status, country and created date. | `workspace_id`, `active_only` |
+| `list_offers` | Offers with URL, payout and tracking domain. | `workspace_id` |
+| `list_landers` | Landers with URL and tracking domain. | `workspace_id` |
+| `list_flows` | Flows and their paths. | `workspace_id` |
+| `list_traffic_sources` | Traffic sources and their parameters. | `workspace_id` |
+| `list_affiliate_networks` | Affiliate networks and postback templates. | `workspace_id` |
+| `list_domains` | Tracking domains, each marked usable or not. | `workspace_id` |
+| `list_integrations` | Connected ad platforms and their status. | `workspace_id` |
+| `list_automation_rules` | PatternPilot rules with conditions, actions and run counts. | `workspace_id` |
+| `get_dashboard_summary` | Workspace totals, active campaign count, and top and bottom performers. Defaults to the last 7 days plus today. | `workspace_id` |
+| `get_campaign_performance` | One campaign's details and metrics. Defaults to the last 30 days. | `campaign_id`, `workspace_id` |
+| `get_campaign_stats` | One campaign broken down by a dimension (offers by default). | `workspace_id`, `campaign_id`, `date_from`, `date_to`, `dimension` |
+| `get_workspace_overview` | KPI snapshots for today, 7 days and 30 days. | `workspace_id` |
+| `generate_analytics_report` | Grouped report for campaigns, offers, landers or traffic sources, with sorting and paging. | `workspace_ids`, `date_from`, `date_to`, `dimension`, `sort_by`, `sort_order`, `page`, `page_size` |
+| `query_clicks` | Detailed analytics by one or more dimensions (up to 5), with filters. | `workspace_id`, `date_from`, `date_to`, `group_by` or `dimensions`, `filters`, `limit` |
+| `get_platform_insights` | The ad platform's own reported spend, impressions and clicks. | `workspace_id`, `platform`, `integration_id`, `date_from`, `date_to` |
+| `suggest_rule` | Drafts a PatternPilot rule from a plain-English goal. Doesn't save it. | `workspace_id`, `goal` |
+
+Dates use the `YYYY-MM-DD` format. Reports are limited to your plan's data retention; the response shows the window actually queried.
+
+### Write tools
+
+| Tool | What it does | Main parameters |
+| --- | --- | --- |
+| `create_offer` | Creates an offer. | `name`, `offer_url`, `tracking_domain`, `tracking_method`, `payout_value` |
+| `create_lander` | Creates a lander. | `name`, `lander_url`, `tracking_domain`, `number_of_ctas` |
+| `create_traffic_source` | Creates a traffic source, custom or from a template. | `name`, `traffic_source_type_id`, `parameters`, `cost_currency` |
+| `create_campaign` | Creates a campaign from existing offers, landers, flow and traffic source. | `name`, `traffic_source_id`, `destination_type`, `offers`, `landers`, `flow_id`, `cost_model`, `cost_value` |
+| `create_campaign_complete` | Creates a campaign and any missing traffic source, offer, lander and flow in one call. | `workspace_id`, `campaign_name`, objects or IDs for each dependency |
+| `create_automation_rule` | Creates a PatternPilot rule. Needs permission to manage rules. | `name`, `match_mode`, `conditions` (1–10), `actions` (1–5), `schedule`, `cooldown_minutes` |
+| `create_traffic_filter_rule` | Creates an account traffic-filtering rule. Needs Owner or Admin. Applies within about 5 minutes when traffic filtering is on. | `rule_kind`, `name`, `match_type` and `entries`, or `conditions` |
+| `invite_workspace_member` | Invites someone by email. The invitation expires in 7 days. | `email`, `role`, `message` |
+| `create_workspace` | Creates a workspace in the same organization. | `name`, `description`, `share_with_user_ids` |
+
+Write tools follow the same validation, role checks and plan limits as the app.
+
+### Related articles
+
+- [Glossary](/reference/glossary)
+- [Error codes and messages](/reference/error-codes-and-messages)

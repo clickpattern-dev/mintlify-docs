@@ -1,0 +1,97 @@
+---
+title: "Upload conversions by CSV"
+description: "Add conversions that weren't recorded automatically, or that need correcting, by pasting rows or uploading a CSV file in Data Hub → Conversion upload."
+---
+
+### Before you start
+
+- Uploads go to one workspace. Select it in the sidebar workspace selector first. If several are selected, the page tells you which workspace the upload goes to.
+- You need Editor access or higher.
+
+### Step 1: Choose a format
+
+Pick the tab that matches your data.
+
+| Tab | Use it when | First column |
+| --- | --- | --- |
+| **Format A: With Click ID** | You have ClickPattern click IDs. The conversion inherits the click's campaign, offer, geo and device. | The click ID |
+| **Format B: Without Click ID** | You only know the campaign | Empty |
+
+ClickPattern reads the format from the first row, not the tab. If the first column is empty, the upload is treated as Format B. The page warns you when the tab and the data don't match.
+
+<Frame>
+  <img src="/images/shared/conversion-upload.jpg" alt="Conversion upload page with Format A tab and Column Reference open" />
+</Frame>
+
+### Step 2: Prepare your rows
+
+Files have no header row: row 1 is data. Columns are read by position. Click **Download example CSV** for a sample row.
+
+**Format A (12 columns)**
+
+| # | Column | Notes |
+| --- | --- | --- |
+| 1 | `click_id` | Required |
+| 2 | `payout` | Number; negative values are rejected |
+| 3 | `transaction_id` | Your order or lead ID |
+| 4 | `conversion_type` | Event type, such as `lead` |
+| 5 | `conversion_time` | ISO 8601, such as `2026-01-15T10:30:00Z` |
+| 6 | (empty) | Must be empty |
+| 7 | `payout_currency` | Such as `USD` or `EUR` |
+| 8–12 | `param_1`–`param_5` | Custom parameters |
+
+**Format B (28 columns)**
+
+| # | Column | Notes |
+| --- | --- | --- |
+| 1 | (empty) | Must be empty |
+| 2–5 | `payout`, `transaction_id`, `conversion_type`, `conversion_time` | As in Format A |
+| 6 | `campaign_id` | Required: the campaign's UUID |
+| 7 | `payout_currency` |  |
+| 8–12 | `param_1`–`param_5` |  |
+| 13–16 | `offer_id`, `lander_id`, `flow_id`, `path_id` | Optional UUIDs |
+| 17–26 | `custom_var_1`–`custom_var_10` | Custom variables |
+| 27 | `external_id` | External click ID, such as a gclid |
+| 28 | `external_id_type` | `GCLID`, `WBRAID` or `GBRAID` |
+
+Example Format A rows:
+
+```
+c1a8f0e2-5b7d-4f3a-8e9c-2d4b6a1f0e37,12.50,ORD-1001,lead,2026-01-15T10:30:00Z,,USD
+3f9b2c71-8d4e-4a6b-b1c2-7e5f9a0d4c28,40.00,ORD-1002,purchase,,,EUR
+```
+
+### Step 3: Upload
+
+1. Paste rows into the text box, or drop a `.csv` file into the upload area.
+2. Click **Save**.
+3. Confirm with **Yes, upload conversions**. Uploaded conversions are registered permanently.
+
+Track progress in **Upload History**: **Status**, **Format**, **Rows**, **Processed**, **Errors**, **Started** and **Duration**. Expand a row to see errors by line.
+
+### Limits
+
+| Limit | Value |
+| --- | --- |
+| File size | Under 10 MB, `.csv` only |
+| Rows per file | 50,000 |
+| Rate | 50,000 conversions per hour per workspace |
+
+### Refunds and duplicates
+
+- You can't upload refunds or negative payouts. Send the network's refund postback instead.
+- A row that matches an existing conversion (same click, event type and transaction ID) is rejected as a duplicate. Re-uploading the same file books nothing twice.
+
+### FAQ
+
+**Can I include a header row?** No. The first row is read as data. A header row fails as an invalid row.
+
+**Why did my rows fail with "campaign\_id is required"?** The first column of the first row was empty, so the file was read as Format B. Put the click ID in column 1, or add campaign IDs.
+
+**Which workspace do my conversions go to?** The workspace selected in the sidebar. With several selected, the page names the workspace the upload goes to.
+
+### Related articles
+
+- [Duplicates, refunds and statuses](/tracking/duplicates-refunds-and-statuses)
+- [Event types and custom conversion events](/tracking/event-types-and-custom-conversion-events)
+- [S2S postback](/tracking/s2s-postback)

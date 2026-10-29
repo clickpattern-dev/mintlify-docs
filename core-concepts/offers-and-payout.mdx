@@ -1,0 +1,54 @@
+---
+title: "Offers and payout"
+description: "An offer is the product page you're promoting, usually an affiliate link. It holds the offer URL with your click ID and the rule for how much each conversion is worth."
+---
+
+### Offer URL and \{clickid\}
+
+Paste your affiliate link into **Offer URL**. Add the `{clickid}` token in the parameter your network uses for sub IDs, for example: `https://network.example/offer?aff_id=123&aff_sub={clickid}`
+
+ClickPattern replaces `{clickid}` with each visitor's click ID when it redirects. The network passes it back in its postback, which is how the conversion is matched.
+
+- The **Append Click ID to Offer URL** switch adds `clickid={clickid}` for you. If your network expects a different parameter name, such as `s2` or `subid`, type it yourself instead.
+- When **Tracking method** is **S2S Postback URL** and the URL has no `{clickid}`, a warning icon appears next to the switch.
+- **Available URL tokens** lists every token you can add, such as country, device or your traffic source variables.
+
+### Auto vs Manual payout
+
+| **Payout type** | Revenue per conversion | Payout in postback |
+| --- | --- | --- |
+| **Auto** (default) | The payout the network sends in the postback or pixel. If none is sent, 0. | Used |
+| **Manual** | Your **Default value**, or a geo payout for the visitor's country | Ignored |
+
+Auto does not fall back to a default value. If your network doesn't send a payout, choose **Manual**.
+
+The **Currency** field next to the default value sets the offer's payout currency. With Auto, a currency sent in the postback takes priority. Without one, the offer's currency is used, then USD.
+
+<Frame>
+  <img src="/images/shared/offer-manual-geo-payout.jpg" alt="Offer form payout section with Payout type set to Manual and Geo-specific payout on" />
+</Frame>
+
+### Geo payout
+
+With **Manual** payout you can turn on **Geo-specific payout** to set a different value per country. Add a country with **Select geo** and enter its payout and currency.
+
+For each conversion ClickPattern uses the matching country's payout first. If the country isn't listed, it uses the **Default value**, and 0 if that is empty.
+
+### Caps
+
+**Offer cap** limits how many conversions or clicks an offer gets per day. Once the cap is reached, visitors go to the **Redirect offer** you pick. You need at least one other offer in the workspace to turn it on. See Offer caps and redirect offers for the details.
+
+### FAQ
+
+**My conversions show $0 revenue. Why?** The offer is on **Auto** and the postback didn't include a payout. Add the payout parameter to the network's postback, or switch the offer to **Manual**.
+
+**Can I use one offer in several campaigns?** Yes. Put it in the Public Workspace if campaigns in different Private workspaces need it.
+
+**What happens if I archive an offer?** It's hidden from the create and edit pickers, so it can't be added to anything new. Campaigns already using it keep sending traffic, and reporting is unaffected.
+
+### Related articles
+
+- [Offer caps and redirect offers](/tracking/offer-caps-and-redirect-offers)
+- [Affiliate networks](/core-concepts/affiliate-networks)
+- [Visits, clicks and conversions](/core-concepts/visits-clicks-and-conversions)
+- [S2S postback](/tracking/s2s-postback)

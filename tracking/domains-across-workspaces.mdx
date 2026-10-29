@@ -1,0 +1,59 @@
+---
+title: "Domains across workspaces"
+description: "Control which workspaces can use each tracking domain. Platform domains come with your account; custom domains can be Public or Restricted."
+---
+
+### Types of domain
+
+| Type | Badge in Settings → Domains | Who uses it |
+| --- | --- | --- |
+| Shared platform domain | **Platform**, **Shared** | Part of a trial pool; may be used by other ClickPattern accounts |
+| Dedicated platform domain | **Platform**, **Dedicated** | Dedicated to your account |
+| Custom domain | **Custom** | Your own domain, added under **Custom Domains** |
+
+Platform domains are ready to use immediately. For an exclusive domain on a shared setup, add a custom domain.
+
+### Public vs Restricted
+
+Visibility applies to custom domains.
+
+| Visibility | Available to |
+| --- | --- |
+| **Public** (default) | All workspaces on your account, including new ones |
+| **Restricted** | Only the workspaces you choose |
+
+A domain's row shows **All workspaces** when Public, or the assigned workspace names when Restricted. Use **All**, **Public** and **Restricted** above the list to filter.
+
+### Change a domain's visibility
+
+1. Go to **Settings → Domains**.
+2. Click the ⋮ menu on the domain and choose **Edit visibility**.
+3. Select **Public — available to all workspaces** or **Restricted — selected workspaces only**.
+4. For Restricted, pick workspaces in **Assign to workspaces**. At least one is required.
+5. Click **Save**.
+
+<Frame>
+  <img src="/images/shared/domain-visibility.jpg" alt="Edit visibility dialog with Restricted selected and workspaces chosen" />
+</Frame>
+
+### Remove from a workspace vs delete
+
+| Action | Where | Result |
+| --- | --- | --- |
+| **Remove from this workspace** | ⋮ menu, Restricted domains only | Removed from the current workspace. It stays on your account, and other workspaces keep using it. |
+| **Delete domain** | ⋮ menu | Deleted from your whole account and every workspace. Its name is released. This can't be undone. |
+
+Before you delete a domain, move campaigns that use it to another domain. Links on a deleted domain stop working.
+
+### FAQ
+
+**I can't see a domain in my campaign's domain list. Why?** It may be Restricted to other workspaces. Ask an admin to add your workspace under **Edit visibility**.
+
+**Can I make a Restricted domain Public again?** Yes. Use **Edit visibility** and select Public.
+
+**Why don't I see the ⋮ menu?** Changing domains needs edit permission in the current workspace.
+
+### Related articles
+
+- [Add a custom tracking domain](/tracking/add-a-custom-tracking-domain)
+- [Tracking URLs page](/tracking/tracking-urls-page)

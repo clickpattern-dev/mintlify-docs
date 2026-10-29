@@ -1,0 +1,80 @@
+---
+title: "Affiliate network templates"
+description: "An affiliate network template fills in the network's postback macros and builds the postback URL for you. Pick the template, choose your tracking domain, then paste the URL into the network."
+---
+
+### What a template prefills
+
+When you pick a network from the list, ClickPattern fills in:
+
+| Item | What it is |
+| --- | --- |
+| **Name** | The network's name. You can change it. |
+| **Parameters** | The network's own macros for **Click ID**, **Payout**, **Transaction ID** and **Event Type**, each shown next to the matching ClickPattern token |
+| **Tracking domain** | Your first available tracking domain |
+| **Method** | **S2S Postback URL** |
+| **Postback URL** | A ready-made URL built from your domain and the network's macros |
+| **Payout currency** | USD |
+
+ClickPattern has templates for many networks. Use the search box to find yours.
+
+### Add a network from a template
+
+1. Go to **Performance → Affiliate Networks** and click **Create**.
+2. In **Select affiliate network**, search for your network and click its card.
+3. Check the **Name** and the workspace.
+4. Under **Conversion tracking**, pick your **Tracking domain**.
+5. Choose a **Method**. **S2S Postback URL** is the default and the most reliable.
+6. Copy the URL or code that appears below the method.
+7. Set **Payout currency** to the currency the network pays in.
+8. Click **Save**.
+9. Paste the postback URL into the network's global conversion tracking settings.
+
+<Frame>
+  <img src="/images/shared/an-grid.jpg" alt="Select affiliate network grid with search and Custom affiliate network card" />
+</Frame>
+
+### Conversion tracking options
+
+| Option | What it does |
+| --- | --- |
+| **S2S Postback URL** | A server-to-server URL for the network's postback settings |
+| **Tracking Pixel URL** | A pixel URL to use as an image source |
+| **Tracking Pixel** | Image HTML for a landing page or confirmation page |
+| **Tracking Script** | A script for a landing page or confirmation page |
+| **Include additional parameters in the postback URL** | Adds `param1` to `param5` to the URL. Payout and transaction ID stay in the URL. |
+| **Accept duplicate postbacks/pixels** | Off by default. Turn on only if the network sends repeat conversions you want counted. |
+| **Only accept postbacks from white-listed IPs** | Accepts postbacks only from the IPs or CIDR blocks you list, one per line. The list can't be empty when this is on. |
+
+Every postback URL starts like `https://{domain}/postback?cid=`. The network replaces its click ID macro with the ClickPattern click ID you passed in the offer URL.
+
+<Frame>
+  <img src="/images/shared/an-form.jpg" alt="Add affiliate network form, Parameters table and Conversion tracking section" />
+</Frame>
+
+### Custom networks
+
+If your network isn't listed, click **Custom affiliate network**.
+
+1. Enter a **Name**.
+2. In **Parameters**, type the network's macro for each row in **AN Parameter**. For example, the network's click ID macro goes in the **Click ID** row.
+3. The postback URL updates as you type.
+4. Finish the **Conversion tracking** section and click **Save**.
+
+### One postback per network
+
+Each affiliate network has its own postback URL. Add each network you work with separately, and paste each URL into that network only. Payout currency, IP whitelist and duplicate settings apply per network.
+
+### FAQ
+
+**The template's macros don't match my network. What should I do?** With a template, the URL uses the template's macros. If your network uses different ones, create a **Custom affiliate network** and enter the right macros.
+
+**The generated URL sends the event type as `ct=`. Will ClickPattern read it?** ClickPattern reads the event type from `et` (also `event`, `event_type` or `type`). If you need event types, change `ct=` to `et=` in the URL you paste into the network.
+
+**Where do I find the postback URL again later?** Open the network from **Performance → Affiliate Networks** with **Edit**.
+
+### Related articles
+
+- [Traffic source templates](/integrations/traffic-source-templates)
+- [S2S postback](/tracking/s2s-postback)
+- [Your first campaign in 10 minutes](/start-here/your-first-campaign-in-10-minutes)

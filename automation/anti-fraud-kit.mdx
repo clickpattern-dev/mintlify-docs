@@ -1,0 +1,95 @@
+---
+title: "Anti-Fraud Kit"
+description: "The Anti-Fraud Kit scores each visit for signs of invalid traffic, flags suspicious visits in your reports, and can stop fraud-tagged conversions from reaching your ad platforms."
+---
+
+### Open the Anti-Fraud Kit
+
+Go to **Data Hub → Anti-fraud kit**. It's available on plans that include it; see [pricing](https://www.clickpattern.com/pricing).
+
+All changes apply to future traffic only. Past rows are not recalculated. Click **Save** to apply changes. Owners and Admins can save.
+
+<Frame>
+  <img src="/images/automation/afk-page.jpg" alt="Anti-fraud kit page" />
+</Frame>
+
+### Conversion blocking
+
+Fraud scores appear in your reports either way. Blocking is off by default.
+
+Turn on **Stop forwarding fraud-tagged conversions to ad-platform CAPIs (Meta, Google, TikTok…)** to stop fraud-tagged conversions, in the categories you select, from reaching your ad platforms. Leave it off until you trust the scoring.
+
+### CAPI outbound block list
+
+Choose which fraud categories are blocked when conversion blocking is on:
+
+| Category | Selected by default |
+| --- | --- |
+| `datacenter` | Yes |
+| `vpn_proxy` | No |
+| `bot` | No |
+| `stuffing` | Yes |
+| `invalid` | Yes |
+
+The defaults are the most precise categories.
+
+### Metrics configuration
+
+Choose which signals flag traffic as suspicious. All are on by default. Turning one off stops it counting toward the fraud score for new traffic.
+
+| Signal | What it detects |
+| --- | --- |
+| **Data centers (ASN)** | Visit IP belongs to a hosting or cloud network. |
+| **Data centers (IP range)** | Visit IP is in a known data center range. |
+| **Known bots / crawlers** | User agent matches a named crawler, such as Googlebot or AhrefsBot. |
+| **Library robots** | User agent is an HTTP library or program, such as curl or python-requests. |
+| **Tor exit nodes** | Visit comes from a Tor exit node. |
+| **Headless browsers** | User agent shows a headless or automation browser. |
+| **Invisible clicks (honeypot)** | A bot clicked the hidden honeypot link on your lander. |
+| **Frequent events (velocity)** | Same fingerprint and network seen too often within 60 seconds. |
+| **Frequent campaign events** | One IP range sends over 60 events a minute to one campaign. |
+| **Frequent events (IP)** | One IP sends over 60 events a minute across the platform. |
+| **Fingerprint stuffing** | One fingerprint seen across an abnormal number of IPs. |
+| **Unsupported OS version** | Operating system is years past end of life. |
+| **Empty / short user agent** | User agent is missing or under 20 characters. |
+| **Unrecognized user agent** | User agent is malformed or non-standard. |
+| **Unrecognized device** | User agent can't be matched to a known browser or OS. |
+| **Missing Accept-Language** | The request has no Accept-Language header. |
+| **Badly-ranked referrers** | Referrer domain has a poor reputation. |
+| **Fast clickers (lander)** | Offer link clicked under 800 ms after the lander became visible. |
+
+### Suspicious vs blocked
+
+Each visit gets a fraud score from the signals above. A visit that trips a signal is flagged as suspicious in your reports. A visit whose score crosses ClickPattern's enforcement threshold counts as enforced ("Blocked"). You can't change the threshold on this page. PatternPilot's Quality metrics use the enforced count.
+
+### Honeypot
+
+The honeypot script adds an invisible link to your lander that only a bot can click. When it's clicked, the visit is marked suspicious and counted as an **Invisible Click** in your reports.
+
+If you see **Honeypot is not enabled for your workspace. Contact support to enable it.**, contact support to turn it on. You also need a tracking domain (**Settings → Domains**).
+
+To install it:
+
+1. Under **Honeypot**, select the domain used on your lander.
+2. Click the copy icon to copy the code.
+3. Paste it into your lander right after the `<body>` tag, before any offer links.
+
+Use it only on redirect-tracking campaigns. Don't combine it with the direct-tracking script, and don't install it through Google Tag Manager.
+
+<Frame>
+  <img src="/images/automation/afk-honeypot.jpg" alt="Honeypot section with domain picker and code" />
+</Frame>
+
+### FAQ
+
+**Will blocking conversions change my ClickPattern reports?** No. Fraud scores show in reports either way. Blocking only stops fraud-tagged conversions from being sent to your ad platforms.
+
+**I turned off a signal. Why are old visits still flagged?** Changes apply to future traffic only. Past rows aren't recalculated.
+
+**Can I put the honeypot in Google Tag Manager?** No. Bots don't scan GTM, so it won't work. Paste the code into the lander HTML.
+
+### Related articles
+
+- [Traffic filtering](/automation/traffic-filtering)
+- [Rule metrics](/automation/rule-metrics)
+- [Time-to-convert (MTTC)](/automation/time-to-convert-mttc)

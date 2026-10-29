@@ -1,0 +1,66 @@
+---
+title: "Visits, clicks and conversions"
+description: "ClickPattern records three kinds of events for every visitor: a visit when they open your campaign URL, a click when they go from a lander to an offer, and a conversion when the affiliate network or store reports a sale or lead. A unique click ID ties them together."
+---
+
+### The event model
+
+| Event | When it's recorded | Report column |
+| --- | --- | --- |
+| Visit | A visitor opens your campaign URL (or a page with your direct tracking script). | **Visits**, **Unique Visits** |
+| Click | The visitor clicks a CTA on your lander and is sent to an offer. | **Clicks**, **Unique Clicks** |
+| Conversion | A postback, pixel or store integration reports a sale, lead or other event for that visitor's click ID. | **Conversions** |
+| Refund | A conversion is reversed. | Lowers revenue and profit |
+
+If a campaign sends visitors straight to an offer (no lander), the visit also counts as the click. You don't need a lander for Clicks to fill in.
+
+### The click ID
+
+Every visit gets a click ID, a UUID such as `7d2f4a10-9c3e-4b8a-a1f2-5e6d7c8b9a01`. ClickPattern puts it in your offer URL wherever you place the `{clickid}` token. Your affiliate network stores it and sends it back in the postback, and that is how a conversion is matched to the visit, campaign, traffic source and ad.
+
+Without `{clickid}` in the offer URL, a postback has nothing to match on and the conversion can't be attributed.
+
+ClickPattern also captures the ad platform's own click ID when it is in the URL, so you don't have to map it yourself. These are read automatically: `fbclid`, `gclid`, `gbraid`, `wbraid`, `ttclid`, `twclid`, `li_fat_id`, `epik`, `msclkid`, `ScCid`, `dclid` and `oppref`.
+
+### Unique vs non-unique visits
+
+Every visit is recorded, including refreshes and repeat visits. ClickPattern then marks each one as unique or non-unique, per campaign.
+
+| How the visitor is recognized | Window |
+| --- | --- |
+| ClickPattern visitor cookie (set on the first visit) | A repeat visit within 24 hours of the first is non-unique. |
+| No cookie (blocked or cleared), so a fingerprint of IP address and browser details is used | A repeat visit within 1 hour is non-unique. |
+
+The fingerprint window is shorter because many people can share one IP address and browser version, for example in an office. A visitor who returns after the window, or who loses the cookie and returns after an hour, counts as unique again. Uniqueness is tracked separately for visits and for lander clicks.
+
+### Refunds are separate negative events
+
+ClickPattern never edits the original conversion's numbers. A refund is recorded as its own event with a negative payout, linked to the original conversion. The conversion still counts in **Conversions**, while revenue and profit go down by the refunded amount. Partial refunds work the same way.
+
+A refund is created by:
+
+- A postback with `status=refund`.
+- A refund or cancellation from a connected store such as Shopify.
+
+A later postback with `status=rejected` does not reverse a conversion. Only an explicit refund does.
+
+If the campaign's cost model is CPA or RevShare, a refund also reverses the cost of that conversion. CPC and CPM costs are not reversed, because the click or impression still happened.
+
+### Click data lookup window
+
+ClickPattern keeps click data for 365 days. A conversion can be attributed as long as its click ID is still on file, so in practice the attribution window is about one year. A postback for an older click is refused as an unknown click.
+
+### FAQ
+
+**Why do I have more visits than unique visits?** Repeat visits and page refreshes are recorded but marked non-unique. Compare the two columns to see how much repeat traffic a source sends.
+
+**Does a paused campaign still record conversions?** Yes. Pausing stops new visits, but conversions for clicks made earlier are still accepted and attributed.
+
+**Why don't I see clicks on a campaign without a lander?** You should. With no lander, each visit is counted as both a visit and a click.
+
+### Related articles
+
+- [Your first campaign in 10 minutes](/start-here/your-first-campaign-in-10-minutes)
+- [Offers and payout](/core-concepts/offers-and-payout)
+- [Landers](/core-concepts/landers)
+- [S2S postback](/tracking/s2s-postback)

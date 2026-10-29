@@ -1,0 +1,62 @@
+---
+title: "Traffic Distribution AI and smart rotation"
+description: "Traffic Distribution AI shifts traffic toward the paths, landers and offers that perform best. You choose the metric it optimizes for. Your manual weights apply until there is enough data."
+---
+
+### Where to turn it on
+
+| Level | Control | What it optimizes |
+| --- | --- | --- |
+| Flow | **Traffic distribution AI (paths)** | Turns on optimization for all rules and default paths at once |
+| Rule | Rule switch (**Optimization enabled**) and method | The paths inside that rule |
+| Default paths | Switch and method under **Default paths** | The default paths |
+| Path | **Traffic distribution AI (offers & landers)** → **Weight optimization** | Landers and offers inside that path |
+
+The flow-level label shows a count such as **2/3 sets of paths optimized**. If you turn off every rule and default-path switch, the flow switch turns off too.
+
+<Frame>
+  <img src="/images/shared/flow-td-ai.jpg" alt="Traffic distribution AI (paths) switch with method selector" />
+</Frame>
+
+### Methods
+
+| Method | Optimizes for |
+| --- | --- |
+| **Auto** (default) | ROI when cost and revenue exist, EPV when only revenue exists, otherwise CV |
+| **ROI** | (Revenue − Cost) / Cost |
+| **EPV** | Revenue per visit |
+| **CV** | Conversions per visit |
+
+### Path targets
+
+With **Weight optimization** on, pick what to optimize inside the path:
+
+| Target | Meaning |
+| --- | --- |
+| **Offers** | Offers only. The only choice for Offers only paths. |
+| **Landers** | Landers only |
+| **Both separately** | Landers and offers, each on its own |
+| **Both combined** (default) | Landers and offers together |
+
+Each lander, offer or path has an **Optimized** checkbox. Clear it to leave that item out of optimization.
+
+### Smart rotation
+
+**Smart rotation** appears next to each optimization switch. If enabled, visitors are automatically sent to a path, lander or offer they haven't seen yet.
+
+### When optimization starts
+
+Until at least one item has 50 visits, ClickPattern uses your manual weights. After that, it picks by performance score.
+
+### FAQ
+
+**Do I still need to set weights?** Yes. Weights drive traffic until there is enough data, and whenever optimization is off.
+
+**Which method should I pick?** Start with **Auto**. Choose **CV** when you track conversions but not revenue.
+
+**Can I keep one offer at a fixed share?** Clear its **Optimized** checkbox. It is then left out of optimization.
+
+### Related articles
+
+- [Create a flow](/tracking/create-a-flow)
+- [Rule-based paths and conditions](/tracking/rule-based-paths-and-conditions)

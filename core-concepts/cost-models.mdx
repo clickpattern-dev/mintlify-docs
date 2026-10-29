@@ -1,0 +1,64 @@
+---
+title: "Cost models"
+description: "The cost model tells ClickPattern how much you paid for traffic, so it can calculate profit and ROI. You set it per campaign under Cost tracking, which appears once a traffic source is selected."
+---
+
+### Cost sources
+
+| **Cost source** | Where the cost comes from |
+| --- | --- |
+| **Not Tracked** | Nowhere. No cost is recorded, and profit and ROI show as unavailable. |
+| **Manual** | A fixed rate you enter on the campaign. |
+| **Token (Auto)** | The traffic source passes the cost of each visit in the campaign URL, through the `{cost}` parameter. |
+| **API (Integrated)** | Cost synced from a connected ad platform, such as Meta or Google Ads. |
+
+<Frame>
+  <img src="/images/shared/cost-manual-cpc.jpg" alt="Cost tracking section with Cost source set to Manual and Cost model CPC" />
+</Frame>
+
+### Manual cost models
+
+With **Manual**, choose a **Cost model** and enter the rate.
+
+| **Cost model** | Field | Cost is recorded |
+| --- | --- | --- |
+| **CPC** | **Cost per click** | On each visit |
+| **CPM** | **Cost per 1,000 impressions** | On each tracked impression, at the rate divided by 1,000 |
+| **CPA** | **Cost per conversion** | On each conversion |
+| **RevShare** | **Percentage share** (0–100%) | On each conversion, as that share of its payout |
+
+Micro-conversions such as add to cart or page view don't add CPA or RevShare cost. A refund reverses CPA and RevShare cost but not CPC or CPM cost.
+
+**Traffic loss (%)** appears for CPC only. Use it when the source bills for clicks that never reach your page. ClickPattern grosses up the recorded cost: with 10% traffic loss, a $0.50 CPC is recorded as $0.55 per visit.
+
+### Token (Auto) and \{cost\}
+
+For **Token (Auto)**, the traffic source's **Cost** parameter must be set in its Parameters table, with the source's cost placeholder in **TS Token**. The campaign URL then carries the price of each visit, and ClickPattern records it as that visit's cost. Visits that arrive without a cost value add no cost.
+
+### API (Integrated)
+
+**API (Integrated)** needs an active integration with cost sync turned on. Cost is synced from the platform and matched to your campaign. You don't enter a rate.
+
+### Which cost wins
+
+1. **Update Cost** overrides everything for the days you choose. It replaces tracked and platform-synced cost for those calendar days, for up to 32 days at a time. **Restore** removes the override.
+2. **API (Integrated)**: synced platform cost takes priority over all other cost sources.
+3. A cost value in the campaign URL: if a visit carries a `{cost}` value above 0, that value is used, even when the campaign's cost source is Manual.
+4. The **Manual** rate, when the visit has no cost value.
+5. **Not Tracked** records nothing, even if the URL carries a cost.
+
+Find **Update Cost** in the Performance toolbar on the Campaigns tab.
+
+### FAQ
+
+**I set Manual CPM but cost stays at 0. Why?** CPM cost is recorded per tracked impression, not per visit. Without impression tracking there is nothing to charge.
+
+**My source sends cost, but the campaign uses Manual. Which is used?** The URL value, for any visit where it is above 0. The manual rate fills in for visits without one.
+
+**Can I correct cost for past days?** Yes. Use **Update Cost** for the date range. It replaces tracked and synced cost for those days.
+
+### Related articles
+
+- [Track and update cost](/tracking/track-and-update-cost)
+- [Campaigns](/core-concepts/campaigns)
+- [Traffic sources](/core-concepts/traffic-sources)

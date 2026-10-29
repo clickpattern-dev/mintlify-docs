@@ -1,0 +1,67 @@
+---
+title: "Custom metrics"
+description: "Create your own report columns from a formula, such as revenue per conversion event or profit after fees. Each workspace can have up to 15."
+---
+
+### Where to find them
+
+1. In Performance, click **Columns**, then **Columns settings...**.
+2. Scroll to **Custom columns**. It shows how many you've created, for example `3 of 15 created`.
+3. Click **Add custom column**.
+
+To change a custom column, click its edit icon. To remove it, click its delete icon.
+
+<Frame>
+  <img src="/images/reports/custom-column.jpg" alt="New custom column dialog with a formula and preview" />
+</Frame>
+
+### Create a custom column
+
+1. Enter a **Column name** (up to 100 characters).
+2. Pick a **Format**: **Decimal**, **Currency** or **Percentage**.
+3. For Currency or Percentage, turn on **Colored** to show positive values in green and negative values in red.
+4. Build **Your formula**:
+   - Pick a column from **Add metric**. It's grouped into **Metrics**, **Custom Metrics** and **Conversion Events**.
+   - Click the buttons **+**, **−**, **×**, **/**, **(** and **)** to add operators.
+   - Or type the formula yourself. Click **Clear** to start over.
+5. Check **Preview (sample data)** under the formula.
+6. Click **Save**.
+
+The new column appears in the column list. Tick it to show it in your report.
+
+New custom columns are visible to everyone in the workspace. You can change who sees them in multi-user settings.
+
+### Formula rules
+
+- Allowed characters: letters, numbers, spaces, decimal points, underscores, `+ - * / ( )`.
+- Use brackets to group parts, for example `revenue - ( cost * 1.1 )`.
+- Column names must exist. Otherwise you'll see `Unknown metric(s): …`.
+
+| Error | Fix |
+| --- | --- |
+| Formula contains invalid characters… | Remove symbols other than the allowed ones. |
+| Unbalanced parentheses… | Add or remove a bracket. |
+| Invalid formula: consecutive operators | Remove one of two operators side by side. |
+| Invalid formula: empty parentheses | Put something inside the brackets. |
+| Invalid formula: operator at start or end | Remove the operator at the start or end. |
+
+### Formats
+
+The format only changes how the value displays. If the result is 0.01, **Decimal** shows `0.01`, **Percentage** shows `1%` and **Currency** shows `$0.01` (in your report currency).
+
+### Division by zero
+
+If a formula divides by zero on a row, that row shows 0. For example, `revenue / conversions` shows 0 on rows with no conversions.
+
+### FAQ
+
+**Who can create custom columns?** You need the Editor role or higher in the workspace.
+
+**What happens at 15?** **Add custom column** is disabled. Delete one to create another.
+
+**Can a custom column use another custom column?** Yes. Pick it from **Custom Metrics** in **Add metric**.
+
+### Related articles
+
+- [Columns and column templates](/reports/columns-and-column-templates)
+- [Performance reports](/reports/performance-reports)

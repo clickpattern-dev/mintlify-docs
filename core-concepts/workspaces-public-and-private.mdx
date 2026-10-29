@@ -1,0 +1,54 @@
+---
+title: "Workspaces: Public and Private"
+description: "Workspaces split your account's elements and data. Your account has one Public Workspace for shared elements and any number of Private workspaces, which hold your campaigns."
+---
+
+### Public vs Private
+
+|  | Public Workspace | Private workspace |
+| --- | --- | --- |
+| How many | Exactly one per account, created at signup | As many as you need |
+| Campaigns | Not allowed | Yes |
+| Offers, landers, flows, traffic sources, affiliate networks | Yes, shared with every Private workspace | Yes, used only within that workspace |
+| Rename or delete | No | Yes |
+
+Use the Public Workspace for elements several teams or clients use, such as a traffic source or an offer you run everywhere. Keep campaigns, and elements only one team needs, in Private workspaces.
+
+The workspace selector at the bottom of the sidebar switches between **All workspaces** and one workspace.
+
+### A funnel can't span two Private workspaces
+
+A campaign can use elements from its own Private workspace and from the Public Workspace, never from another Private workspace. The same rule applies to flows.
+
+If you try, saving fails with "Funnel coherence violation: referenced entities live outside this workspace and the account Public Workspace." To fix it, move the element to the Public Workspace, or pick one from the campaign's own workspace.
+
+<Frame>
+  <img src="/images/shared/workspaces-list.jpg" alt="Workspaces page listing the Public Workspace and Private workspaces" />
+</Frame>
+
+### Moving elements
+
+Select an element in Performance and open **Actions**. You need the Owner or Admin role.
+
+| Action | What it does |
+| --- | --- |
+| **Move to Public Workspace** | Moves the element to the Public Workspace. Select several to move them together. |
+| **Move to workspace…** | Moves the element to another workspace in the same account, Public or Private. |
+
+A move is blocked if it would leave a campaign unable to see an element it uses.
+
+Campaigns move with **Move to workspace…** too, but only to another Private workspace. Offers, landers, the flow and the traffic source that the destination can't see are detached during the move. Re-attach them in the destination right after.
+
+### FAQ
+
+**Why can't I create a campaign in the Public Workspace?** Campaigns live only in Private workspaces. The Public Workspace is for elements you share.
+
+**Can a campaign use an offer from another Private workspace?** No. Move the offer to the Public Workspace, or create it in the campaign's workspace.
+
+**Can I delete the Public Workspace?** No. Every account keeps exactly one.
+
+### Related articles
+
+- [Move elements between workspaces](/team/move-elements-between-workspaces)
+- [Campaigns](/core-concepts/campaigns)
+- [Flows and paths](/core-concepts/flows-and-paths)

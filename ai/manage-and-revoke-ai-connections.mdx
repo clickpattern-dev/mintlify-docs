@@ -1,0 +1,54 @@
+---
+title: "Manage and revoke AI connections"
+description: "See every AI connection you've approved, check when each one was last used, and revoke any connection under Settings → MCP Access."
+---
+
+### Open your connections
+
+1. Go to **Settings → MCP Access**. The page is titled **Connect via MCP**.
+2. Pick a tab:
+
+| Tab | What it shows |
+| --- | --- |
+| **My connections** | Every connection you've approved, across all workspaces. Each row shows the workspace name. |
+| **Selected workspace** | Every connection for the workspace chosen in the workspace selector. Select one workspace to use this tab. |
+
+Each connection shows its name, **Authorized** date and **Last used** date.
+
+<Frame>
+  <img src="/images/team/mcp-connections.jpg" alt="Connect via MCP page with My connections tab" />
+</Frame>
+
+### Revoke a connection
+
+1. Find the connection and click **Revoke access**.
+2. In the confirmation dialog, click **Revoke access** again.
+
+The connection stops working right away and can't renew itself. Other connections stay connected. To use that client again, connect and approve it again.
+
+You can always revoke your own connections. On the **Selected workspace** tab, members who can manage integrations in that workspace can also revoke other members' connections.
+
+### Limits and rules
+
+| Rule | Detail |
+| --- | --- |
+| Plan | Available on plans with API access. See [pricing](https://www.clickpattern.com/pricing). |
+| Workspaces | One workspace per connection. |
+| Rate limit | 30 requests per minute. |
+| Permissions | A connection can never do more than your role allows. |
+| Write calls | Not idempotent. Check the app before retrying a failed write. |
+
+### FAQ
+
+**I left a workspace. Can I still revoke its connection?** Yes. It stays on the **My connections** tab, marked **Workspace not currently accessible**, and you can still revoke it.
+
+**Why is the Selected workspace tab greyed out?** It needs exactly one workspace. Pick a single workspace in the workspace selector, not **All workspaces**.
+
+**Does revoking remove anything the assistant created?** No. Elements the assistant created stay in your workspace. Revoking only stops future access.
+
+### Related articles
+
+- [Connect Claude to ClickPattern](/ai/connect-claude-to-clickpattern)
+- [Connect ChatGPT](/ai/connect-chatgpt)
+- [Connect Cursor and other MCP clients](/ai/connect-cursor-and-other-mcp-clients)
+- [What your AI assistant can do](/ai/what-your-ai-assistant-can-do)

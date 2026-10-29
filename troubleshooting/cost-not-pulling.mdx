@@ -1,0 +1,69 @@
+---
+title: "Cost not pulling"
+description: "Cost appears only when the campaign's cost source is set and the data has somewhere to come from. For API cost, the ad platform must be connected, synced and mapped to the campaign."
+---
+
+### Check 1: The campaign's cost source
+
+1. Go to **Performance → Campaigns**, select the campaign and click **Edit**.
+2. Check **Cost tracking**:
+
+| Option | Where cost comes from | Common reason it's empty |
+| --- | --- | --- |
+| **Not Tracked** | Nowhere. Profit and ROI aren't available. | Pick another option. |
+| **Manual** | The fixed value you enter, per click, impression, conversion or revenue share. | No value entered. |
+| **Token (Auto)** | The `{cost}` token in the campaign URL. | The traffic source doesn't fill its cost macro. |
+| **API (Integrated)** | Your connected ad platform. | The integration isn't active or the campaign isn't mapped. |
+
+### Check 2: Integration status
+
+Go to **Data Hub → Integrations** and look at the integration's status.
+
+| Status | Meaning | Fix |
+| --- | --- | --- |
+| No badge | Connected and syncing. | — |
+| **Finish setup** | Authorized, but no ad account selected. | Open it and select an ad account. |
+| **Syncing…** | The first sync is running. | Wait for it to finish. |
+| **Sync error** | The last sync failed. | Open it and check **Sync Logs**. |
+| **Reconnect needed** | The platform login expired. | Reconnect the integration. |
+| **Inactive** | Turned off. | Reactivate it. |
+
+### Check 3: Campaign mapping
+
+Cost is attached to a ClickPattern campaign only when the platform campaign is mapped to it.
+
+1. Add the **Integration Status** column to the campaigns table (**Columns**). **Unmatched** means no mapping.
+2. In **Data Hub → Integrations**, click **Unmapped objects** to see platform campaigns that aren't linked yet.
+3. Click **Map** and choose the ClickPattern campaign.
+
+Visits that carry the platform's IDs are mapped automatically. A manual mapping wins over an automatic one.
+
+### Check 4: Sync timing
+
+Spend syncs about every 15 minutes. The integration's **Health** tab shows its schedule. Today's cost can lag behind visits. Click **Sync Now** on the integration to request a sync.
+
+### Check 5: Cost Logs
+
+Go to **Logs → Cost Logs**. Each row is one sync run.
+
+| Status | Meaning |
+| --- | --- |
+| **Success** | Spend imported. |
+| **Partial** | Some campaigns imported, some failed. Open the row for details. |
+| **Failed** | The run failed. The message explains why. |
+| **In Progress** | Still running. |
+| **Skipped** | The run had nothing to do. |
+
+Filter by **Platform**, **Status** and **Trigger** (**Scheduled**, **Manual**, **First sync**, **Backfill**, **File import**). Open a row to see the ad account, date range, spend imported and records processed.
+
+### FAQ
+
+**I set Manual cost. Why don't dashboards show it?** They do. Check the date range and workspace selector match the campaign.
+
+**What's "Include estimated cost"?** A per-workspace toggle in **Data Hub → Integrations**. On, reports include estimated cost. Off, reports use synced cost only. Select a single workspace to change it.
+
+### Related articles
+
+- [Integration token expired or sync errors](/troubleshooting/integration-token-expired-or-sync-errors)
+- [Rule didn't trigger](/troubleshooting/rule-didnt-trigger)
+- [Metrics and formulas](/reference/metrics-and-formulas)

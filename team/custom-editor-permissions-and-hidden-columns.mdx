@@ -1,0 +1,77 @@
+---
+title: "Custom Editor permissions and hidden columns"
+description: "Turn individual Editor permissions on or off for each member, and hide financial and other sensitive columns from Editors and Read-only members."
+---
+
+### Adjust an Editor's permissions
+
+You can do this when you invite someone as **Editor**, or later:
+
+1. Open the workspace from **Workspaces**.
+2. In the **Members** table, click the tune icon on the Editor's row.
+3. In **Edit permissions — \{name\}**, switch permissions on or off. Each one shows its **Default for Editor**.
+4. Click **Save changes**.
+
+If you leave every permission at its default, saving clears any earlier overrides.
+
+<Frame>
+  <img src="/images/team/editor-permissions.jpg" alt="Editor permissions as they appear when you invite an Editor. The Edit permissions dialog for an existing member uses the same switches." />
+</Frame>
+
+### Permissions you can change
+
+| Group | Permission | Editor default |
+| --- | --- | --- |
+| Content + Integrations | Create + edit campaigns, offers, landers, and flows | On |
+| Content + Integrations | Connect and configure ad-platform integrations | On |
+| Content + Integrations | Read raw OAuth tokens + integration credentials | Off |
+| Content + Integrations | View workspace audit log + event history | On |
+| Members + Roles | Invite new members to this workspace | Off |
+| Members + Roles | View pending invitations | Off |
+| Members + Roles | Remove existing members from this workspace | Off |
+| Members + Roles | Change roles of other members | Off |
+| Workspace Settings | Edit workspace name, description, and settings | Off |
+| Pattern Pilot (rules engine) | View Pattern Pilot | On |
+| Pattern Pilot (rules engine) | Create, edit, and delete rules | On |
+| Pattern Pilot (rules engine) | Run rules in test (dry-run) mode | On |
+| Pattern Pilot (rules engine) | Execute rules against live data (live-fire) | Off |
+| Pattern Pilot (rules engine) | Manage Pattern Pilot Portfolios (advanced/beta) | Off |
+| Pattern Pilot (rules engine) | View rule execution logs | On |
+
+Turning off **Allow Pattern Pilot management** hides PatternPilot from that member entirely.
+
+Only Editors have per-member permissions. Admin and Read-only permissions are fixed by role. To customize an Admin or Read-only member, change their role to **Editor** first.
+
+### Hide columns
+
+You can hide columns from Editors and Read-only members. Owners and Admins always see every column.
+
+1. In the invite dialog, use **Hide columns (optional)**. For an existing member, click the tune icon on their row and use **Hidden columns**.
+2. Pick columns from the list, or use a quick option:
+   - **Show all**: hide nothing.
+   - **Hide money only**: hide Cost, Revenue, Profit, ROAS and ROI.
+   - **Hide all**: hide every column in the list.
+3. Save.
+
+| Category | Columns |
+| --- | --- |
+| Financial | Cost, Revenue, Profit, ROAS, ROI |
+| Per-action | CPC, CPA, CPV, EPC, EPV, AP |
+| Per-mille and effective | RPM, eCPM, eCPC, eCPA, CV |
+| Refunds | Refunds, Refund amount |
+| Quality | MTTC, TTC — low, TTC — optimal, TTC — high, Quality score, Avg quality score |
+
+Hidden columns disappear from the member's tracker view and reports. Visits, clicks, impressions, conversions, CR and CTR always stay visible.
+
+### FAQ
+
+**Why can't I see the permission toggles for a member?** They aren't an Editor. Change their role to **Editor**, then open the dialog again.
+
+**Do hidden columns affect what I see?** No. They only apply to that member.
+
+**When do the changes apply?** Within about a minute. The member may need to reload the page.
+
+### Related articles
+
+- [Roles and permissions](/team/roles-and-permissions)
+- [Invite team members](/team/invite-team-members)

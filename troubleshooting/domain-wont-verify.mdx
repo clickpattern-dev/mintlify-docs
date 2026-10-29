@@ -1,0 +1,53 @@
+---
+title: "Domain won't verify"
+description: "A custom domain verifies once its CNAME record points to the target ClickPattern shows and the SSL certificate is issued. Verification runs automatically; most delays are DNS settings or propagation."
+---
+
+### Check 1: The CNAME record
+
+1. Go to **Settings → Domains**.
+2. Under your domain, copy the **CNAME** record **Name** and **Value** exactly.
+3. At your DNS provider, create a CNAME record with that name and value. Remove any A, AAAA or other CNAME record for the same name.
+
+### Check 2: Read the status
+
+| Status | Meaning |
+| --- | --- |
+| **Pending** | Waiting for the DNS record or the certificate. |
+| **Partial** | DNS is correct but HTTPS isn't ready yet. |
+| **Verified** | Ready to use. |
+| **Failed** | Verification failed. Read the error under the record. |
+| **Expired** | The certificate expired. |
+
+The record row shows **Passed**, **Pending** or **Error**. A line under it shows the SSL status, for example "Cloudflare SSL: pending\_validation · checked automatically every hour".
+
+### Check 3: Cloudflare proxy
+
+If your DNS is on Cloudflare, an orange-cloud (proxied) record hides the CNAME from lookups. If the domain stays **Pending**, set the record to **DNS only** (grey cloud) until it verifies.
+
+### Check 4: Propagation and SSL
+
+DNS changes can take time to reach every resolver. Verification is checked automatically every hour, so you don't need to click Verify. The certificate is issued after the record is in place.
+
+### Error messages when adding a domain
+
+| Message | Fix |
+| --- | --- |
+| Invalid domain format | Enter a hostname only, such as `track.yourdomain.com`, with no `https://` or path. |
+| ClickPattern-owned domains cannot be registered as custom domains | Use a domain you own. |
+| This domain is a platform domain and cannot be registered as custom | Platform domains are already available to you. |
+| Domain already exists in this workspace | It's already added. |
+| This domain is already in use in workspace "…" | Remove it from that workspace first. |
+| A restricted domain must be assigned to at least one workspace | Assign a workspace or make the domain Public. |
+| Custom domains not available: CNAME target is not configured | Contact support. |
+
+### FAQ
+
+**Can I use the domain before it's verified?** No. Tracking links need a verified domain.
+
+**Should I use a subdomain?** Yes. Use a subdomain such as `track.yourdomain.com` so your main site's records stay untouched.
+
+### Related articles
+
+- [Visits or clicks not recorded](/troubleshooting/visits-or-clicks-not-recorded)
+- [Lander CTA not working](/troubleshooting/lander-cta-not-working)

@@ -1,0 +1,77 @@
+---
+title: "Campaigns"
+description: "A campaign is the link between one traffic source and the landers and offers you send its visitors to. It gives you the campaign URL you put in your ads, and it is where cost tracking and routing are set."
+---
+
+### What a campaign holds
+
+- **Workspace**: the Private workspace the campaign belongs to.
+- **Traffic source**: where the visitors come from. Its parameters are added to the campaign URL.
+- **Destination**: where visitors go, either a saved flow or a path set up on the campaign itself.
+- **Cost tracking**: how ClickPattern knows what you paid for the traffic. See Cost models.
+- Labels: **Campaign name**, **Country label**, **Traffic type** (Desktop, Mobile, Tablet or Mixed), **Tags** and **Notes**.
+
+After you save, the form switches to the **Tracking & PatternPilot** tab, which shows the campaign URL to put in your ad. To see it later, open the campaign with **Edit**.
+
+For redirect tracking the campaign URL looks like `https://{domain}/c/7d2f4a10-9c3e-4b8a-a1f2-5e6d7c8b9a01` followed by your traffic source parameters.
+
+### Simple vs Advanced form
+
+Both forms are under **Create** on **Performance → Campaigns**.
+
+|  | Campaign Simple | Campaign Advanced |
+| --- | --- | --- |
+| Tabs | **General**, **Tracking & PatternPilot** | **GENERAL**, **DESTINATION**, **TRACKING & PATTERNPILOT** |
+| Path destination | Pick landers and offers in a list | Full path editor with default paths and rule-based paths |
+| Weights | Spread evenly when you save | Set your own |
+| Flow tools | Pick an existing flow | Pick a flow, **Load from flow template**, or **Save as flow** |
+| Tracking method | Set by **Transition to offer** | **Redirect** or **Direct** under **Transition between ad and campaign funnel** |
+
+Use the Advanced form when you need custom weights or rules. You can switch a simple campaign with **Convert to Advanced Campaign**. This is one way: once converted, the campaign can only be edited in the Advanced form.
+
+<Frame>
+  <img src="/images/shared/campaign-adv-destination.jpg" alt="Advanced campaign form, Destination tab in Path mode" />
+</Frame>
+
+### Destination types
+
+Under **Campaign destination** you choose **Flow** or **Path**.
+
+| Option | What it does |
+| --- | --- |
+| **Flow** | Uses a saved flow. Edit the flow once and every campaign that uses it follows. |
+| **Path** | Sets the route on this campaign only. |
+
+A path sends visitors one of two ways:
+
+| Path destination | Visitor journey |
+| --- | --- |
+| **Landers & Offers** | Campaign URL → lander → offer. The lander's CTA links send the visitor on to an offer. |
+| **Offers only** | Campaign URL → offer. No landing page. |
+
+All offers in one campaign must use the same tracking domain. Saving fails with "All offers in a campaign must use the same tracking domain" otherwise.
+
+### Statuses and archiving
+
+| Status | New visits | Conversions from earlier clicks | How to change |
+| --- | --- | --- | --- |
+| Active | Redirected normally | Recorded | **Actions → Resume** |
+| Paused | Stopped right away. The campaign URL no longer redirects. | Still recorded | **Actions → Pause** |
+| Archived | Stopped. The campaign stops accepting clicks. | Still recorded | **Actions → Archive** |
+
+**Unarchive** restores a campaign as paused. Resume it separately to start traffic again.
+
+### FAQ
+
+**Can I change a campaign's traffic source later?** Yes, edit the campaign. The campaign URL's parameters come from the traffic source, so copy the URL again from the **Tracking & PatternPilot** tab and update your ad.
+
+**Why can't I see the campaign URL while creating a campaign?** The **Tracking & PatternPilot** tab unlocks once the campaign is saved. After you click **Create Campaign**, the form switches to it. Later, open it with **Edit**.
+
+**Can I go back from an advanced campaign to the simple form?** No. Converting to advanced is permanent for that campaign.
+
+### Related articles
+
+- [Your first campaign in 10 minutes](/start-here/your-first-campaign-in-10-minutes)
+- [Flows and paths](/core-concepts/flows-and-paths)
+- [Cost models](/core-concepts/cost-models)
+- [Test a campaign before sending traffic](/start-here/test-a-campaign-before-sending-traffic)

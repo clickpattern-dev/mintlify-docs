@@ -1,0 +1,59 @@
+---
+title: "Affiliate networks"
+description: "An affiliate network is the company that owns your offers and pays you for conversions. Adding it to ClickPattern gives you a postback URL or pixel to paste into the network, preset for its parameter names."
+---
+
+### Templates vs custom
+
+Click **Create** on **Performance → Affiliate Networks** and search with **Search affiliate networks...**. Choose a template, or **Custom affiliate network** if yours isn't listed.
+
+A template fills the **Parameters** table with the network's own macros. Each row maps a network parameter (**AN Parameter**, **AN Token**) to a ClickPattern token:
+
+| Name | CP Token |
+| --- | --- |
+| Click ID | `{clickid}` |
+| Payout | `{payout}` |
+| Transaction ID | `{txid}` |
+| Event Type | `{eventType}` |
+
+### Conversion tracking method
+
+Under **Conversion tracking**, pick a **Tracking domain** and a **Method**. ClickPattern builds the code to paste into the network.
+
+| **Method** | What you get | Use it when |
+| --- | --- | --- |
+| **S2S Postback URL** | A URL the network calls from its server | The network supports server postbacks. This is the most reliable option. |
+| **Tracking Pixel URL** | An image URL | The network asks for a pixel URL |
+| **Tracking Pixel** | An `<img>` tag | You place the pixel on a thank-you page |
+
+Tick **Include additional parameters in the postback URL** to add `param1`–`param5` for extra values. Set **Payout currency** to the currency the network pays in.
+
+### Postback security
+
+Under **Additional settings**, **Only accept postbacks from white-listed IPs** limits which servers can report conversions. Enter one IP address or CIDR block per line, for example `10.0.0.0/24`. Get the list of server IPs from your network.
+
+Postbacks from other addresses are refused. To avoid revealing the rule, the sender still gets a normal "Postback received" reply. Refused postbacks show in **Logs → Received Postbacks**, so check there if conversions stop after you set an allowlist.
+
+### Duplicates
+
+ClickPattern de-duplicates conversions by click, event type and transaction ID:
+
+- A repeat postback for the same click and event type with no transaction ID counts as a duplicate.
+- A postback with a new transaction ID is a new conversion, for example a second sale.
+- The same transaction ID sent again counts as a duplicate.
+
+Ask your network to send `{txid}` if visitors can convert more than once.
+
+### FAQ
+
+**Do I need an affiliate network to track conversions?** No. You can post conversions to the S2S postback URL without one. Adding the network gives you a URL preset for its macros and lets you secure it.
+
+**Why do postbacks say "Postback received" but no conversion appears?** The postback was refused, for example its IP isn't on the allowlist or it's a duplicate. Check **Logs → Received Postbacks**. If its click ID is unknown, it shows in **Logs → Errors Log** instead.
+
+**Which method should I choose?** Use **S2S Postback URL** when your network supports it. Pixels depend on the visitor's browser and can be blocked.
+
+### Related articles
+
+- [Add an affiliate network](/tracking/add-an-affiliate-network)
+- [S2S postback](/tracking/s2s-postback)
+- [Offers and payout](/core-concepts/offers-and-payout)

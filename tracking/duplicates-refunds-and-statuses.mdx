@@ -1,0 +1,71 @@
+---
+title: "Duplicates, refunds and statuses"
+description: "How ClickPattern decides whether a conversion is new, a duplicate, a rejection or a refund, and how each one shows in your reports."
+---
+
+### What counts as a duplicate
+
+A conversion is a duplicate when the click already has a conversion with the same:
+
+1. click ID,
+2. event type, and
+3. transaction ID (`txid`).
+
+Two conversions without a `txid` count as the same transaction. Duplicates are logged but not booked.
+
+| Situation | Result |
+| --- | --- |
+| Same click, same event, same `txid` | Duplicate |
+| Same click, same event, new `txid` | New conversion |
+| Same click, different event | New conversion |
+| Postback with no `et` and no `txid` on a click that already converted | Duplicate |
+| Micro-conversion, such as `add_to_cart` | Never a duplicate |
+| Same custom conversion twice on one click | Duplicate |
+
+To count several sales on one click, send a unique `txid` with each.
+
+### Statuses
+
+| Status you send | What happens |
+| --- | --- |
+| `approved` (or none) | Booked and counted |
+| `pending` | Booked as pending and counted. A later `approved` with the same `txid` approves it, without counting it twice. |
+| `rejected` | Stored. A `rejected` with no `et` never reverses an existing conversion. |
+| `refund` | Reverses a conversion. `refunded` and `chargeback` mean the same. |
+
+Send the same `txid` on the pending and approved postbacks. Otherwise the approval can be booked as a second sale.
+
+### Rejected is not a refund
+
+To take back a conversion, send `status=refund`. A later `status=rejected` without an event type changes nothing on a click that already converted.
+
+### How refunds work
+
+1. Send `status=refund` with the original `txid`, to the postback URL.
+2. ClickPattern finds the matching conversion on the click.
+3. Add `refund_amount` for a partial refund. Leave it out to refund the whole amount.
+4. Add `refund_id` if the network has one. Each refund ID is applied once, so retries don't refund twice.
+
+Refunds are accepted only by postback and the Shopify connection. The conversion pixel doesn't accept them.
+
+### How refunds show in reports
+
+A refund is a separate entry with a negative payout. It doesn't change the original conversion's row.
+
+- **Revenue** and **Profit** go down by the refunded amount.
+- The refund doesn't count as a conversion.
+- **Logs → Received Postbacks** shows the refund postback, with status **Refund** or **Partial refund**.
+
+### FAQ
+
+**I sent the same postback twice. Was it counted twice?** No, if it had the same `txid` and event type. It shows as **Duplicate** in **Logs → Received Postbacks**.
+
+**A sale was refunded and then sent again. Is it booked?** No. A fully refunded sale still counts as booked for duplicate checks. A new `txid` is a new sale.
+
+**Can I reverse a conversion from a pixel?** No. Send `status=refund` by postback.
+
+### Related articles
+
+- [S2S postback](/tracking/s2s-postback)
+- [Event types and custom conversion events](/tracking/event-types-and-custom-conversion-events)
+- [Upload conversions by CSV](/tracking/upload-conversions-by-csv)

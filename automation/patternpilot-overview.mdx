@@ -1,0 +1,68 @@
+---
+title: "PatternPilot overview"
+description: "PatternPilot runs automation rules on your ad campaigns. A rule checks your metrics on a schedule and, when its conditions are met, pauses, resumes or changes bids and budgets on the connected ad platform."
+---
+
+### When to use it
+
+- Stop spend on campaigns that cost money without converting.
+- Raise budgets on campaigns that hit your ROI target.
+- Get notified when a metric crosses a threshold.
+
+### How a rule works
+
+Every rule has two parts:
+
+| Part | What it defines |
+| --- | --- |
+| **Actions** | What the rule targets (campaigns, ad sets or ad groups) and what it does to them. |
+| **Conditions** | Which metrics to check, over which time frame, and how often. |
+
+On each check, the rule reads your data for the time frame. If the conditions are met, it runs its actions. A cooldown then stops it from acting again too soon.
+
+### Before you start
+
+A rule can only act on a ClickPattern campaign that is mapped to a campaign on a connected ad platform. If something is missing, **PatternPilot** shows one of two screens instead of your rules:
+
+| Screen | What it means | Button |
+| --- | --- | --- |
+| **Connect an ad integration to use Pattern Pilot** | No ad platform is connected to this workspace yet. | **Connect an integration** |
+| **Map your campaigns to use Pattern Pilot** | An ad platform is connected, but no ClickPattern campaign is mapped to one of its campaigns. | **Map campaigns** |
+
+Both buttons open **Data Hub → Integrations**, where you connect a platform (for example Meta or Google Ads) and map your campaigns.
+
+### Open PatternPilot
+
+1. Click **PatternPilot** in the sidebar. The **Automations** page opens.
+2. To create a rule, click **Create Rule**. You can also start from **Performance**: click **Create** and choose **PatternPilot Rule**.
+
+A rule belongs to one workspace. Select that workspace in the sidebar before you click **Create Rule**. If several workspaces are selected, the rule is saved to the first one in your list.
+
+<Frame>
+  <img src="/images/automation/pp-automations.jpg" alt="Automations page before any rules are created" />
+</Frame>
+
+### Who can do what
+
+| Task | Owner | Admin | Editor | Read-only |
+| --- | --- | --- | --- | --- |
+| See rules | Yes | Yes | Yes | Yes |
+| Create, edit, duplicate, pause, activate and delete rules | Yes | Yes | Yes | No |
+| **Run Rule Now** | Yes | Yes | No | No |
+| View rule logs | Yes | Yes | Yes | Yes |
+
+PatternPilot must also be included in your plan. See [pricing](https://www.clickpattern.com/pricing).
+
+### FAQ
+
+**Why do I see "Map your campaigns" when I already connected Meta?** Connecting the platform isn't enough. Each ClickPattern campaign must also be mapped to its ad-platform campaign in **Data Hub → Integrations**.
+
+**Can a rule act on campaigns that aren't mapped?** No. The campaign picker in the rule wizard only lists mapped campaigns.
+
+**Why can't I see the Create Rule button?** Your role doesn't allow managing rules. Ask a workspace Owner or Admin.
+
+### Related articles
+
+- [Create an automation rule](/automation/create-an-automation-rule)
+- [Rule logs and Run Rule Now](/automation/rule-logs-and-run-rule-now)
+- [Which platforms support which actions](/automation/which-platforms-support-which-actions)

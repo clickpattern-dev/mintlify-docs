@@ -1,0 +1,80 @@
+---
+title: "Add a lander"
+description: "A lander is your pre-sell page between the ad and the offer. You add its URL, choose how many CTAs it has, and put ClickPattern's click URLs and script on the page."
+---
+
+### Steps
+
+1. Go to **Performance → Landers** and click **Create**.
+2. In **New lander**, pick a **Workspace** and, optionally, a **Country label**.
+3. Enter a **Name** and, optionally, **Tags - optional**.
+4. Enter the **Lander URL**.
+5. Under **Landing page setup**, set **Number of CTAs**.
+6. Pick a **Tracking domain**. Use the same domain as the campaign URL.
+7. Copy each **Click URL(s)** into the `href` of your CTA links.
+8. Copy the **Lander Tracking Script** into your page.
+9. Click **Verify** to check the page responds.
+10. Click **Save**.
+
+<Frame>
+  <img src="/images/shared/new-lander.jpg" alt="New lander form with Landing page setup, click URLs and script" />
+</Frame>
+
+### Field reference
+
+| Field | What to enter | Notes |
+| --- | --- | --- |
+| **Workspace** | Owning workspace | Required. |
+| **Country label - optional** | A country for naming | Added to the front of the name. |
+| **Name** | A unique name | Starts as `Global - `. |
+| **Tags - optional** | Labels for filtering |  |
+| **Lander URL** | Your page's address, for example `https://www.lander-url.com` | Tokens are optional. Use them for dynamic text on the page. |
+| **Number of CTAs** | 1 to 10 | Default 1. Use more than 1 for multi-offer landers. |
+| **Tracking domain** | Domain for click URLs and the script | Must match your campaign URL's domain. |
+
+### Click URLs
+
+The click URLs depend on **Number of CTAs**:
+
+| Number of CTAs | Click URLs |
+| --- | --- |
+| 1 | `https://{domain}/click` |
+| 2 to 10 | `https://{domain}/click/1` up to `https://{domain}/click/N` |
+
+Put each one inside the `<a>` tag of a CTA, for example `<a href="https://{domain}/click">Get the offer</a>`.
+
+### Lander tracking script
+
+The **Lander Tracking Script** box has two versions:
+
+| Option | Use it when |
+| --- | --- |
+| **Inline** (default) | Your CTAs are above the fold. It runs immediately with no extra request. |
+| **External** | You prefer a one-line tag: `<script async src="https://{domain}/l/script.js"></script>` |
+
+The script rewrites the `/click` links on your page so each CTA click is tied to the visit. The visit itself is recorded when the visitor arrives through the campaign URL.
+
+Only visitors who came through a campaign URL are tracked, plus their clicks on a return visit within 24 hours.
+
+### Setup verification
+
+Click **Verify** to test the **Lander URL**. The result box shows the outcome:
+
+- Success: "URL is accessible and responding correctly".
+- Failure, for example "URL returned 404 Not Found" or "Verification failed: Unable to reach the URL".
+
+Verify checks that the page loads. It doesn't load your CTAs, so click through a test visit as well.
+
+### FAQ
+
+**Why do my CTA clicks say "Click tracking information not found"?** The visitor didn't come through the campaign URL, or the script is missing. Open the page through the campaign URL and check that the script is on it.
+
+**What does "This link has expired" mean?** The lander visit is older than 24 hours. The visitor has to come back through the campaign URL.
+
+**Can I use a different domain for click URLs?** No. Use the same tracking domain as the campaign URL, or the click can't be linked to the visit.
+
+### Related articles
+
+- [Multi-offer landers](/tracking/multi-offer-landers)
+- [Create a campaign: Simple form](/tracking/create-a-campaign-simple-form)
+- [Redirect tracking](/tracking/redirect-tracking)

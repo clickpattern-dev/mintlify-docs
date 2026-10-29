@@ -1,0 +1,100 @@
+---
+title: "Google Ads"
+description: "Connect your Google Ads account to import cost, campaigns and ad groups, upload conversions to Google with offline click conversions and enhanced conversions, and let PatternPilot manage your campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, clicks, impressions and conversions for campaigns and ad groups |
+| Campaign import | Campaigns and ad groups |
+| CAPI | Conversion uploads to your Google Ads conversion actions, including refund adjustments from Shopify |
+| PatternPilot actions | **Pause**, **Resume**, **Adjust budget**, and **Adjust bid** on ad groups with manual CPC bidding |
+
+### Connect Google Ads
+
+1. Go to **Data Hub → Integrations**.
+2. Click the **Google Ads** card.
+3. Sign in with Google and approve access.
+4. In **Configure Google Ads Integration**, select the account to sync.
+5. Click **Save and Start Sync**.
+
+The account can't be changed after setup. To use a different account, delete this integration and connect again.
+
+### Manager (MCC) accounts
+
+If your Google login manages client accounts, the list shows each manager as a heading, for example "Agency (Manager Account - 3 clients)", with its client accounts below. Select a client account. You can't select the manager itself.
+
+If a manager account has no linked clients, you see **Manager Account Detected**. Google doesn't allow campaign metrics from a manager account directly. Either link or create a client account under the manager, or connect a regular Google Ads account instead.
+
+### The Google Ads integration page
+
+Tabs: **Performance**, **Campaigns**, **Ad Groups**, **Campaign Mapping**, **CAPI**, **Sync Logs** and **Health**.
+
+The **Ad Groups** tab lists ad group performance for the last 30 days: **Ad Group Name**, **Campaign**, **Status**, **Cost**, **Clicks**, **Impressions**, **Conversions** and **CTR**. Filter by **Campaign** when you have more than one.
+
+<Frame>
+  <img src="/images/integrations/21-google-campaigns.jpg" alt="Google Ads Campaigns tab with pause, resume and edit actions" />
+</Frame>
+
+### Pass the ad group ID
+
+ClickPattern maps Google ad groups to your campaigns automatically when visits carry the ad group ID. Add Google's `{adgroupid}` ValueTrack parameter to your tracking template. Google adds the `gclid` click ID itself when auto-tagging is on.
+
+### Upload conversions to Google (CAPI)
+
+Google Ads CAPI uploads ClickPattern conversions to conversion actions in your account.
+
+1. Open the **CAPI** tab and click **Set Up CAPI**.
+2. Select the **Google Ads account**.
+3. Under **Which conversion action each event is sent to**, pick a conversion action for each event. Use **Add an event** to add more rows.
+4. Optional: turn on **Email and phone matching (enhanced conversions for leads)**.
+5. Click **Save & Enable**.
+
+Only events with a conversion action are sent. Events left without one show **Won't be sent to Google**.
+
+Only enabled conversion actions of type `UPLOAD_CLICKS` that don't use external attribution appear in the list. If the account has none, create one in Google Ads first. Open **How to create the conversion action in Google Ads** in the setup window for step-by-step instructions. A new action can take up to 6 hours before Google accepts uploads.
+
+### Enhanced conversions for leads
+
+With **Email and phone matching** on, ClickPattern sends each conversion's email and phone, hashed, so Google can match conversions without a click ID. Google accepts them only after your Google Ads account has accepted the customer data terms and turned on enhanced conversions for leads (Google Ads → Goals → Conversions → Settings). With it off, conversions match by Google click ID only, and a conversion without one isn't sent.
+
+### Upload timing
+
+Google accepts a conversion only once its click is at least 6 hours old. ClickPattern holds each conversion and uploads it about 6 hours after the click. Until then, the delivery log shows **Scheduled**.
+
+### Refunds
+
+Google Ads is the only platform that receives refunds through CAPI. Shopify refunds and cancellations retract the conversion (full refund) or restate it with the new total (partial refund).
+
+### Bids: ad groups only, manual CPC only
+
+Google sets bids on ad groups, not campaigns. ClickPattern changes CPC bids only:
+
+- A bid change at campaign level is refused.
+- A bid change is refused when the campaign uses an automated bidding strategy, because Google would ignore it. Switch the campaign to manual CPC (or enhanced CPC) to control the bid.
+- CPM and CPA bid changes aren't supported.
+
+To use **Adjust bid** in PatternPilot, map the ClickPattern campaign to a Google ad group. Budget changes work at campaign level.
+
+### Token renewal
+
+Google access refreshes automatically. If it expires, the page shows "Your Google access token has expired. Reconnect to resume syncing." Click **Reconnect**.
+
+### FAQ
+
+**Why can't I select my MCC account?** Google doesn't return campaign metrics for manager accounts. Select one of its client accounts.
+
+**Why is my conversion action missing from the list?** Only enabled `UPLOAD_CLICKS` actions without external attribution can receive uploads. Check the action's type, status and attribution in Google Ads.
+
+**My bid rule ran but nothing changed in Google.** Check that the rule targets an ad group mapped to the campaign, and that the Google campaign uses manual CPC bidding.
+
+**Is there a test event for Google Ads?** No. Google has no test mode, so every upload is a real conversion. Check the delivery logs instead.
+
+### Related articles
+
+- [Server-side conversions (CAPI) setup](/integrations/server-side-conversions-capi-setup)
+- [Campaign mapping and unmapped objects](/integrations/campaign-mapping-and-unmapped-objects)
+- [Which platforms support which actions](/automation/which-platforms-support-which-actions)
+- [Integrations overview](/integrations/integrations-overview)

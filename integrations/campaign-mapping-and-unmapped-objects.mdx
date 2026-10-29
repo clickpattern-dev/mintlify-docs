@@ -1,0 +1,103 @@
+---
+title: "Campaign mapping and unmapped objects"
+description: "Mapping links platform campaigns, ad sets and ad groups to your ClickPattern campaigns. It's how synced cost lands on the right campaign and how PatternPilot knows which platform object to change."
+---
+
+### Why mapping matters
+
+- **Cost**: ClickPattern assigns each platform object's spend to the ClickPattern campaign it's mapped to. Unmapped spend doesn't reach your campaign reports.
+- **PatternPilot**: when a rule pauses, resumes or changes a bid or budget, it acts on the platform objects mapped to the rule's campaign. No mapping, no action.
+
+### What gets mapped
+
+| Platform | Mapping level |
+| --- | --- |
+| Meta | Ad set |
+| Google Ads | Ad group |
+| TikTok | Ad group |
+| Snapchat | Ad squad |
+| Platforms without an ad set level (for example Taboola, Outbrain, MGID) | Campaign |
+
+Ads and creatives can't be mapped directly. Map their ad set, ad group or campaign instead.
+
+### Automatic mapping
+
+ClickPattern maps objects for you when visits arrive with platform IDs in the URL. For Meta, Google Ads, TikTok and Snapchat, the click must carry the ad set or ad group ID. A click with only a campaign ID isn't mapped automatically on these platforms.
+
+Pass the IDs with the platform's URL macros, for example `{{adset.id}}` on Meta, `{adgroupid}` on Google Ads or `__AID__` on TikTok. Traffic source templates add the right parameters for you.
+
+Automatic mappings show an **auto** chip with the number of clicks seen. A manual mapping always wins. Automatic mapping never overwrites it.
+
+### Map from an integration's Campaign Mapping tab
+
+1. Go to **Data Hub → Integrations** and open the connected integration.
+2. Click **Campaign Mapping**.
+3. Expand a platform campaign to see its ad sets or ad groups. (Platforms without that level list campaigns directly.)
+4. Choose the ClickPattern campaign in the picker next to each row.
+5. Click the **Save mapping** icon. Use **Remove mapping** to undo.
+
+Turn on **Unmapped only** to hide rows that are already mapped. Each mapped row shows **manual** or **auto (N clicks)**.
+
+On Meta and Google Ads you can also pause or resume an ad set or ad group from this tab.
+
+<Frame>
+  <img src="/images/integrations/22-google-mapping.jpg" alt="Campaign Mapping tab with campaigns expanded to their ad groups" />
+</Frame>
+
+### Find everything that isn't mapped
+
+The **Unmapped Platform Objects** page lists platform objects with no ClickPattern campaign, across all your integrations in the workspace.
+
+1. Go to **Data Hub → Integrations** and click **Unmapped objects**.
+2. Optional: filter by **Platform** (for example `meta` or `google-ads`) and **Level** (**All levels**, **Meta adset**, **Google adgroup**, **Campaign**, **Ad / creative**). Click **Refresh** to reload.
+3. Click **Map** on a row.
+4. In **Map \{level\} to a ClickPattern campaign**, select the campaign and click **Map**.
+
+The row disappears once it's mapped. The table shows each object's **Name**, **Platform**, **Level**, **Status**, **Cost** and **Clicks**. Cost reads **No stored spend** when there's no synced spend, or **Incomplete** when it can't be totaled.
+
+The next cost run (every 6 hours) uses the new mapping. Saving a mapping doesn't confirm that cost has already reached your reports.
+
+<Frame>
+  <img src="/images/integrations/25-unmapped-objects.jpg" alt="Unmapped Platform Objects page with Map buttons" />
+</Frame>
+
+<Frame>
+  <img src="/images/integrations/26-map-dialog.jpg" alt="Map campaign to a ClickPattern campaign window" />
+</Frame>
+
+### Conflicts and Override
+
+ClickPattern stops you before a mapping could misplace cost:
+
+| Situation | What you see | Your options |
+| --- | --- | --- |
+| The ad set is already mapped to another campaign | **Reassign existing mapping?** with the current campaign | **Reassign anyway** or **Cancel** |
+| Another ad set in the same platform campaign is mapped to a different ClickPattern campaign | **Confirm conflicting mapping** with the sibling ad set | **Override and save** or **Cancel** |
+
+On the Unmapped Platform Objects page both cases show a warning and an **Override and save** button.
+
+Be careful with the second case. Cost is attributed at the platform campaign level, so when sibling ad sets point to different ClickPattern campaigns, the whole campaign's spend goes to whichever was resolved last.
+
+### ABO and CBO on Meta
+
+- **ABO** (ad set budget): each ad set has its own budget. Mapping ad sets gives you per-ad-set budget and bid data.
+- **CBO** (campaign budget): the budget is shared at the campaign level, and Meta spreads it across ad sets.
+
+The Campaigns tab counts your **CBO** and **ABO** campaigns. The budget mode chip on each campaign tells you which one it is.
+
+### FAQ
+
+**Why is the Map button disabled on some rows?** The row is an ad or creative. Map its ad set, ad group or campaign instead.
+
+**Will an automatic mapping replace one I set myself?** No. Manual mappings are never overwritten.
+
+**I mapped an ad set. Why is cost still missing?** Cost is attributed every 6 hours. Wait for the next run, then check again.
+
+**Can one ClickPattern campaign have several ad sets mapped to it?** Yes. All their spend adds up on that campaign.
+
+### Related articles
+
+- [Integrations overview](/integrations/integrations-overview)
+- [Which platforms support which actions](/automation/which-platforms-support-which-actions)
+- [Track and update cost](/tracking/track-and-update-cost)
+- [Traffic source templates](/integrations/traffic-source-templates)

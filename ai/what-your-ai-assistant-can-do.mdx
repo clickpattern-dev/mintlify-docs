@@ -1,0 +1,93 @@
+---
+title: "What your AI assistant can do"
+description: "Your AI assistant reaches ClickPattern through a set of tools. Read tools answer questions about your data. Write tools create elements and need a Read and write connection."
+---
+
+### How it works
+
+- Every tool works only in the workspace you approved for that connection.
+- The assistant gets the same checks as the app: your role, your plan limits and the same validation as the create forms.
+- Report tools show the date range that was actually queried. If your plan's data retention shortens the window, the answer reflects the shorter range.
+
+### Read tools (any connection)
+
+| Tool | What it does |
+| --- | --- |
+| `get_current_user` | Shows your name, email and email-verification status. |
+| `list_workspaces` | Shows the workspace this connection can use, with your role. |
+| `list_campaigns` | Lists campaigns, optionally only active ones. |
+| `list_offers` | Lists offers with URL, payout and tracking domain. |
+| `list_landers` | Lists landers with URL and tracking domain. |
+| `list_flows` | Lists flows and their paths. |
+| `list_traffic_sources` | Lists traffic sources. |
+| `list_affiliate_networks` | Lists affiliate networks. |
+| `list_domains` | Lists tracking domains and whether each one is usable. |
+| `list_integrations` | Lists connected ad platforms and their connection status. |
+| `list_automation_rules` | Lists PatternPilot rules with status, conditions, actions and last run. |
+| `get_dashboard_summary` | Shows workspace totals, active campaigns and top and bottom performers. Defaults to the last 7 days plus today. |
+| `get_workspace_overview` | Shows KPIs for today, the last 7 days and the last 30 days. |
+| `get_campaign_performance` | Shows one campaign with its metrics. Defaults to the last 30 days. |
+| `get_campaign_stats` | Breaks one campaign down by a dimension: offers (default), landers, countries, devices, OS, browsers, day of week, hour of day or `var1`–`var10`. |
+| `generate_analytics_report` | Builds a report across campaigns, offers, landers or traffic sources. |
+| `query_clicks` | Runs a detailed click-level query with dimensions and filters. |
+| `get_platform_insights` | Shows the ad platform's own reported numbers (spend, impressions, clicks, CTR, CPC, CPM) for a connected integration. |
+| `suggest_rule` | Drafts a PatternPilot rule from a plain-English goal. It doesn't save the rule. |
+
+### Write tools (Read and write connection only)
+
+| Tool | What it does |
+| --- | --- |
+| `create_campaign_complete` | Creates a campaign and its traffic source, offer, lander and flow in one step. It can also reuse existing ones. |
+| `create_campaign` | Creates a campaign from existing offers, landers, traffic source and flow. |
+| `create_offer` | Creates an offer. |
+| `create_lander` | Creates a lander. |
+| `create_traffic_source` | Creates a traffic source from a template or as a custom source. |
+| `create_automation_rule` | Creates a PatternPilot rule. Needs permission to manage PatternPilot rules. |
+| `create_traffic_filter_rule` | Creates an account-wide traffic filter rule. Needs the organization owner or admin role. Rules apply within about 5 minutes, and only when traffic filtering is turned on for the account. |
+| `invite_workspace_member` | Sends a workspace invitation by email. The invitation lasts 7 days. |
+| `create_workspace` | Creates a new workspace in the same organization. |
+
+On a **Read only** connection, write tools are refused with the message `this token lacks mcp:write scope`.
+
+### Write tools aren't idempotent
+
+Each successful call creates a new element. If a call seems to fail or time out, check the app before you ask the assistant to retry. Otherwise you can end up with duplicates. A repeated invitation to someone who already has a pending one is refused.
+
+### Example prompts
+
+- "How did my campaigns perform last week?"
+- "Which offers have the best ROI this month?"
+- "Break down campaign Summer Sale by country for the last 7 days."
+- "Compare what Meta reports for spend with what ClickPattern tracked yesterday."
+- "Suggest a rule that pauses campaigns losing money."
+- "Create a lead-gen campaign for the US on Facebook." (Read and write)
+
+### Prompt templates
+
+Some clients show ready-made prompts from ClickPattern, usually in a prompt or slash-command menu.
+
+| Template | What it asks for |
+| --- | --- |
+| `analyze-campaign` | Analyze one campaign, optionally for a time period. |
+| `compare-campaigns` | Compare a comma-separated list of campaigns. |
+| `troubleshoot-campaign` | Find issues with one campaign. |
+| `portfolio-overview` | Review all campaigns, optimizing for ROAS, CPA, ROI or profit. |
+| `daily-report` | Daily report for all active campaigns with trends and alerts. |
+| `weekly-summary` | This week compared with last week. |
+| `suggest-automation` | Suggest automation rules based on your campaign data. |
+| `create-lead-gen-campaign` | Set up a lead-gen campaign for a vertical, country and ad platform. |
+| `setup-tracking` | Set up tracking for an ad platform and offer type. |
+
+### FAQ
+
+**Does `suggest_rule` create the rule?** No. It returns a draft for you to review. To save it, create the rule in PatternPilot, or ask the assistant to create it on a Read and write connection.
+
+**Why are the platform numbers different from ClickPattern's?** `get_platform_insights` shows what the ad platform reports. The other report tools show what ClickPattern tracked. Some difference between the two is normal.
+
+**Can the assistant edit or delete existing elements?** No. The write tools only create new elements and send invitations.
+
+### Related articles
+
+- [Connect Claude to ClickPattern](/ai/connect-claude-to-clickpattern)
+- [Manage and revoke AI connections](/ai/manage-and-revoke-ai-connections)
+- [Roles and permissions](/team/roles-and-permissions)

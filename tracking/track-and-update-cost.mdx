@@ -1,0 +1,78 @@
+---
+title: "Track and update cost"
+description: "Choose where each campaign's cost comes from, so profit and ROI are accurate. You can also correct cost for a past period with Update Cost."
+---
+
+### Choose a cost source
+
+In the campaign form, set **Cost tracking**.
+
+| Option | How cost is recorded |
+| --- | --- |
+| **Not Tracked** | No cost. Profit and ROI show as unavailable. |
+| **Manual** | A fixed cost per event, using a cost model (below) |
+| **Token (Auto)** | Read from the `{cost}` token in your tracking URL |
+| **API (Integrated)** | Fetched from your connected ad platform, such as Meta or Google Ads |
+
+### Manual cost models
+
+| Model | Cost recorded |
+| --- | --- |
+| **CPC** | The amount on every visit |
+| **CPM** | The amount per 1,000 impressions. Needs impression tracking on your traffic source. |
+| **CPA** | The amount on every conversion |
+| **RevShare** | A percentage of each conversion's payout |
+
+For CPC you can turn on **Traffic loss (%)**. It raises the recorded cost to cover traffic lost before the page. For example, $0.10 with 10% loss records $0.11 per visit.
+
+### Token (Auto)
+
+1. In the traffic source's **Parameters**, set the **Cost** row's **TS Parameter** and **TS Token** to the traffic source's cost macro, for example `cost` and `{bid}`.
+2. ClickPattern adds `cost={bid}` to the campaign URL.
+3. The traffic source fills in the cost on every click.
+
+The value must be a plain number, such as `0.0125`. Anything else is ignored.
+
+### API (Integrated)
+
+Cost syncs from the connected ad platform every 2 hours. API cost takes priority over all other cost sources. The ad platform integration must be active with cost sync enabled.
+
+### Correct cost for a past period
+
+1. Go to **Performance → Campaigns** and tick one or more campaigns.
+2. Click **Update Cost**.
+3. Set the **Time range** (start and end) and the **Time zone**.
+4. Under **Action**, choose **Update** or **Restore**.
+5. For **Update**, enter the total cost and currency for each ticked campaign.
+6. Click **Save**.
+
+<Frame>
+  <img src="/images/shared/update-cost.jpg" alt="Manual cost update dialog with time range, Update/Restore and campaign rows" />
+</Frame>
+
+| Action | What it does |
+| --- | --- |
+| **Update** | Replaces the cost for every day in the range, including tracked and synced cost. The total is spread across the days in proportion to visits. |
+| **Restore** | Removes your override and goes back to the tracked or synced cost |
+
+Limits:
+
+- The range must be under 32 days.
+- Times round to whole days in the selected time zone.
+- Up to 50 campaigns per update, and 60 updates per workspace per hour.
+
+Updated cost shows in reports and dashboards right after you save.
+
+### FAQ
+
+**Which cost wins if I use more than one?** API (Integrated) cost takes priority. An **Update Cost** override replaces both tracked and synced cost for its days. See **Cost models** for the full order.
+
+**Can I undo an Update Cost change?** Yes. Run **Update Cost** again for the same range with **Restore**.
+
+**Where can I check API cost syncs?** Open **Logs → Cost Logs**. It shows one row per sync run from your connected ad platforms.
+
+### Related articles
+
+- [Cost models](/core-concepts/cost-models)
+- [Custom variables and external IDs](/tracking/custom-variables-and-external-ids)
+- [Payout and currencies](/tracking/payout-and-currencies)

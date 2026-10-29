@@ -1,0 +1,49 @@
+---
+title: "Which platforms support which actions"
+description: "PatternPilot sends pause, resume, bid and budget changes to the ad platform. Some platforms don't accept every change. Check this table before you build a rule."
+---
+
+### Support table
+
+Most connected ad platforms support all four platform actions. Meta sets bids on ad sets, so **Adjust bid** on Meta needs a campaign mapped at ad set level (**Create rule for** → **Ad Set**). TikTok and Microsoft Ads bids work the same way at ad group level. The exceptions:
+
+| Platform | Pause / Resume | Adjust bid | Adjust budget |
+| --- | --- | --- | --- |
+| Google Ads | Yes | Ad group level only, manual CPC bidding | Yes |
+| MGID | Yes | No | Yes |
+| Pinterest | Yes | No | Yes |
+| Yandex Direct | Yes | No | Yes |
+| Zeropark | Yes | Yes | No |
+| HilltopAds | Yes | Yes | No |
+| Evadav | Yes | No | No |
+| MediaGo | Yes | No | No |
+| PopAds | Yes | No | No |
+| RevContent | No | No | No |
+| Mondiad | No | No | No |
+| Adcash | No | No | No |
+
+**Send alert**, **Send notification** and **Mark** don't touch the ad platform, so they work everywhere.
+
+Conversion sources such as Shopify aren't ad platforms. Rules can't act on them.
+
+### Google Ads bids
+
+Google sets bids on ad groups, not campaigns. To use **Adjust bid** with Google Ads:
+
+1. Map the ClickPattern campaign to a Google Ads ad group.
+2. In the rule wizard, choose **Create rule for** → **Ad Group**.
+3. Make sure the Google campaign uses manual CPC bidding. Automated strategies, such as maximize conversions, ignore a manual bid, so ClickPattern doesn't send it.
+
+Budget changes on Google Ads work at campaign level.
+
+### FAQ
+
+**What happens if I add an unsupported action?** The platform can't carry it out, so nothing changes there. Remove the action, or target a platform that supports it.
+
+**Can I pause campaigns on every platform?** On most. RevContent, Mondiad and Adcash don't support any rule actions today.
+
+### Related articles
+
+- [Create an automation rule](/automation/create-an-automation-rule)
+- [Rule logs and Run Rule Now](/automation/rule-logs-and-run-rule-now)
+- [PatternPilot overview](/automation/patternpilot-overview)

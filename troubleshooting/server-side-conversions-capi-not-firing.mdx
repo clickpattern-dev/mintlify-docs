@@ -1,0 +1,56 @@
+---
+title: "Server-side conversions (CAPI) not firing"
+description: "ClickPattern sends a conversion to a connected ad platform only when the integration is active, the event type is enabled in Event Mapping, the conversion is approved, and there's enough data to match the visitor. The integration's Delivery Logs tell you which one failed."
+---
+
+### Check 1: Open the delivery logs
+
+1. Go to **Data Hub → Integrations** and open the integration.
+2. Open the **Server-Side Conversion Tracking** tab and scroll to **Delivery Logs**.
+3. Filter by **Status** and open a row to read the outcome.
+
+| Row status | Meaning |
+| --- | --- |
+| **Success** | The platform accepted the event. |
+| **Skipped** | Not sent. The row says why. |
+| **Scheduled** | Will be sent later, when the platform accepts it. |
+| **Failed** | The platform rejected it. The row shows the recorded error. |
+
+### Check 2: Common skip reasons
+
+| Reason shown | Fix |
+| --- | --- |
+| **Event type not enabled for this platform** | Enable the event in **Event Mapping**, or send the right `et=` value. A conversion without an event type is sent as Purchase. |
+| **Event not mapped for this platform** | Map the event type to the platform event in **Event Mapping**. |
+| **Connection not active** | Reconnect the integration. |
+| **Platform turned off** | Turn the platform entry back on. |
+| **CAPI turned off** | Turn server-side tracking back on. |
+| **Refund not sent** | Most platforms don't take refunds through this channel. |
+| No … attribution data (…) | The visit had none of the click IDs or customer identifiers the platform needs. |
+| Excluded by … filter: … | One of your event filters excluded it. |
+
+### Check 3: Only approved conversions are sent
+
+Conversions with status `pending`, `rejected` or `refund` are not sent. Check the status in **Logs → Received Postbacks**.
+
+### Check 4: Identifiers
+
+Platforms match conversions to people with their click ID (captured from the ad URL) or hashed customer data. To improve matching:
+
+- Keep the platform's click ID parameter on your campaign URL. ClickPattern captures it automatically.
+- Send customer details in the postback or pixel where you're allowed to: `email`, `phone`, `first_name`, `last_name`, `city`, `state`, `zip`, `country`, `external_id`. ClickPattern hashes them before storing.
+
+### Check 5: Test
+
+Use **Send Test Event** on the integration to check the connection without waiting for a real conversion.
+
+### FAQ
+
+**The conversion is in ClickPattern but not in the platform.** Find it in **Delivery Logs**. If there's no row, the conversion wasn't eligible; check its status and event type.
+
+**Why does a delivered event show a low "Delivery integrity"?** It's ClickPattern's own delivery check, on a 0–1 scale. It isn't the platform's match quality score.
+
+### Related articles
+
+- [Conversions not showing](/troubleshooting/conversions-not-showing)
+- [Integration token expired or sync errors](/troubleshooting/integration-token-expired-or-sync-errors)

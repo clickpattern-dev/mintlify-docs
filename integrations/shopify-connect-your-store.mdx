@@ -1,0 +1,89 @@
+---
+title: "Shopify: connect your store"
+description: "Connect your Shopify store with a one-time code from ClickPattern. ClickPattern then tracks orders from Shopify's own notifications, records refunds and cancellations, and installs its conversion pixel for you."
+---
+
+### Before you start
+
+- A ClickPattern account and the workspace you want the store in.
+- Permission to manage integrations in that workspace.
+- Access to the store's Shopify admin.
+
+### Step 1: Install the app
+
+Install **ClickPattern** from the Shopify App Store. Shopify grants the app access to orders, products, inventory, pixels and customer events at install.
+
+### Step 2: Get a connection code
+
+1. In ClickPattern, go to **Data Hub → Integrations**.
+2. Click the **Shopify** card. The **Connect a store** window opens with your code, for example `ABCD-EFGH`.
+3. Click **Copy**.
+
+The code expires in 15 minutes and can be used once. If it expires, click **Regenerate** for a new one. Each time you open the window you get a fresh code.
+
+<Frame>
+  <img src="/images/integrations/52-shopify-connect-code.jpg" alt="Connect a store window with connection code and countdown" />
+</Frame>
+
+### Step 3: Enter the code in Shopify
+
+1. In your Shopify admin, open **Apps → ClickPattern**.
+2. On **Settings**, under **Connect your store**, paste the code into **Connection code**.
+3. Click **Connect**.
+
+The page then shows **Connected to \{workspace\}** with two badges: **Connected** and **Order tracking: On**. ClickPattern registers the order, refund and cancellation webhooks and installs the conversion pixel automatically. Don't add the webhooks yourself under Shopify's notification settings. ClickPattern can't verify webhooks created there, so their events are dropped.
+
+### Step 4: Turn on ad click capture
+
+To attribute orders to your ad clicks, turn on the app embed in your theme:
+
+1. On the ClickPattern app's **Settings** page in Shopify, click **Enable tracking script**. (In ClickPattern you can also use **Open App embeds** on the Shopify integration's **Setup** tab.)
+2. In the theme editor's **App embeds** panel, turn on **Ad click capture**.
+3. Click **Save**.
+
+The embed captures click IDs such as `gclid`, `fbclid` and `ttclid` on every storefront page.
+
+### One workspace per store
+
+A store connects to one ClickPattern workspace. If it's already connected elsewhere, you see "This store is already connected to \{workspace\}. Reload this page to manage that connection." Disconnect it there first.
+
+### Connection messages
+
+| Message | What to do |
+| --- | --- |
+| "Enter the connection code from ClickPattern." | Paste the code before clicking **Connect**. |
+| "That code is not valid. Check it and try again." | Check for typos. Hyphens, spaces and letter case don't matter. |
+| "That code has expired. Create a new code in ClickPattern and try again." | Codes last 15 minutes. Generate a new one. |
+| "That code has already been used. Create a new code in ClickPattern and try again." | Each code works once. Generate a new one. |
+| "Too many code attempts for this store. Wait about 15 minutes, then try again." | Wait, then use a fresh code. |
+| "Another connection attempt for this store is in progress. Wait a moment and try again." | Wait a few seconds and retry. |
+| "This ClickPattern workspace can't add another integration. Manage its integrations in ClickPattern." | The workspace has reached its integration limit. Remove an integration or see [pricing](https://www.clickpattern.com/pricing). |
+| "The ClickPattern app is missing permissions it needs…" | Reopen the app from your Shopify admin so the store owner can approve the permissions. |
+
+### Reconnect
+
+If Shopify access expires, the app shows **Needs reconnect** and orders stop reaching ClickPattern. Get a new code (in ClickPattern, open the Shopify integration and click **Connect a store**), enter it in the app and click **Reconnect**.
+
+If the Shopify integration's **Setup** tab says refunds aren't adjusting, click **Register webhooks now**. If the connection has lapsed, click **Get a reconnect code**.
+
+### Disconnect
+
+- **From Shopify**: on the app's **Settings** page, click **Disconnect** and confirm. This deletes the integration, its stored Shopify credentials, the store connection and the data synced from this store. If it's the store's last ClickPattern connection, the pixel and order webhooks are removed too. The app stays installed.
+- **From ClickPattern**: open the Shopify integration and click **Delete**. Conversion tracking from the store stops. To remove the pixel, app embed and webhooks too, uninstall the ClickPattern app in Shopify.
+
+If you uninstall the app, the integration in ClickPattern shows that it needs reconnecting.
+
+### FAQ
+
+**Do I need to type my store's domain anywhere?** No. The code links the store and workspace for you.
+
+**Is the pixel affected by customer consent?** Yes. The pixel runs only when the shopper allows analytics and marketing, and stops when they opt out of data sharing. Order webhooks aren't affected.
+
+**Can I move the store to another workspace?** Yes. Disconnect it, then connect it again with a code from the other workspace.
+
+### Related articles
+
+- [Shopify: products, events and refunds](/integrations/shopify-products-events-and-refunds)
+- [Server-side conversions (CAPI) setup](/integrations/server-side-conversions-capi-setup)
+- [Direct (redirectless) tracking](/tracking/direct-redirectless-tracking)
+- [Integrations overview](/integrations/integrations-overview)

@@ -1,0 +1,47 @@
+---
+title: "Multi-offer landers"
+description: "One lander can show several offers, each with its own CTA. Numbered click URLs send each CTA to a specific offer in the path."
+---
+
+### When to use it
+
+Use it for comparison pages, top-5 lists or quizzes where each button leads to a different offer.
+
+### Steps
+
+1. Create or edit the lander and set **Number of CTAs** to the number of offer buttons (2 to 10).
+2. Copy the numbered click URLs into your buttons: **CTA 1** uses `/click/1`, **CTA 2** uses `/click/2`, and so on.
+3. In the campaign or flow path, add the offers in the order that matches your buttons.
+4. Save the campaign. The **Tracking & PatternPilot** tab lists the CTA links for that campaign.
+
+<Frame>
+  <img src="/images/shared/lander-3-ctas.jpg" alt="Click URL(s) with /click/1 to /click/3" />
+</Frame>
+
+### How offers are picked
+
+| Click URL | Offer |
+| --- | --- |
+| `/click` | One offer picked by the path's offer weights |
+| `/click/1` | The 1st offer in the path |
+| `/click/2` | The 2nd offer in the path |
+| `/click/N` | The Nth offer in the path |
+
+- In a flow, "the path" is the path the visitor was sent down.
+- Numbers wrap around. With 3 offers, `/click/4` goes to offer 1 and `/click/5` to offer 2.
+- Offer caps still apply. A capped offer sends the click to its redirect offer.
+- The visitor's lander visit stays valid for 24 hours.
+
+### FAQ
+
+**Do offer weights matter on `/click/N` links?** No. Numbered links always pick by position. Weights only apply to the plain `/click` link.
+
+**I removed an offer and the buttons now go to the wrong place. Why?** Numbers follow the offer order in the path. Removing an offer shifts the ones after it. Check the order after any change.
+
+**Can I mix `/click` and `/click/1` on one page?** Yes. For example, a header button can use `/click` for weighted rotation, while list buttons use numbered links.
+
+### Related articles
+
+- [Add a lander](/tracking/add-a-lander)
+- [Create a flow](/tracking/create-a-flow)
+- [Offer caps and redirect offers](/tracking/offer-caps-and-redirect-offers)

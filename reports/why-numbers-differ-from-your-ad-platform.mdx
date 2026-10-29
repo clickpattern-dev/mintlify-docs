@@ -1,0 +1,71 @@
+---
+title: "Why numbers differ from your ad platform"
+description: "ClickPattern and your ad platform count from different places, so their numbers rarely match exactly. These are the usual reasons, and how to check each one."
+---
+
+### Time zones
+
+Each tool cuts days at midnight in its own time zone. If your ad account uses New York time and ClickPattern uses UTC, results move between days.
+
+To check:
+
+1. Note your ad account's time zone.
+2. In the date picker, set **Timezone** to the same zone and click **Apply**.
+
+To change the default, set **Default report time zone** in **Settings → General settings**.
+
+<Frame>
+  <img src="/images/reports/date-timezone.jpg" alt="Date picker with a time zone search in the Timezone field" />
+</Frame>
+
+### When a conversion is dated
+
+A visit on Monday that converts on Tuesday can land on either day. **Settings → General settings → Conversion registration time reporting** offers **Visit timestamp** and **Postback timestamp**. Your ad platform may date conversions differently.
+
+### Cost sync lag
+
+Platform cost arrives on a schedule, typically every 2–6 hours. Until then:
+
+- ClickPattern may show estimated cost for today and yesterday.
+- If estimates are off, cost may read lower than the platform.
+
+See "[Synced vs estimated cost](/reports/synced-vs-estimated-cost)". Check **Logs → Cost Logs** for the last sync.
+
+### Visits vs platform clicks
+
+- An ad platform counts clicks on your ad. ClickPattern counts visits that reach your tracking link. Some people leave before the page loads.
+- **Visits** counts every visit. **Unique Visits** counts a visitor once per 24 hours, or once per hour when the visitor can't be recognized by cookie.
+- ClickPattern **Clicks** means clicks from your lander to the offer, not ad clicks.
+
+### Filtered and bot traffic
+
+- Traffic blocked by your traffic-filter rules isn't counted in reports. You'll find it in **Logs → Traffic Filtering**.
+- Bot visits are counted in **Visits** but also reported in **Bot Visits** and **Bot Rate**. Ad platforms often remove invalid clicks from their own counts.
+
+### Attribution differences
+
+- ClickPattern records a conversion when it receives a postback with a matching click ID.
+- Ad platforms use their own attribution rules and windows, and may count conversions ClickPattern never received.
+- Postbacks with unknown or missing click IDs aren't counted. Check **Logs → Errors Log**.
+
+### Currency
+
+Reports show money in the currency you pick in Performance, or your default currency. Your ad account may report in another currency, so values are converted. Small differences from exchange rates are normal.
+
+### Unmapped spend
+
+If some platform spend isn't matched to a ClickPattern campaign, total cost will be lower than the platform total. The Dashboard shows **…% of ad spend unmapped** when this happens.
+
+### FAQ
+
+**How close should the numbers be?** After you match the time zone and currency, and cost has synced, the remaining gap usually comes from attribution and filtered traffic.
+
+**Which number should I trust for profit?** Use ClickPattern for revenue from your postbacks. Turn off **Include estimated cost** when you need cost that matches the platform invoice.
+
+**Why does yesterday change today?** A late cost sync, a refund, or a late conversion postback can update yesterday's numbers.
+
+### Related articles
+
+- [Date ranges, comparison and time zone](/reports/date-ranges-comparison-and-time-zone)
+- [Synced vs estimated cost](/reports/synced-vs-estimated-cost)
+- [Logs](/reports/logs)

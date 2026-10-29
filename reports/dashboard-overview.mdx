@@ -1,0 +1,96 @@
+---
+title: "Dashboard overview"
+description: "The Dashboard gives you a one-page view of performance for the selected workspaces and date range. Use it to spot trends fast, then open Performance for detail."
+---
+
+### Pick what you're looking at
+
+1. Go to **Dashboard** in the sidebar.
+2. Use the workspace selector at the bottom of the sidebar to choose **All workspaces** or one workspace.
+3. Click the date range button in the top-right corner to choose a period. The date range picker works the same way it does in Performance. See "[Date ranges, comparison and time zone](/reports/date-ranges-comparison-and-time-zone)".
+4. Use the arrows next to the date button to move to the previous or next period. The forward arrow is disabled once the range reaches today.
+
+A thin progress bar under the header shows while the dashboard refreshes. The previous numbers stay on screen until the new ones load.
+
+<Frame>
+  <img src="/images/reports/dashboard.jpg" alt="Full dashboard with KPI cards, charts and Details tables" />
+</Frame>
+
+### KPI cards
+
+The top row shows six cards: **Revenue**, **Profit**, **ROAS**, **ROI**, **Conversions** and **Visits**. Each card has a small trend line for the period.
+
+**ROAS** shows `–` and the note **No cost recorded** when the period has no cost. That means there's nothing to divide by, not that ROAS is zero.
+
+### Performance Trends
+
+This chart plots your metrics over the date range. Switch between three views:
+
+| View | Lines |
+| --- | --- |
+| **Money** | Revenue, Cost, Profit |
+| **Volume** | Visits, Clicks, Conversions |
+| **Efficiency** | ROI %, EPC, ROAS, CR % |
+
+Click a legend item to hide or show that line. When **Compare** is on in the date picker, each line gets a matching "(prev)" line for the comparison period.
+
+### Distribution
+
+A donut chart that shows how a metric splits across your top five items, with the rest grouped as **Others**. The total appears under the chart.
+
+- First menu: **Traffic Source**, **Affiliate Network**, **Campaign** or **Offer**.
+- Second menu: **Revenue**, **Cost**, **Profit**, **Visits**, **Clicks**, **Conversions** or **Impressions**.
+
+### Traffic Flow
+
+A flow diagram that follows your traffic from **Total** through **Sources**, **Campaigns** and **Offers** to the outcome.
+
+- Choose the metric: **Visits**, **Clicks**, **Conversions** or **Revenue**.
+- Turn on **Landers** to add landers to the flow.
+- With **Visits** selected, the outcome splits into **Did Not Click**, **Clicked** and **Converted**.
+
+The line above the chart describes the stages shown, for example `Total → Sources → Campaigns → Offers → Did Not Click / Clicked / Converted`.
+
+### Top Countries
+
+Bars for your top five countries by the metric you pick: **Revenue**, **Profit**, **ROI**, **Visits**, **Cost**, **Clicks**, **Conversions** or **Impressions**. The total for all countries appears below.
+
+### Details
+
+Four small tables show the top five **Campaigns**, **Traffic sources**, **Offers** and **Countries**.
+
+1. Click **Highest** or **Lowest** to choose the sort direction.
+2. Click a metric button to rank by it: **Visits**, **Clicks**, **Conversions**, **Revenue**, **Cost**, **Profit**, **Impressions**, **ROI** or **ROAS**.
+
+<Frame>
+  <img src="/images/reports/dashboard-details.jpg" alt="Details section with Highest/Lowest and metric buttons" />
+</Frame>
+
+### Cost indicators
+
+Chips can appear above the KPI cards when you have connected ad platforms.
+
+| Chip | What it means |
+| --- | --- |
+| **Cost Synced** | All cost in the period came from your connected ad platforms. |
+| **Cost Estimated** | Some cost is estimated from your recent cost per visit and will be replaced when the platform syncs. |
+| **Cost Pending** | Cost isn't available yet. The tooltip notes that platforms typically sync every 2–6 hours. |
+| **…% of ad spend unmapped** (or **Ad spend needs mapping**) | Some spend from a connected platform isn't matched to a ClickPattern campaign. |
+
+Click a cost chip to see how many campaigns have synced cost and how estimation works. In the unmapped-spend tooltip, click **Review unmapped objects** to fix the mapping.
+
+Manual cost you set on a campaign also shows on the dashboard.
+
+### FAQ
+
+**Why does the dashboard show different totals than Performance?** Check that both use the same workspaces, date range, time zone and currency. The Details tables show only the top five rows, so they won't add up to the KPI totals.
+
+**Can I click a chart to drill down?** No. Use Performance for drill-down. See "[Grouping and drill-down](/reports/grouping-and-drill-down)".
+
+**What currency is the dashboard in?** It uses the currency you picked in Performance during this session. Otherwise it uses the default currency from your General settings.
+
+### Related articles
+
+- [Performance reports](/reports/performance-reports)
+- [Date ranges, comparison and time zone](/reports/date-ranges-comparison-and-time-zone)
+- [Synced vs estimated cost](/reports/synced-vs-estimated-cost)

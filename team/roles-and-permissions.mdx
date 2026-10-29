@@ -1,0 +1,74 @@
+---
+title: "Roles and permissions"
+description: "Each workspace member has one role: Owner, Admin, Editor or Read-only. The role decides what they can see and change in that workspace."
+---
+
+### The roles
+
+- **Owner**: the person who created the workspace. There is one Owner per workspace.
+- **Admin**: manages the workspace, its settings and its members.
+- **Editor**: works on content. You can fine-tune an Editor's permissions per member.
+- **Read-only**: views data. No actions.
+
+When you invite someone, you choose **Admin**, **Editor** or **Read-only**. Owner isn't an option in the role picker.
+
+### What each role can do (defaults)
+
+| Action | Owner | Admin | Editor | Read-only |
+| --- | --- | --- | --- | --- |
+| View campaigns, elements and reports | Yes | Yes | Yes | Yes |
+| Create, edit and delete campaigns, offers, landers and flows | Yes | Yes | Yes | No |
+| Connect and configure ad-platform integrations | Yes | Yes | Yes | No |
+| View PatternPilot and rule logs | Yes | Yes | Yes | Yes |
+| Create, edit and delete PatternPilot rules | Yes | Yes | Yes | No |
+| Run PatternPilot rules against live data | Yes | Yes | No | No |
+| Invite members and see pending invitations | Yes | Yes | No | No |
+| Remove members and change roles | Yes | Yes | No | No |
+| Edit workspace name and settings | Yes | Yes | No | No |
+| Move elements between workspaces | Yes | Yes | No | No |
+| Delete the workspace | Yes | No | No | No |
+
+Editor defaults can be changed per member. See "[Custom Editor permissions and hidden columns](/team/custom-editor-permissions-and-hidden-columns)".
+
+<Frame>
+  <img src="/images/team/roles.jpg" alt="Assign role options in the invite dialog" />
+</Frame>
+
+### Compare roles in the app
+
+In the invite dialog, click **Compare permissions** next to **Assign role** to see every permission side by side.
+
+### Change a member's role
+
+1. Open the workspace from **Workspaces**.
+2. In the **Members** table, click the edit icon on the member's row.
+3. Choose **Admin**, **Editor** or **Read-only** and click the save icon.
+
+Role changes can take up to a minute to apply. The member sees updated buttons after reloading the page.
+
+### Organization roles
+
+If your workspaces belong to an organization, people also have an organization role:
+
+| Role | What it covers |
+| --- | --- |
+| owner | Everything in the organization |
+| admin | Organization settings and members. Can create workspaces in the organization. |
+| billing | Billing only. No member management, and no workspace content unless also a workspace member. |
+| member | Basic membership. Can create workspaces and see the member list. |
+
+Organization owners and admins can open the organization's workspaces without being invited to each one.
+
+### FAQ
+
+**Can I make someone an Owner?** No. Owner isn't available in the role picker, and the Owner's row can't be edited or removed.
+
+**What happens if I lower someone's role?** It applies within about a minute. Actions they're no longer allowed to do are refused.
+
+**Can I hide revenue from a team member?** Yes. You can hide financial columns from Editors and Read-only members. See "[Custom Editor permissions and hidden columns](/team/custom-editor-permissions-and-hidden-columns)".
+
+### Related articles
+
+- [Invite team members](/team/invite-team-members)
+- [Custom Editor permissions and hidden columns](/team/custom-editor-permissions-and-hidden-columns)
+- [Workspaces: create, switch, delete](/team/workspaces-create-switch-delete)

@@ -1,0 +1,51 @@
+---
+title: "Integration token expired or sync errors"
+description: "When an ad platform login expires or a sync fails, cost and rule actions stop for that integration. The status tells you whether to reconnect or read the sync logs."
+---
+
+### Check 1: Status
+
+In **Data Hub → Integrations**, the card shows:
+
+| Status | What it means | What to do |
+| --- | --- | --- |
+| **Reconnect needed** | The login expired. | Open the integration and click **Reconnect**. |
+| **Sync error** | The last sync failed. | Open **Sync Logs**. |
+| **Finish setup** | No ad account selected yet. | Open it and select an ad account. |
+| **Syncing…** | The first sync is running. | Wait. |
+| **Inactive** | Turned off. | Reactivate it. |
+
+On the integration page, the same states read **Token Expired**, **Error**, **Finish setup**, **Syncing**, **Inactive** or **Active**, with a line such as "Credentials expired. Please reconnect your account." or "Sync failed. See the error below and the Sync Logs tab."
+
+### Check 2: Reconnect
+
+1. Open the integration and click **Reconnect** (or **Refresh Token**).
+2. Log in to the platform with an account that still has access to the ad account.
+3. Wait for the status to return to **Active**.
+
+### Check 3: Sync Logs
+
+Open the integration's **Sync Logs** tab. Each run shows its result and error message. Fix the cause it names (for example lost access to the ad account), then click **Sync Now**.
+
+### Messages from Sync Now
+
+| Message | Meaning |
+| --- | --- |
+| Integration credentials have expired. Please reconnect your account. | Reconnect first. |
+| Integration is pending configuration. Please complete the setup first. | Select an ad account. |
+| Integration is currently syncing. Please wait for the current sync to complete. | A sync is already running. |
+| Integration has been deactivated. Please reactivate it first. | Reactivate the integration. |
+| Sync is temporarily unavailable. Please try again later. | Try again in a few minutes. |
+| Could not confirm all sync requests. Check sync status before retrying. | Check **Sync Logs** before you click again. |
+| Manual sync queued for … | The sync was requested. |
+
+### FAQ
+
+**Do I lose data while the token is expired?** Tracking and conversions continue. Cost and platform actions pause until you reconnect; the next syncs catch up recent days.
+
+**Why do rules stop acting?** Rules act through the integration. An expired or errored integration can't pause or adjust campaigns.
+
+### Related articles
+
+- [Cost not pulling](/troubleshooting/cost-not-pulling)
+- [Rule didn't trigger](/troubleshooting/rule-didnt-trigger)

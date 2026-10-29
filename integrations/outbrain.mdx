@@ -1,0 +1,70 @@
+---
+title: "Outbrain"
+description: "Connect Outbrain Amplify with your login email and password. ClickPattern syncs cost from one marketer account, imports your campaigns and lets PatternPilot pause, resume and change bids and budgets on mapped campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks for your campaigns and publishers |
+| Campaign import | Your Outbrain campaigns and promoted links |
+| PatternPilot actions | **Pause campaign**, **Resume campaign**, **Adjust bid**, **Adjust budget** |
+
+PatternPilot acts on whole campaigns. Publisher-level and section-level actions aren't available in rules.
+
+### What you need
+
+- The email and password you use to sign in to Outbrain Amplify.
+- If your login can see more than one Outbrain account, the name (or ID) of the account you want to sync.
+
+### Connect Outbrain
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **Outbrain** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **Login/Email** | Your Outbrain Amplify account login email. Required. |
+| **Password** | Your Outbrain Amplify account password. Required. |
+| **Outbrain account name** | Optional. An account name copied from your Outbrain account. Fill it in if you have multiple users related to one Outbrain account. You can enter the account's name or ID. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+If your login has access to several marketer accounts, enter **Outbrain account name** when you connect. Without it, ClickPattern can't tell which account to use and doesn't create the integration.
+
+<Frame>
+  <img src="/images/integrations/16-outbrain.jpg" alt="Integrate with Outbrain dialog" />
+</Frame>
+
+### Choose or change the marketer account
+
+The detail page has three tabs: **Configuration**, **Performance** and **Campaigns**.
+
+1. Click the Outbrain card under **Connected Integrations**.
+2. Open the **Configuration** tab.
+3. Select an account in **Marketer Account** and click **Save**.
+
+If no account is set, the page shows **Marketer Account Not Configured**. Campaigns and cost don't sync until you pick one.
+
+### Map Outbrain campaigns
+
+The Outbrain detail page has no mapping tab. Use **Unmapped objects** on the **Integrations** page to link Outbrain campaigns to ClickPattern campaigns.
+
+### FAQ
+
+**I get "Rate limit exceeded. Please wait a few minutes and try again."** Outbrain allows very few logins per hour. Wait before you try again, and avoid repeated connect attempts.
+
+**I get "The specified Outbrain account was not found on this login."** The value in **Outbrain account name** doesn't match any account on your login. Copy the name exactly as Outbrain shows it, or use the account ID.
+
+**I get "No marketer accounts found for this Outbrain user".** Your login has no advertising access. Ask the Outbrain account owner to grant it.
+
+**Can I sync two Outbrain marketer accounts?** Each integration syncs one marketer account. Change it on the **Configuration** tab.
+
+### Related articles
+
+- [Taboola](/integrations/taboola)
+- [MGID](/integrations/mgid)
+- [Traffic source templates](/integrations/traffic-source-templates)

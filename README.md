@@ -1,55 +1,65 @@
-# Mintlify Starter Kit
+# ClickPattern Knowledge Base
 
-Use the starter kit to get your docs deployed and ready to customize.
+Customer help center for [ClickPattern](https://www.clickpattern.com), built with [Mintlify](https://mintlify.com).
+Every page is an MDX file in this repo. Mintlify publishes the site whenever `main` changes.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Structure
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+| Folder | Navigation group |
+| --- | --- |
+| `start-here/` | Guides → Start here |
+| `core-concepts/` | Guides → Core concepts |
+| `tracking/` | Guides → Tracking (4 sub-groups) |
+| `automation/` | Guides → Automation and protection |
+| `reports/` | Guides → Reports and analytics |
+| `ai/` | Guides → AI assistants |
+| `team/` | Guides → Team and account |
+| `billing/` | Guides → Plans and billing |
+| `integrations/` | Integrations tab |
+| `troubleshooting/` | Troubleshooting and reference → Troubleshooting |
+| `reference/` | Troubleshooting and reference → Reference |
+| `images/` | Screenshots, by area |
+| `docs.json` | Site settings and navigation |
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+`index.mdx` is the home page.
 
-## AI-assisted writing
+## Editing a page
 
-Set up your AI coding tool to work with Mintlify:
+1. Edit the `.mdx` file (or use the Mintlify web editor, which commits back to this repo).
+2. Open a pull request. The **Docs checks** workflow looks for broken links and MDX problems.
+3. Merge. Mintlify deploys automatically.
+
+To add a page, create the file and add its path (without `.mdx`) to the right group in `docs.json`.
+
+## Writing rules
+
+- Each page starts with frontmatter: `title` and a one or two sentence `description` (shown under the title).
+- Use the app's exact UI labels in **bold**. Menu paths use arrows: **Data Hub → Integrations**.
+- Short sentences, active voice, second person.
+- Put tokens, parameters and URLs in backticks: `{clickid}`, `cid`, `https://{domain}/postback`.
+- Outside backticks, write `\{` and `\}` for braces and `&lt;` for a less-than sign (MDX treats them as code).
+- Don't state plan limits or prices. Link to [pricing](https://www.clickpattern.com/pricing).
+- End with **FAQ** (optional) and **Related articles** linking other pages.
+
+## Screenshots
+
+- Take them from the demo account with **This year** and **All workspaces** selected, 1440×900 window, visible screen only.
+- Blur or pixelate IP addresses, ad account IDs, campaign IDs, pixel IDs and codes.
+- Save under `images/<area>/` and embed with:
+
+```mdx
+<Frame>
+  <img src="/images/<area>/<file>.jpg" alt="What the screenshot shows" />
+</Frame>
+```
+
+Pages still waiting for a screenshot have an MDX comment: `{/* Screenshot to add: … */}`.
+
+## Preview locally
 
 ```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
 npm i -g mint
+mint dev                 # http://localhost:3000
+mint broken-links
+python3 scripts/check_docs.py
 ```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
-mint dev
-```
-
-View your local preview at `http://localhost:3000`.
-
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)

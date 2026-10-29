@@ -1,0 +1,90 @@
+---
+title: "Your first campaign in 10 minutes"
+description: "The simplest working setup: one traffic source, one offer, no landing page, redirect tracking. You'll end with a campaign URL to put in your ad and a postback URL for your affiliate network."
+---
+
+### Before you start
+
+- Your offer link from the affiliate network.
+- The name of the network's sub ID parameter that carries your click ID back (often `subid`, `aff_sub`, `s2` or `clickid`). Check the network's tracking docs.
+
+### Step 1: Add a traffic source
+
+1. Go to **Performance → Traffic Sources** and click **Create**.
+2. Search for your traffic source and select its template, or choose **Custom** if it isn't listed.
+3. Check the name and currency, then click **Save**.
+
+Templates fill in the right URL parameters for that network, so visits arrive with campaign, ad and placement details.
+
+<Frame>
+  <img src="/images/shared/add-traffic-source.jpg" alt="Add traffic source template picker" />
+</Frame>
+
+### Step 2: Add your offer
+
+1. Go to **Performance → Offers** and click **Create**.
+2. Enter a **Name**.
+3. Paste your affiliate link into **Offer URL** and add the `{clickid}` token in the network's sub ID parameter, for example: `https://network.example/offer?aff_id=123&aff_sub={clickid}`
+4. Leave **Payout type** on **Auto** so the payout comes from the network's postback.
+5. Click **Create Offer**.
+
+`{clickid}` is replaced with each visitor's unique click ID. Without it, ClickPattern can't match conversions to visits.
+
+<Frame>
+  <img src="/images/shared/new-offer.jpg" alt="New offer form" />
+</Frame>
+
+### Step 3: Create the campaign
+
+1. Go to **Performance → Campaigns**, click the arrow next to **Create** and choose **Campaign Simple**.
+2. Pick the **Workspace**, a **Country label** (or Global) and a **Campaign name**.
+3. Select the **Traffic source** from Step 1.
+4. Under the destination, keep **Offers only** and select your offer.
+5. Leave **Transition to offer** on **302 Redirect**.
+6. Click **Create Campaign**.
+
+<Frame>
+  <img src="/images/shared/create-menu.jpg" alt="Create menu with Campaign Simple" />
+</Frame>
+
+<Frame>
+  <img src="/images/shared/new-campaign-simple.jpg" alt="New campaign form, simple, General tab" />
+</Frame>
+
+### Step 4: Put the campaign URL in your ad
+
+In Performance → Campaigns, select your new campaign, click Edit and open the **Tracking & PatternPilot** tab and copy the **Campaign URL**. It looks like:
+
+`https://{domain}/c/3f9a1c2e-…?…`
+
+Use it as your ad's destination URL. The parameters after `?` come from your traffic source template; keep them.
+
+<Frame>
+  <img src="/images/shared/campaign-tracking-tab.jpg" alt="Tracking & PatternPilot tab with the Campaign URL" />
+</Frame>
+
+### Step 5: Give your network the postback URL
+
+1. Go to **Settings → Tracking URLs** and copy the **Secure postback URL** under **Postback URL**: `https://{domain}/postback?cid=REPLACE&et=OPTIONAL&payout=OPTIONAL&currency=OPTIONAL&txid=OPTIONAL`
+2. Replace `REPLACE` with your network's click ID macro (the one that returns the value you put in its sub ID), and replace each `OPTIONAL` with the matching network macro or delete that parameter. Example: `https://{domain}/postback?cid={aff_sub}&payout={payout}&txid={transaction_id}`
+3. Paste it into the network's postback or conversion tracking settings.
+
+<Frame>
+  <img src="/images/shared/tracking-urls-postback.jpg" alt="Settings, Tracking URLs, Postback URL section" />
+</Frame>
+
+### Step 6: Test it
+
+Run one test click and one test postback before you spend money. See: Test a campaign before sending traffic.
+
+### FAQ
+
+**Do I need a landing page?** No. This setup sends visitors straight to the offer. Add a lander later with the Landers & Offers destination.
+
+**My network isn't in the affiliate network list. Does that matter?** Not for this setup. The postback URL works with any network that can call a URL when a conversion happens.
+
+### Related articles
+
+- [Test a campaign before sending traffic](/start-here/test-a-campaign-before-sending-traffic)
+- [Add a lander](/tracking/add-a-lander)
+- [S2S postback](/tracking/s2s-postback)

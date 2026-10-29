@@ -1,0 +1,89 @@
+---
+title: "Error codes and messages"
+description: "Messages you may see from tracking links, postbacks, rules, plans, roles and integrations, what they mean and what to do."
+---
+
+### Campaign URL (`/c/…`)
+
+| Status | Message | Meaning | What to do |
+| --- | --- | --- | --- |
+| 400 | Invalid campaign slug | The campaign ID in the URL is malformed. | Copy the campaign URL again. |
+| 404 | Campaign not found | No campaign has this ID. | Use an existing campaign. |
+| 403 | Campaign inactive | The campaign isn't active. | Resume it. |
+| 410 | Gone | The campaign is paused or archived, or its flow has no enabled default path, and no fallback URL is set. | Resume or unarchive it, or enable a default path. |
+| 404 | Page not found | The offer is capped with no redirect offer. | Set a redirect offer or raise the cap. |
+| 500 | No valid lander configured / No valid offer configured | Everything in the path is inactive or zero-weight. | Give a lander or offer a weight. |
+| 500 | No destination configured | No landers or offers. | Add a destination. |
+| 500 | Flow evaluation failed / Destination selection failed | A path in the flow has no lander or offer to send the visitor to. | Check each path has an active lander or offer. |
+| 500 | Click tracking failed | Unexpected error. | Retry; contact support if it repeats. |
+| 302 to a notice page | Content Not Available… | The visitor was filtered. | Check **Logs → Traffic Filtering**. |
+
+### Lander click (`/click`, `/click/1`–`/click/10`)
+
+| Status | Message | What to do |
+| --- | --- | --- |
+| 400 | Click tracking information not found. Please return to the original link. | Use the same tracking domain as the campaign URL and add `/l/script.js`. |
+| 410 | This link has expired. Please return to the original page. | The visit is over 24 hours old. |
+| 404 | The campaign associated with this link no longer exists. | Use a live campaign. |
+| 403 | This campaign is currently inactive. | Resume the campaign. |
+| 500 | This campaign has no offers configured. | Add an offer. |
+| 500 | No active offers available (all may have zero weight). | Give an offer a weight. |
+| 404 | The selected offer is no longer available. | The offer was removed from the campaign. Copy the click URLs again from the lander's setup. |
+
+### Direct tracking
+
+| Response | Meaning |
+| --- | --- |
+| `// Error: Missing cpid parameter` | The page URL has no `cpid`. |
+| `// Error: Campaign not found` | The `cpid` doesn't match a campaign. |
+| `// Campaign not active` | The campaign is paused or archived. |
+
+### Postback reasons (Logs)
+
+| Reason | Where shown | Meaning | What to do |
+| --- | --- | --- | --- |
+| click not found | Errors Log, category **Invalid conversion request** | The click ID matches no visit. | Pass `{clickid}` in the offer URL and return it in `cid`. |
+| Missing required parameter: cid (Click ID) | Errors Log, **Invalid conversion request** | No click ID. | Fill the `cid` macro. |
+| Invalid payout value: must be a positive number | Errors Log, **Invalid conversion request** | Payout isn't a number or is negative. | Fix the payout macro. |
+| Refused: a ClickPattern outgoing postback reached a ClickPattern tracking host. … | Errors Log, **Postback sending error** | A traffic source postback URL points to ClickPattern. | Use the traffic source's own postback URL. |
+| ip not whitelisted | Received Postbacks | Sender IP isn't allowed. | Add the IP or turn off the IP check. |
+| invalid ptoken | Received Postbacks | Security token missing or wrong. | Send the correct `ptoken`. |
+| duplicate | Received Postbacks | Already counted. | Send a unique `txid` per sale. |
+| unknown status | Received Postbacks | `status` isn't recognized. | Use `approved`, `pending`, `rejected` or `refund`. |
+| Conversion recorded; the postback to the traffic source or the ad-platform event could not be sent | Received Postbacks | The conversion counts, but a follow-up delivery failed. | Check **Sent Postbacks** and the integration's **Delivery Logs**. |
+
+### Rules
+
+| Code | Message | What to do |
+| --- | --- | --- |
+| `CAMPAIGN_NOT_MAPPED` | This rule has a platform action (pause / adjust) targeting N campaign(s) that are not mapped to an ad integration… | Map the campaigns in **Data Hub → Integrations**. |
+| `RULE_NOT_ACTIVE` | Activate the rule before manually firing it | Activate the rule, then run it. |
+| — | Cannot execute a deleted rule / Cannot execute a archived rule | Restore or recreate the rule. |
+| — | Rate limited (in rule logs) | The integration hit 100 actions per hour or 1,000 per day. Wait. |
+
+### Plan and role
+
+| Code | Example message | Meaning | What to do |
+| --- | --- | --- | --- |
+| `PLAN_LIMIT_REACHED` | You've reached your … limit (5/5). Upgrade your plan to create more. | Your plan's limit for that item is used up. | Archive or delete items, or see [pricing](https://www.clickpattern.com/pricing). |
+| `PLAN_FEATURE_UNAVAILABLE` | … are available on the … plan. | Your plan doesn't include the feature (HTTP 402). | See [pricing](https://www.clickpattern.com/pricing). |
+| `INSUFFICIENT_ROLE` | This action requires EDITOR access or higher | Your role in the workspace is too low (HTTP 403). | Ask an Owner or Admin. |
+| `INSUFFICIENT_ROLE` | This action requires the … permission. Your role does not include it. | A specific permission is off for your role. | Ask an Owner or Admin to enable it. |
+
+### Integrations
+
+| Message | What to do |
+| --- | --- |
+| Integration credentials have expired. Please reconnect your account. | Click **Reconnect**. |
+| Integration is pending configuration. Please complete the setup first. | Select an ad account. |
+| Integration is currently syncing. Please wait for the current sync to complete. | Wait. |
+| Integration has been deactivated. Please reactivate it first. | Reactivate it. |
+| Sync is temporarily unavailable. Please try again later. | Retry later. |
+| Could not confirm all sync requests. Check sync status before retrying. | Check **Sync Logs** first. |
+| Sync could not be confirmed. Check Sync Logs for details before trying Sync Now again. | Read **Sync Logs**. |
+
+### Related articles
+
+- [Conversions not showing](/troubleshooting/conversions-not-showing)
+- [Visits or clicks not recorded](/troubleshooting/visits-or-clicks-not-recorded)
+- [Rule didn't trigger](/troubleshooting/rule-didnt-trigger)

@@ -1,0 +1,82 @@
+---
+title: "Add your postback to an affiliate network"
+description: "Give your affiliate network a postback URL with its own macros in place, so it tells ClickPattern about every conversion."
+---
+
+### Before you start
+
+- Your offer URL passes `{clickid}` in the network's sub ID parameter. For example: `https://network.example/offer?aff_sub={clickid}`.
+- You know the network's macros for that sub ID, payout and transaction ID. Check the network's tracking docs.
+
+### Step 1: Get the URL from ClickPattern
+
+1. Go to **Performance → Affiliate Networks** and click **Create**.
+2. Search for your network and select its template, or choose custom if it isn't listed.
+3. Check the **Parameters** table. Each row maps the network's parameter and macro (**AN Parameter**, **AN Token**) to the ClickPattern token (**CP Token**) for Click ID, Payout, Transaction ID and Event Type.
+4. Under **Conversion tracking**, pick the **Tracking domain** and set **Method** to **S2S Postback URL**.
+5. Optional: tick **Include additional parameters in the postback URL**.
+6. Set **Payout currency** to the currency the network pays in.
+7. Copy the URL and click **Save**.
+
+You can also copy a generic URL from **Settings → Tracking URLs → Postback URL** and fill in the macros yourself.
+
+<Frame>
+  <img src="/images/shared/an-form.jpg" alt="Add affiliate network form with Parameters table and Conversion tracking section" />
+</Frame>
+
+### Step 2: Map the network's macros
+
+Each network writes macros differently. Put the network's macro on the right side of each parameter.
+
+| ClickPattern parameter | Network gives you | Example macro |
+| --- | --- | --- |
+| `cid` | The sub ID you sent `{clickid}` in | `{aff_sub}`, `[s2]`, `#s1#` |
+| `payout` | Payout or commission | `{payout}`, `[amount]` |
+| `txid` | Transaction or conversion ID | `{transaction_id}` |
+| `et` | Event or goal name (optional) | `{goal}` |
+| `currency` | Currency (optional) | `{currency}` |
+
+ClickPattern reads the event type from `et` (or `event`, `event_type`, `type`). If your URL carries the event macro in another parameter, such as `ct`, rename it to `et`.
+
+### Worked example
+
+Your offer URL sends the click ID in `aff_sub`:
+
+`https://network.example/offer?aff_id=123&aff_sub={clickid}`
+
+The network's macros are `{aff_sub}`, `{payout}` and `{transaction_id}`. Your postback becomes:
+
+`https://{domain}/postback?cid={aff_sub}&payout={payout}&currency=USD&txid={transaction_id}&et=lead`
+
+When a lead converts, the network calls:
+
+`https://{domain}/postback?cid=c1a8f0e2-5b7d-4f3a-8e9c-2d4b6a1f0e37&payout=12.50&currency=USD&txid=88412&et=lead`
+
+### Step 3: Paste it into the network
+
+Paste the URL into the network's global postback or conversion tracking settings. Some networks also let you set it per offer.
+
+### Step 4: Test it
+
+1. Open your campaign URL in a browser and click through to the offer.
+2. Copy the click ID from the offer page's address bar. It's the value of the network's sub ID parameter.
+3. Paste your postback URL in a new tab, with that click ID in `cid` and a test `txid`. Press Enter.
+4. Check that the page shows `Postback received successfully`.
+5. Open **Logs → Received Postbacks** and find the row.
+
+Use a test payout of `0` if you don't want test revenue in your reports.
+
+### FAQ
+
+**The network has no event macro. What do I put in `et`?** Type a fixed event, such as `et=lead`, or leave it out. Without an event type, the conversion is recorded untyped and sent to ad platforms as Purchase.
+
+**My test shows "Postback received" without "successfully". Why?** The postback was refused. The most common causes are a click ID that doesn't exist, an IP allow list, a wrong `ptoken`, or a repeat postback with no `et` and no `txid` on a click that already converted. Check **Logs → Received Postbacks** and **Logs → Errors Log**.
+
+**Do I need separate postbacks for each offer?** No. One global postback per network works for all offers, because the click ID identifies the campaign and offer.
+
+### Related articles
+
+- [S2S postback](/tracking/s2s-postback)
+- [Tracking URLs page](/tracking/tracking-urls-page)
+- [Duplicates, refunds and statuses](/tracking/duplicates-refunds-and-statuses)
+- [Passing data with URL tokens](/tracking/passing-data-with-url-tokens)

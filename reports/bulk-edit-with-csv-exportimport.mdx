@@ -1,0 +1,75 @@
+---
+title: "Bulk edit with CSV export/import"
+description: "Edit many campaigns, offers or landers at once in a spreadsheet, then import the file back. You can also add new offers and landers in bulk."
+---
+
+### Before you start
+
+- You need the Editor role or higher. Otherwise the import items are disabled with "Editor access required — ask a workspace admin to raise your role".
+- Bulk import works for **Campaigns**, **Offers** and **Landers**.
+
+| Tab | Import options |
+| --- | --- |
+| Campaigns | **Import edited campaigns** |
+| Offers | **Import new offers**, **Import edited offers** |
+| Landers | **Import new landers**, **Import edited landers** |
+
+### Step 1: Export your current setup
+
+1. Open the **Campaigns**, **Offers** or **Landers** tab.
+2. Click **Export/import**.
+3. Choose **Export all …**, or tick rows first and choose **Export selected …**.
+4. In **Export … for editing**, click **Yes, export setup**.
+
+The dialog lists the four steps: export your setup, edit the CSV, upload it back, then review validation and confirm.
+
+<Frame>
+  <img src="/images/reports/export-menu.jpg" alt="Export/import menu on the Offers tab" />
+</Frame>
+
+### Step 2: Edit the CSV
+
+Open the file in Excel, Google Sheets or any CSV editor. Change the values you need, then save it as CSV.
+
+To add new offers or landers, start from a template instead. In the import dialog, click **Download template**.
+
+### Step 3: Upload and validate
+
+1. Click **Export/import** and choose the import option.
+2. Read **How CSV import works** and click **Start importing**. Tick **Do not show this again** to skip this screen next time.
+3. Open **CSV column reference** to check the expected columns.
+4. Drag your file onto the upload area, or click to browse. Only `.csv` files up to 5 MB are accepted.
+
+Validation runs as soon as you add the file. You'll see how many rows are valid, how many have errors, and the total rows.
+
+| Column | Shows |
+| --- | --- |
+| **Row** | The row number in your file |
+| **Field** | The column with the problem |
+| **Value** | What you entered |
+| **Error** | What's wrong |
+
+Fix the errors and upload again. Only valid rows will be imported.
+
+### Step 4: Save
+
+Click **Save (N)**, where N is the number of valid rows.
+
+Imported changes can't be undone automatically. Keep the CSV you exported before editing. Re-importing it is the only way back.
+
+### Download report data instead
+
+**Download CSV** in the same menu saves the report table, not the setup. Pick the columns you want, then click **Download CSV (N cols)**. It's available on every tab and for every role.
+
+### FAQ
+
+**Why can't I import new campaigns?** Campaigns only support importing edits. Create new campaigns with **Create**.
+
+**My file was rejected right away. Why?** Check that you used the right template for new vs edited rows, and that the file is comma-separated. The dialog shows a hint when it can tell what's wrong.
+
+**Is there a size limit?** Yes, 5 MB per file.
+
+### Related articles
+
+- [Performance reports](/reports/performance-reports)
+- [Columns and column templates](/reports/columns-and-column-templates)

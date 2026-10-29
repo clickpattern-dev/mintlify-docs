@@ -1,0 +1,71 @@
+---
+title: "MGID"
+description: "Connect MGID with an API token and your Client ID. ClickPattern syncs your MGID cost, imports your campaigns and widgets, and lets PatternPilot pause, resume and change budgets on mapped campaigns."
+---
+
+### What the integration does
+
+| Feature | What you get |
+| --- | --- |
+| Cost sync | Spend, impressions and clicks per campaign |
+| Campaign import | Your MGID campaigns and widgets |
+| PatternPilot actions | **Pause campaign**, **Resume campaign**, **Adjust budget** |
+| Detail page | **Pause** and **Resume** buttons on each campaign |
+
+MGID doesn't accept bid changes at campaign level. Bids in MGID are set per widget, and PatternPilot rules act on campaigns. Don't add **Adjust bid** to rules for MGID campaigns: the action can't succeed.
+
+### What you need
+
+- Your MGID API token.
+- Your MGID Client ID.
+
+### Connect MGID
+
+1. Go to **Data Hub → Integrations**.
+2. Under **Available Integrations**, click the **MGID** card.
+3. Fill in the fields below and click **Integrate**.
+
+| Field | What to enter |
+| --- | --- |
+| **API Token** | Your MGID API token. Required. |
+| **Client ID** | Your MGID Client ID. Find it in your MGID dashboard or API documentation. Required. |
+| **Assign to workspace** | The workspace that receives the integration. |
+| **Custom account name** | Optional name for this connection. |
+| **Auto-matching for all campaigns** | On by default. Leave it on. |
+
+### Manage the connection
+
+Click the MGID card under **Connected Integrations**. The detail page has these tabs:
+
+| Tab | What it shows |
+| --- | --- |
+| **Performance** | Impressions, clicks, CTR, cost, CPM and CPC for the last 7, 30 or 90 days |
+| **Campaigns** | Imported campaigns with **Pause** or **Resume** buttons |
+| **Campaign Mapping** | Which ClickPattern campaign each MGID campaign is linked to |
+| **Sync Logs** | Recent sync runs and errors |
+| **Health** | Whether scheduled syncs are running on time |
+
+MGID has no ad set level, so you map each MGID campaign directly.
+
+<Frame>
+  <img src="/images/integrations/40-mgid-header.jpg" alt="MGID integration detail page" />
+</Frame>
+
+### Budgets on MGID
+
+- **Adjust budget** sets either a daily or an overall limit, not both at once.
+- MGID rejects daily budgets below 20 in your account currency.
+
+### FAQ
+
+**Why is the Integrate button greyed out?** Both **API Token** and **Client ID** are required for MGID.
+
+**Can PatternPilot change widget bids?** No. Rules act on campaigns, and MGID doesn't accept a campaign-level bid.
+
+**The Campaigns tab is empty.** Campaigns appear after the first sync completes. Click **Sync Now** and check again in a few minutes.
+
+### Related articles
+
+- [Taboola](/integrations/taboola)
+- [Outbrain](/integrations/outbrain)
+- [Traffic source templates](/integrations/traffic-source-templates)

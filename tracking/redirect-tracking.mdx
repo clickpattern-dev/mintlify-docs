@@ -1,0 +1,71 @@
+---
+title: "Redirect tracking"
+description: "With redirect tracking, every ad points to your campaign URL. ClickPattern records the visit, picks the destination and forwards the visitor in milliseconds."
+---
+
+### Campaign URL format
+
+```
+https://{domain}/c/{campaignId}?{traffic source parameters}
+```
+
+Example: `https://{domain}/c/7d2f4a10-3b9c-4e21-9f6a-1c2d3e4f5a6b?zone={zoneid}&cost={cost}`
+
+- `{campaignId}` is the campaign's UUID.
+- The parameters come from your traffic source's enabled parameter rows.
+- Copy the full URL from the campaign's **Tracking & PatternPilot** tab.
+
+### What happens on each click
+
+1. ClickPattern finds the campaign.
+2. Traffic filtering rules run. Blocked visitors go to a notice page.
+3. The flow or path picks a lander or offer.
+4. The visit is recorded with its click ID, device, location and parameters.
+5. The visitor is forwarded using the transition mode.
+
+<Frame>
+  <img src="/images/shared/campaign-tracking-tab.jpg" alt="Campaign URL on the Tracking & PatternPilot tab" />
+</Frame>
+
+### Paused or archived campaigns
+
+- New clicks on a paused or archived campaign are not tracked or forwarded.
+- The visitor gets a "Gone" response (HTTP 410).
+- Conversions from earlier clicks are still recorded.
+
+### Error responses
+
+| Response | Cause |
+| --- | --- |
+| 400 "Invalid campaign slug" | The ID in the URL isn't a valid campaign ID. Check for a cut-off link. |
+| 404 "Campaign not found" | No campaign has that ID. |
+| 404 "Page not found" | The offer is capped and has no available redirect offer. |
+| 500 "No destination configured" | The campaign has no landers or offers configured. |
+
+### Filtered traffic page
+
+Visitors blocked by traffic filtering see a notice page with no link to your offer. The title depends on the reason:
+
+| Title | Reason |
+| --- | --- |
+| **Content Not Available in Your Region** | Location restriction |
+| **Device Not Supported** | Device restriction |
+| **Operating System Not Supported** | OS restriction |
+| **Content Not Available at This Time** | Day or hour restriction |
+| **Content Not Available** | Any other reason, including your own Traffic filtering rules |
+
+Each page ends with "If you believe this is an error, please contact the advertiser." Filtered visits are still recorded.
+
+### FAQ
+
+**Can I change the domain in the campaign URL?** Yes. Pick another domain under the preview selector on the **Tracking & PatternPilot** tab and copy that URL. Use the same domain for your lander click URLs.
+
+**Why does my paused campaign show "Gone"?** Paused campaigns stop forwarding traffic. Resume the campaign to send visitors again.
+
+**Do I need a separate URL for each ad?** No. Use one campaign URL with your traffic source's tokens. The tokens tell ads and placements apart.
+
+### Related articles
+
+- [Transition modes](/tracking/transition-modes)
+- [Add a lander](/tracking/add-a-lander)
+- [Create a campaign: Simple form](/tracking/create-a-campaign-simple-form)

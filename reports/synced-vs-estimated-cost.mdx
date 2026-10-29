@@ -1,0 +1,73 @@
+---
+title: "Synced vs estimated cost"
+description: "Cost from connected ad platforms arrives on a schedule. Until it does, ClickPattern can estimate recent cost so today's profit isn't blank. This article explains how that works and how to turn it off."
+---
+
+### Where cost comes from
+
+| Source | How it arrives |
+| --- | --- |
+| Synced | Pulled from connected ad platforms such as Meta or Google Ads. |
+| Estimated | Calculated from your recent cost per visit (CPV) for hours the platform hasn't synced yet. |
+| Manual | Set on the campaign, or with **Update Cost**. |
+| Token | Passed in the campaign URL by the traffic source. |
+
+### How estimation works
+
+The cost chip on the Dashboard explains it in three steps:
+
+1. ClickPattern calculates your CPV from the last synced period.
+2. Estimated cost = CPV × current visits for unsynced hours.
+3. Once the platform syncs, estimated cost is replaced with the actual cost.
+
+Estimates cover today and yesterday.
+
+### Include or exclude estimated cost
+
+Reports include estimated cost by default. To use synced cost only, for example to match an invoice:
+
+1. Select a single workspace in the workspace selector.
+2. Go to **Data Hub → Integrations**.
+3. Turn off **Include estimated cost**.
+
+You'll see **Setting saved** and "Reports now use synced cost only." Turn it back on to include estimates again.
+
+This is a workspace setting. Only workspace Owners and Admins see it. If you view several workspaces at once and any of them excludes estimates, the whole report uses synced cost only.
+
+<Frame>
+  <img src="/images/reports/integrations-estimated.jpg" alt="Include estimated cost switch at the top of the Integrations page. It's greyed out while All workspaces is selected." />
+</Frame>
+
+### Check cost status on the Dashboard
+
+The chip above the KPI cards tells you where the period's cost stands:
+
+- **Cost Synced**: all cost is from your ad platforms.
+- **Cost Estimated**: some cost is estimated.
+- **Cost Pending**: no cost has arrived yet.
+
+Click the chip to see how many campaigns have synced cost data.
+
+### Sync timing
+
+Connected platforms sync cost on a schedule. The Dashboard tooltip notes that platforms typically sync every 2–6 hours. Check **Logs → Cost Logs** to see each sync, its status and how much spend it imported.
+
+### Why today's cost may change
+
+- An estimate is replaced by the real spend when the platform syncs.
+- Ad platforms can update recent spend after the fact, and the next sync picks that up.
+- Spend that isn't mapped to a campaign doesn't appear in campaign cost. Watch for the **…% of ad spend unmapped** chip on the Dashboard.
+
+### FAQ
+
+**Why is today's ROI different an hour later?** Estimated cost was replaced with synced cost, or a new sync arrived.
+
+**Why is cost $0 for a campaign?** The platform may not have synced yet, the spend may be unmapped, or the campaign doesn't track cost. See "[Cost not pulling](/troubleshooting/cost-not-pulling)".
+
+**Does estimated cost affect manual cost?** No. Estimates apply to cost from connected platforms.
+
+### Related articles
+
+- [Track and update cost](/tracking/track-and-update-cost)
+- [Cost not pulling](/troubleshooting/cost-not-pulling)
+- [Why numbers differ from your ad platform](/reports/why-numbers-differ-from-your-ad-platform)
